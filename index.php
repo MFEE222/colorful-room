@@ -16,11 +16,11 @@
 $page = $_GET['page'];
 $page_order     = 'order';
 $page_product   = 'product';
-$page_member    = 'member';
+$page_customer    = 'customer';
 $url_page_dashboard = 'index.php';
 $url_page_order     = $url_page_dashboard . '?page=order';
 $url_page_product   = $url_page_dashboard . '?page=product';
-$url_page_member    = $url_page_dashboard . '?page=member';
+$url_page_customer  = $url_page_dashboard . '?page=customer';
 
 ?>
 <!DOCTYPE html>
@@ -62,7 +62,8 @@ $url_page_member    = $url_page_dashboard . '?page=member';
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-white active bg-gradient-primary" href="./pages/dashboard.html">
+                    <!-- <a class="nav-link text-white active bg-gradient-primary" href="./pages/dashboard.html"> -->
+                    <a class="nav-link text-white active bg-gradient-primary" href="<?= $url_page_dashboard ?>">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
@@ -70,7 +71,8 @@ $url_page_member    = $url_page_dashboard . '?page=member';
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="./pages/tables.html">
+                    <!-- <a class="nav-link text-white " href="./pages/tables.html"> -->
+                    <a class="nav-link text-white " href="<?= $url_page_order ?>">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">table_view</i>
                         </div>
@@ -78,7 +80,8 @@ $url_page_member    = $url_page_dashboard . '?page=member';
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="./pages/billing.html">
+                    <!-- <a class="nav-link text-white " href="./pages/billing.html"> -->
+                    <a class="nav-link text-white " href="<?= $url_page_product ?>">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
                         </div>
@@ -86,11 +89,11 @@ $url_page_member    = $url_page_dashboard . '?page=member';
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="./pages/virtual-reality.html">
+                    <a class="nav-link text-white " href="<?= $url_page_customer ?>">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">view_in_ar</i>
                         </div>
-                        <span class="nav-link-text ms-1">Member</span>
+                        <span class="nav-link-text ms-1">Customer</span>
                     </a>
                 </li>
                 <!-- 
@@ -279,9 +282,9 @@ $url_page_member    = $url_page_dashboard . '?page=member';
                 <div class="row mt-4">
                     <?php include 'pages/product/product.php'; ?>
                 </div>
-            <?php elseif ($page == $page_member) : ?>
+            <?php elseif ($page == $page_customer) : ?>
                 <div class="row mt-4">
-                    <?php include 'pages/member/member.php'; ?>
+                    <?php include 'pages/customer/customer.php'; ?>
                 </div>
             <?php else : ?>
                 <div class="row mb-4">
