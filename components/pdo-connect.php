@@ -1,24 +1,19 @@
 <?php
 session_start();
-$servername="localhost";
-$username="mfee222";
-$password="222eefm";
-$dbname="colorful";
+$servername = "localhost";
+$username = "mfee222";
+$password = "222eefm";
+$dbname = "colorful";
 
-try{
-    $db_host= new PDO(
+try {
+    $db_host = new PDO(
         "mysql:host={$servername};dbname={$dbname};charset=utf8",
-        $username, $password
+        $username,
+        $password
     );
-//    echo "資料庫連線成功";
+    //    echo "資料庫連線成功";
 
-}catch(PDOException $e){
+} catch (PDOException $e) {
     echo "資料庫連線失敗";
-    echo "error: ".$e->getMessage();
+    echo "error: " . $e->getMessage();
 }
-
-
-
-
-
-?>
