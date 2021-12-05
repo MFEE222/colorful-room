@@ -14,13 +14,21 @@
 -->
 <?php
 $page = $_GET['page'];
-$page_order     = 'order';
-$page_product   = 'product';
-$page_customer    = 'customer';
-$url_page_dashboard = 'index.php';
-$url_page_order     = $url_page_dashboard . '?page=order';
-$url_page_product   = $url_page_dashboard . '?page=product';
-$url_page_customer  = $url_page_dashboard . '?page=customer';
+
+$query_page_order   = 'order';
+$query_page_product = 'product';
+$query_page_customer = 'customer';
+
+$get_page_summary   = 'index.php';
+$get_page_order     = 'index.php?page=' . $query_page_order;
+$get_page_product   = 'index.php?page=' . $query_page_product;
+$get_page_customer  = 'index.php?page=' . $query_page_customer;
+
+$page_summary   = 'pages/summary/summary.php';
+$page_order     = 'pages/order/order.php';
+$page_product   = 'pages/product/product.php';
+$page_customer  = 'pages/customer/customer.php';
+$page_signin    = 'pages/signin/signin.php';
 
 ?>
 <!DOCTYPE html>
@@ -63,16 +71,16 @@ $url_page_customer  = $url_page_dashboard . '?page=customer';
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <!-- <a class="nav-link text-white active bg-gradient-primary" href="./pages/dashboard.html"> -->
-                    <a class="nav-link text-white active bg-gradient-primary" href="<?= $url_page_dashboard ?>">
+                    <a class="nav-link text-white active bg-gradient-primary" href="<?= $get_page_summary ?>">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
-                        <span class="nav-link-text ms-1">Dashboard</span>
+                        <span class="nav-link-text ms-1">Summary</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <!-- <a class="nav-link text-white " href="./pages/tables.html"> -->
-                    <a class="nav-link text-white " href="<?= $url_page_order ?>">
+                    <a class="nav-link text-white " href="<?= $get_page_order ?>">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">table_view</i>
                         </div>
@@ -81,7 +89,7 @@ $url_page_customer  = $url_page_dashboard . '?page=customer';
                 </li>
                 <li class="nav-item">
                     <!-- <a class="nav-link text-white " href="./pages/billing.html"> -->
-                    <a class="nav-link text-white " href="<?= $url_page_product ?>">
+                    <a class="nav-link text-white " href="<?= $get_page_product ?>">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
                         </div>
@@ -89,7 +97,7 @@ $url_page_customer  = $url_page_dashboard . '?page=customer';
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="<?= $url_page_customer ?>">
+                    <a class="nav-link text-white " href="<?= $get_page_customer ?>">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">view_in_ar</i>
                         </div>
@@ -114,6 +122,7 @@ $url_page_customer  = $url_page_dashboard . '?page=customer';
                     </a>
                 </li>
                  -->
+                <!-- 
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
                 </li>
@@ -126,13 +135,14 @@ $url_page_customer  = $url_page_dashboard . '?page=customer';
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="./pages/sign-in.html">
+                    <a class="nav-link text-white " href="<?= $get_page_signin ?>">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">login</i>
                         </div>
                         <span class="nav-link-text ms-1">Sign In</span>
                     </a>
                 </li>
+                 -->
                 <!-- 
                 <li class="nav-item">
                     <a class="nav-link text-white " href="./pages/sign-up.html">
@@ -274,21 +284,21 @@ $url_page_customer  = $url_page_dashboard . '?page=customer';
         </nav>
         <!-- main part 2 of 3 下方內容頁 -->
         <div class="container-fluid py-4">
-            <?php if ($page == $page_order) : ?>
+            <?php if ($page == $query_page_order) : ?>
                 <div class="row">
-                    <?php include 'pages/order/order.php'; ?>
+                    <?php include $page_order; ?>
                 </div>
-            <?php elseif ($page == $page_product) : ?>
+            <?php elseif ($page == $query_page_product) : ?>
                 <div class="row mt-4">
-                    <?php include 'pages/product/product.php'; ?>
+                    <?php include $page_product; ?>
                 </div>
-            <?php elseif ($page == $page_customer) : ?>
+            <?php elseif ($page == $query_page_customer) : ?>
                 <div class="row mt-4">
-                    <?php include 'pages/customer/customer.php'; ?>
+                    <?php include $page_customer; ?>
                 </div>
             <?php else : ?>
                 <div class="row mb-4">
-                    <?php include 'pages/dashboard/dashboard.php'; ?>
+                    <?php include $page_summary; ?>
                 </div>
             <?php endif; ?>
             <!-- 
