@@ -31,9 +31,12 @@
         </form>
 
         <h3 class="m-3">20 Products</h3>
-        <table class="table">
+        <button type="button" class="btn btn-danger m-2">新增商品</button>
+        <button type="button" class="btn btn-light m-2">批次工具</button>
+
+        <table class="table table-hover mt-3">
             <thead>
-                <tr>
+                <tr class="table-secondary">
                     <th scope="col">商品名稱</th>
                     <th scope="col">類別</th>
                     <th scope="col">價格</th>
