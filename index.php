@@ -27,7 +27,7 @@ $get_page_customer  = 'index.php?page=' . $query_page_customer;
 $page_summary   = 'pages/summary/summary.php';
 $page_order     = 'pages/order/order.php';
 $page_product   = 'pages/product/product.php';
-$page_customer  = 'pages/customer/customer.php';
+$page_customer  = 'pages/customer/user-list.php';
 $page_signin    = 'pages/signin/signin.php';
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 require_once ("../../components/pdo-connect.php");
-if(!isset($_POST["id"])){
+if(!isset($_GET["id"])){
     echo "您不是從正常程序進入此頁";
     exit();
 }
@@ -15,24 +15,20 @@ $subscribe=$_POST["subscribe"];
 $tag_id=$_POST["tag"];
 //echo"$name,$account,$password,$email,$phone,$gender,$birthday,$subscribe";
 
-
-
 $sqlCheck="SELECT * FROM member WHERE account=? AND email=? ";
 $stmt=$db_host->prepare($sqlCheck);
 try {
     $stmt->execute([$account,$email]);
     $memberExist=$stmt->rowCount();
-//    echo $memberExist;//1代表有重複的
     if($memberExist>0){
 //        echo "帳號已存在";
         $row=$stmt->fetch();
-        $user=[                     //建立關聯式陣列
-            "id"=>$row["id"],      //id被賦予$row["id"]
+        $user=[
+            "id"=>$row["id"],
             "account"=>$row["account"],
             "name"=>$row["name"],
             "email"=>$row["email"]
         ];
-//        var_dump($user);
         $_SESSION["user"]=$user;
         header("Refresh:3;url=create-member.php");
 //        exit();
