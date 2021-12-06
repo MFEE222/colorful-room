@@ -60,20 +60,20 @@
                     <td><a href="#">編輯</a> <a href="#">更多</a></td>
                 </tr>
                 <tr>
-                <th scope="row"><img src="https://picsum.photos/200/100" alt="Italian Trulli">商品名稱3</th>
+                    <th scope="row"><img src="https://picsum.photos/200/100" alt="Italian Trulli">商品名稱3</th>
                     <td>類別3</td>
                     <td>價格3</td>
                     <td>已售出3</td>
                     <td><a href="#">編輯</a> <a href="#">更多</a></td>
-                    <tr>
-                <th scope="row"><img src="https://picsum.photos/200/100" alt="Italian Trulli">商品名稱3</th>
+                <tr>
+                    <th scope="row"><img src="https://picsum.photos/200/100" alt="Italian Trulli">商品名稱3</th>
                     <td>類別4</td>
                     <td>價格4</td>
                     <td>已售出4</td>
                     <td><a href="#">編輯</a> <a href="#">更多</a></td>
                 </tr>
                 <tr>
-                <th scope="row"><img src="https://picsum.photos/200/100" alt="Italian Trulli">商品名稱3</th>
+                    <th scope="row"><img src="https://picsum.photos/200/100" alt="Italian Trulli">商品名稱3</th>
                     <td>類別5</td>
                     <td>價格5</td>
                     <td>已售出5</td>
