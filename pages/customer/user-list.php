@@ -99,7 +99,7 @@ try {
                                     <!-- index.php -->
                                     <a class="btn btn-primary btn-sm" href="pages/customer/member.php?id=<?= $value["id"] ?>">內容</a>
                                     <a class="btn btn-primary btn-sm" href="pages/customer/member-edit.php?id=<?= $value["id"] ?>">修改</a>  <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="<?= '#staticBackdrop' . $value['id'] ?>">刪除</a>
-   <!-- Modal -->
+                                    <!-- Modal -->
                                     <div class="modal fade" id="<?= 'staticBackdrop' . $value['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -112,7 +112,7 @@ try {
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                                                    <a class="btn btn-primary" href="memberDoDelete.php?id=<?= $value["id"] ?>">確定</a>
+                                                    <a class="btn btn-primary" href="pages/customer/memberDoDelete.php?id=<?= $value["id"] ?>">確定</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -148,11 +148,11 @@ try {
                                 <td><?= $value["email"] ?></td>
                                 <td><?= $value["phone"] ?></td>
                                 <td class="text-center d-flex justify-content-evenly">
-                                    <a class="btn btn-primary btn-sm me-2" href="customer.php?id=<?= $value["id"] ?>">內容</a>
-                                    <a class="btn btn-primary btn-sm me-2" href="customer-edit.php?id=<?= $value["id"] ?>">修改</a>
-                                    <a class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">刪除</a>
+                                    <a class="btn btn-primary btn-sm me-2" href="pages/customer/customer.php?id=<?= $value["id"] ?>">內容</a>
+                                    <a class="btn btn-primary btn-sm me-2" href="pages/customer/customer-edit.php?id=<?= $value["id"] ?>">修改</a>
+                                    <a class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="<?= '#staticBackdrop' . $value['id'] ?>">刪除</a>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+                                    <div class="modal fade" id="<?= 'staticBackdrop' . $value['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -164,7 +164,7 @@ try {
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                                                    <a type="submit" class="btn btn-primary" href="customerDoDelete.php?id=<?= $value["id"] ?>">確定</a>
+                                                    <a type="submit" class="btn btn-primary" href="pages/customer/customerDoDelete.php?id=<?= $value["id"] ?>">確定</a>
                                                 </div>
                                             </div>
                                         </div>
