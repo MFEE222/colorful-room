@@ -1,7 +1,7 @@
 <?php
-//include_once('../var.php');
-require_once("../../components/pdo-connect.php");
 
+//include_once('../var.php');
+require_once ("../../components/pdo-connect.php");
 if (isset($_SESSION["user"])) {
     unset($_SESSION["user"]);
 }
@@ -24,13 +24,12 @@ if (isset($_SESSION["user"])) {
     <div class="container">
         <div class="py-2 d-flex  mx-5">
             <div>
-                <!-- <a class="btn btn-primary" href="user-list.php">使用者列表</a> -->
-                <a class="btn btn-primary" href=create-member.php ?>>使用者列表</a>
+                <a class="btn btn-primary" href="user-list.php">使用者列表</a>
+
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-3">
-                <!-- <form action="doinsert.php" method="post"> -->
                 <form action="doinsert.php " method="post">
                     <div class="mb-4 input-group-sm">
                         <label for="name">姓名</label>
@@ -89,7 +88,7 @@ if (isset($_SESSION["user"])) {
                     </div>
                     <?php unset($_SESSION["user"]); ?>
 
-                    <!--                <input class="btn btn-primary" type="reset">清除</input>-->
+
                     <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">送出</button>
                     <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -104,7 +103,7 @@ if (isset($_SESSION["user"])) {
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                                    <button type="submit" class="btn btn-primary" href="create-member.php">確定</button>
+                                    <button type="submit" class="btn btn-primary" href="pages/customer/create-member.php">確定</button>
                                 </div>
                             </div>
                         </div>

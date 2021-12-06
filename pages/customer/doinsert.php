@@ -1,9 +1,9 @@
 <?php
 require_once ("../../components/pdo-connect.php");
-if(!isset($_GET["id"])){
-    echo "您不是從正常程序進入此頁";
-    exit();
-}
+//if(!isset($_GET["id"])){
+//    echo "您不是從正常程序進入此頁";
+//    exit();
+//}
 $name=$_POST["name"];
 $account=$_POST["account"];
 $password=$_POST["password"];

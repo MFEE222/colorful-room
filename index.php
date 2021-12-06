@@ -2,52 +2,21 @@
 =========================================================
 * Material Dashboard 2 - v3.0.0
 =========================================================
-
 * Product Page: https://www.creative-tim.com/product/material-dashboard
 * Copyright 2021 Creative Tim (https://www.creative-tim.com)
 * Licensed under MIT (https://www.creative-tim.com/license)
 * Coded by Creative Tim
-
 =========================================================
-
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
-<!-- 
-    1. require_once 
+<!--
+    1. require_once
     2. set GET/POST, get GET/POST
  -->
 <?php
 require_once("components/pdo-connect.php");
 include_once("pages/var.php");
-<<<<<<< HEAD >>>>>>>
-//$query_page = $_GET['page'];
-// $page = $_GET['page'];
 
-// // GET 的值
-// // Query String
-// $query_page_order   = 'order';
-// $query_page_product = 'product';
-// $query_page_customer = 'customer';
-// $query_page_add_customer = 'add_customer';
-
-// // URL 網址
-// $get_page_summary   = 'index.php';
-// $get_page_order     = 'index.php?page=' . $query_page_order;
-// $get_page_product   = 'index.php?page=' . $query_page_product;
-// $get_page_customer  = 'index.php?page=' . $query_page_customer;
-// $get_page_add_customer = 'index.php?page=' . $query_page_add_customer;
-
-// // 實際檔案位置 
-// $page_summary   = 'pages/summary/summary.php';
-// $page_order     = 'pages/order/order.php';
-// $page_product   = 'pages/product/product.php';
-// $page_customer  = 'pages/customer/user-list.php';
-// $page_add_customer = 'pages/customer/create-member.php';
-// $page_signin    = 'pages/signin/signin.php';
-
-// // index.php?page=add_customer
-=======
->>>>>>> d9bdc08ae83f91da7784a95e70272317e9c2f028
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -316,6 +285,10 @@ include_once("pages/var.php");
             <?php elseif ($query_page == $query_page_add_customer) : ?>
                 <div class="row mt-4">
                     <?php include $page_add_customer; ?>
+                </div>
+            <?php elseif ($query_page == $query_page_doinsert) : ?>
+                <div class="row mt-4">
+                    <?php include $page_doinsert; ?>
                 </div>
             <?php else : ?>
                 <div class="row mb-4">
