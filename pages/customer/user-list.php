@@ -100,10 +100,9 @@ try {
                                     <!-- index.php -->
                                     <a class="btn btn-primary btn-sm" href="pages/customer/member.php?id=<?= $value["id"] ?>">內容</a>
                                     <a class="btn btn-primary btn-sm" href="pages/customer/member-edit.php?id=<?= $value["id"] ?>">修改</a>
-                                    <!-- id 實際上重複，要再加上索引值區分 -->
-                                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">刪除</a>
+                                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="<?= '#staticBackdrop' . $value['id'] ?>">刪除</a>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal fade" id="<?= 'staticBackdrop' . $value['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
