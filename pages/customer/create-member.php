@@ -44,7 +44,7 @@ session_start();
                     <label for="email">Email</label>
                     <input id="email" type="text" name="email" class="form-control" required>
                     <?php if (isset($_SESSION["user"]["email"])) :?>
-                        <p class="fs-6 text-danger"><?=($_SESSION["user"]["email"])?>帳號已存在</p>
+                        <p class="fs-6 text-danger"><?=($_SESSION["user"]["email"])?>信箱已註冊過</p>
                     <?php endif;?>
                 </div>
                 <div class="mb-4 input-group-sm">

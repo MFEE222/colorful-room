@@ -141,8 +141,9 @@ try{
                     <th scope="col"></th>
                 </tr>
                 </thead>
-                <tbody>
+
                 <?php  foreach ($rowsCustomer as $value): ?>
+                <tbody>
                     <tr>
                         <td><?=$value["id"]?></td>
                         <td><?=$value["account"]?></td>
@@ -152,11 +153,30 @@ try{
                         <td class="text-center d-flex justify-content-evenly">
                             <a class="btn btn-primary btn-sm me-2" href="customer.php?id=<?=$value["id"]?>">內容</a>
                             <a class="btn btn-primary btn-sm me-2" href="customer-edit.php?id=<?=$value["id"]?>">修改</a>
-                            <a class="btn btn-primary btn-sm" href="customerDoDelete.php?id=<?=$value["id"]?>">刪除</a>
+                            <a class="btn btn-primary btn-sm" type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop1" >刪除</a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel1">確認刪除<?=$value["account"]?>非會員嗎?</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            可以再思考一下喔!
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                                            <a type="submit" class="btn btn-primary" href="customerDoDelete.php?id=<?=$value["id"]?>">確定</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
-                <?php endforeach; ?>
                 </tbody>
+                <?php endforeach; ?>
+
             </table>
         </div>
     </div>
