@@ -20,22 +20,29 @@
 require_once("components/pdo-connect.php");
 $page = $_GET['page'];
 
+// GET 的值
+// Query String
 $query_page_order   = 'order';
 $query_page_product = 'product';
 $query_page_customer = 'customer';
+$query_page_add_customer = 'add_customer';
 
+// URL 網址
 $get_page_summary   = 'index.php';
 $get_page_order     = 'index.php?page=' . $query_page_order;
 $get_page_product   = 'index.php?page=' . $query_page_product;
 $get_page_customer  = 'index.php?page=' . $query_page_customer;
+$get_page_add_customer = 'index.php?page=' . $query_page_add_customer;
 
+// 實際檔案位置 
 $page_summary   = 'pages/summary/summary.php';
 $page_order     = 'pages/order/order.php';
 $page_product   = 'pages/product/product.php';
 $page_customer  = 'pages/customer/user-list.php';
+$page_add_customer = 'pages/customer/create-member.php';
 $page_signin    = 'pages/signin/signin.php';
-// test github desktop
 
+// index.php?page=add_customer
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -300,6 +307,10 @@ $page_signin    = 'pages/signin/signin.php';
             <?php elseif ($page == $query_page_customer) : ?>
                 <div class="row mt-4">
                     <?php include $page_customer; ?>
+                </div>
+            <?php elseif ($page == $query_page_add_customer) : ?>
+                <div class="row mt-4">
+                    <?php include $page_add_customer; ?>
                 </div>
             <?php else : ?>
                 <div class="row mb-4">
