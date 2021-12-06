@@ -1,5 +1,6 @@
 <?php
-include_once('../var.php');
+//include_once('../var.php');
+require_once("../../components/pdo-connect.php");
 
 if (isset($_SESSION["user"])) {
     unset($_SESSION["user"]);
@@ -24,13 +25,13 @@ if (isset($_SESSION["user"])) {
         <div class="py-2 d-flex  mx-5">
             <div>
                 <!-- <a class="btn btn-primary" href="user-list.php">使用者列表</a> -->
-                <a class="btn btn-primary" href=<?php $url_page_customer ?>>使用者列表</a>
+                <a class="btn btn-primary" href=create-member.php ?>>使用者列表</a>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-3">
                 <!-- <form action="doinsert.php" method="post"> -->
-                <form action="<?= $url_page_doinsert ?>" method="post">
+                <form action="doinsert.php " method="post">
                     <div class="mb-4 input-group-sm">
                         <label for="name">姓名</label>
                         <input id="name" type="text" name="name" class="form-control" required>
@@ -108,7 +109,6 @@ if (isset($_SESSION["user"])) {
                             </div>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>

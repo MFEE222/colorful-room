@@ -1,9 +1,9 @@
 <?php
 require_once ("../../components/pdo-connect.php");
-if(!isset($_GET["id"])){
-    echo "您不是從正常程序進入此頁";
-    exit();
-}
+//if(!isset($_GET["id"])){
+//    echo "您不是從正常程序進入此頁";
+//    exit();
+//}
 $id=$_GET["id"];
 $sql="UPDATE member SET valid=0 WHERE id=?";
 $stmt=$db_host->prepare($sql);

@@ -1,5 +1,5 @@
 <?php
-// require_once("../../components/pdo-connect.php");
+ require_once("../../components/pdo-connect.php");
 //member的資料
 $sqlMember = "SELECT member. *,tag.name AS tag_name FROM member
 JOIN tag ON member.tag_id = tag.id
@@ -98,8 +98,8 @@ try {
                                 <td><?= $value["tag_name"] ?></td>
                                 <td class="text-center d-flex justify-content-evenly">
                                     <!-- index.php -->
-                                    <a class="btn btn-primary btn-sm" href="pages/customer/member.php?id=<?= $value["id"] ?>">內容</a>
-                                    <a class="btn btn-primary btn-sm" href="pages/customer/member-edit.php?id=<?= $value["id"] ?>">修改</a>
+                                    <a class="btn btn-primary btn-sm" href="member.php?id=<?= $value["id"] ?>">內容</a>
+                                    <a class="btn btn-primary btn-sm" href="member-edit.php?id=<?= $value["id"] ?>">修改</a>
                                     <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">刪除</a>
                                     <!-- Modal -->
                                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -114,7 +114,7 @@ try {
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                                                    <a class="btn btn-primary" href="pages/customer/memberDoDelete.php?id=<?= $value["id"] ?>">確定</a>
+                                                    <a class="btn btn-primary" href="memberDoDelete.php?id=<?= $value["id"] ?>">確定</a>
                                                 </div>
                                             </div>
                                         </div>
