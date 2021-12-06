@@ -12,7 +12,12 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
+<!-- 
+    1. require_once 
+    2. set GET/POST, get GET/POST
+ -->
 <?php
+require_once("components/pdo-connect.php");
 $page = $_GET['page'];
 
 $query_page_order   = 'order';
@@ -29,6 +34,7 @@ $page_order     = 'pages/order/order.php';
 $page_product   = 'pages/product/product.php';
 $page_customer  = 'pages/customer/user-list.php';
 $page_signin    = 'pages/signin/signin.php';
+// test github desktop
 
 ?>
 <!DOCTYPE html>
@@ -53,6 +59,9 @@ $page_signin    = 'pages/signin/signin.php';
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="./assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+    <!-- temp -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="fontawesome-free-5.0.1/web-fonts-with-css/css/fontawesome-all.min.css"> -->
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -1156,6 +1165,9 @@ $page_signin    = 'pages/signin/signin.php';
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="./assets/js/material-dashboard.min.js?v=3.0.0"></script>
+    <!-- temp -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> -->
 </body>
 
 </html>

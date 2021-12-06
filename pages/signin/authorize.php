@@ -1,6 +1,11 @@
 <?php
-session_start();
+echo "here is authorize.";
+require_once("/components/pdo-connect.php");
+echo "here is authorize.";
+// session_start();
+// $session = $_SESSION;
 
-// 檢查登入狀態
-if (empty($_SESSION['admin']))
-    header('Location: ./signin.php');
+// // 檢查登入狀態
+// if (!$session['status']) {
+//     header('Location: ../index.html');
+// }
