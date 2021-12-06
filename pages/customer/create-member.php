@@ -4,7 +4,7 @@ include_once('../var.php');
 if (isset($_SESSION["user"])) {
     unset($_SESSION["user"]);
 }
-session_start();
+//session_start();
 ?>
 <html lang="en">
 
@@ -21,7 +21,7 @@ session_start();
 
 <body>
     <div class="container">
-        <div class="py-2 d-flex justify-content-end ">
+        <div class="py-2 d-flex  mx-5">
             <div>
                 <!-- <a class="btn btn-primary" href="user-list.php">使用者列表</a> -->
                 <a class="btn btn-primary" href=<?php $url_page_customer ?>>使用者列表</a>
