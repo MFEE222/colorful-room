@@ -84,7 +84,6 @@ try{
                     <th scope="col">生日</th>
                     <th scope="col">訂閱方案</th>
                     <th scope="col">標籤</th>
-                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <?php  foreach ($rowsMember as $value): ?>
