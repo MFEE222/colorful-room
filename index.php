@@ -19,6 +19,7 @@
 <?php
 require_once("components/pdo-connect.php");
 include_once("pages/var.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -272,19 +273,19 @@ include_once("pages/var.php");
         </nav>
         <!-- main part 2 of 3 下方內容頁 -->
         <div class="container-fluid py-4">
-            <?php if ($page == $query_page_order) : ?>
+            <?php if ($query_page == $query_page_order) : ?>
                 <div class="row">
                     <?php include $page_order; ?>
                 </div>
-            <?php elseif ($page == $query_page_product) : ?>
+            <?php elseif ($query_page == $query_page_product) : ?>
                 <div class="row mt-4">
                     <?php include $page_product; ?>
                 </div>
-            <?php elseif ($page == $query_page_customer) : ?>
+            <?php elseif ($query_page == $query_page_customer) : ?>
                 <div class="row mt-4">
                     <?php include $page_customer; ?>
                 </div>
-            <?php elseif ($page == $query_page_add_customer) : ?>
+            <?php elseif ($query_page == $query_page_add_customer) : ?>
                 <div class="row mt-4">
                     <?php include $page_add_customer; ?>
                 </div>
