@@ -126,10 +126,10 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form action="components/do-signin.php" method="POST" role="form" class="text-start">
+                                <form action="model/do-signin.php" method="POST" role="form" class="text-start">
                                     <div class="input-group input-group-outline my-3">
-                                        <label class="form-label">Email</label>
-                                        <input type="email" class="form-control" name="admin_account">
+                                        <label class="form-label">Account</label>
+                                        <input type="text" class="form-control" name="admin_account">
                                     </div>
                                     <div class="input-group input-group-outline mb-3">
                                         <label class="form-label">Password</label>
