@@ -2,7 +2,7 @@
 if (isset($_SESSION["user"])) {
     unset($_SESSION["user"]);
 }
-session_start();
+//session_start();
 ?>
 <html lang="en">
 
@@ -19,13 +19,13 @@ session_start();
 
 <body>
     <div class="container">
-        <div class="py-2 d-flex justify-content-end ">
+        <div class="py-2 d-flex  mx-5">
             <div>
-                <a class="btn btn-primary" href="user-list.php">使用者列表</a>
+                <a class="btn btn-primary" href="index.php?page=customer">使用者列表</a>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-3">
+        <div class="row justify-content-start mx-5">
+            <div class="col-lg-3 ">
                 <form action="doinsert.php" method="post">
                     <div class="mb-4 input-group-sm">
                         <label for="name">姓名</label>

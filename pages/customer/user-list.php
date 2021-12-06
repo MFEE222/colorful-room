@@ -44,12 +44,12 @@ try {
 
 <body>
     <div class="container ">
-        <div class="row mb-2">
+        <div class="row ">
             <label for="">搜尋</label>
             <form action="" method="get">
-                <div class="col-4 d-flex align-items-center">
-                    <input type="search" class="form-control me-2" name="" value="">
-                    <button type="submit" class="btn btn-primary text-nowrap">搜尋</button>
+                <div class="col-4 d-flex align-items-center ">
+                    <input type="search" class="form-control mx-3" name="" value="">
+                    <button type="submit" class="btn btn-primary text-nowrap ">搜尋</button>
                 </div>
             </form>
             <div class="p-2 d-flex justify-content-between">
@@ -58,12 +58,13 @@ try {
                 </div>
             </div>
         </div>
-        <div class="p-2 d-flex justify-content-end">
-            <!-- <a class="btn btn-primary" href="pages/customer/create-member.php">新增使用者</a> -->
-            <a class="btn btn-primary" href="index.php?page=add_customer">新增使用者</a>
-        </div>
 
         <nav class="col-lg-10">
+            <div class="p-2 d-flex justify-content-end">
+                <a class="btn btn-primary   justify-content-end" href="index.php?page=add_customer">新增使用者</a>
+
+            </div>
+
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <button class="nav-link active" id="nav-member-tab" data-bs-toggle="tab" data-bs-target="#nav-member" type="button" role="tab" aria-controls="nav-member" aria-selected="true">會員</button>
                 <button class="nav-link" id="nav-customer-tab" data-bs-toggle="tab" data-bs-target="#nav-customer" type="button" role="tab" aria-controls="nav-customer" aria-selected="false">非會員</button>
