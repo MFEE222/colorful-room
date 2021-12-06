@@ -19,6 +19,7 @@
 <?php
 require_once("components/pdo-connect.php");
 include_once("pages/var.php");
+<<<<<<< HEAD >>>>>>>
 //$query_page = $_GET['page'];
 // $page = $_GET['page'];
 
@@ -45,6 +46,8 @@ include_once("pages/var.php");
 // $page_signin    = 'pages/signin/signin.php';
 
 // // index.php?page=add_customer
+=======
+>>>>>>> d9bdc08ae83f91da7784a95e70272317e9c2f028
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,7 +90,7 @@ include_once("pages/var.php");
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-white active bg-gradient-primary" href="<?= $get_page_summary ?>">
+                    <a class="nav-link text-white active bg-gradient-primary" href="<?= $url_page_summary ?>">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
@@ -95,7 +98,7 @@ include_once("pages/var.php");
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="<?= $get_page_order ?>">
+                    <a class="nav-link text-white " href="<?= $url_page_order ?>">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">table_view</i>
                         </div>
@@ -103,7 +106,7 @@ include_once("pages/var.php");
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="<?= $get_page_product ?>">
+                    <a class="nav-link text-white " href="<?= $url_page_product ?>">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
                         </div>
@@ -111,7 +114,7 @@ include_once("pages/var.php");
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="<?= $get_page_customer ?>">
+                    <a class="nav-link text-white " href="<?= $url_page_customer ?>">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">view_in_ar</i>
                         </div>
@@ -149,7 +152,7 @@ include_once("pages/var.php");
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="<?= $get_page_signin ?>">
+                    <a class="nav-link text-white " href="<?= $url_page_signin ?>">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">login</i>
                         </div>
@@ -313,10 +316,6 @@ include_once("pages/var.php");
             <?php elseif ($query_page == $query_page_add_customer) : ?>
                 <div class="row mt-4">
                     <?php include $page_add_customer; ?>
-                </div>
-            <?php elseif ($query_page == $query_page_doinsert) : ?>
-                <div class="row mt-4">
-                    <?php include $page_doinsert; ?>
                 </div>
             <?php else : ?>
                 <div class="row mb-4">
