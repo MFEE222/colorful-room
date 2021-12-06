@@ -2,21 +2,23 @@
 =========================================================
 * Material Dashboard 2 - v3.0.0
 =========================================================
+
 * Product Page: https://www.creative-tim.com/product/material-dashboard
 * Copyright 2021 Creative Tim (https://www.creative-tim.com)
 * Licensed under MIT (https://www.creative-tim.com/license)
 * Coded by Creative Tim
+
 =========================================================
+
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
-<!--
-    1. require_once
+<!-- 
+    1. require_once 
     2. set GET/POST, get GET/POST
  -->
 <?php
 require_once("components/pdo-connect.php");
 include_once("pages/var.php");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -285,10 +287,6 @@ include_once("pages/var.php");
             <?php elseif ($query_page == $query_page_add_customer) : ?>
                 <div class="row mt-4">
                     <?php include $page_add_customer; ?>
-                </div>
-            <?php elseif ($query_page == $query_page_doinsert) : ?>
-                <div class="row mt-4">
-                    <?php include $page_doinsert; ?>
                 </div>
             <?php else : ?>
                 <div class="row mb-4">
