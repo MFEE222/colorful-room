@@ -6,7 +6,7 @@ if (!isset($_GET["id"])) {
 }
 $id = $_GET["id"];
 $sql = "UPDATE member SET valid=0 WHERE id=?";
- $stmt = $db_host->prepare($sql);
+$stmt = $db_host->prepare($sql);
 try {
     if ($stmt->execute([$id]) === TRUE) {
         //      echo "刪除資料完成" ;

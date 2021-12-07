@@ -1,6 +1,5 @@
 <?php
-include_once('../var.php');
-// require_once ("../../components/pdo-connect.php");
+require_once("../../components/pdo-connect.php");
 //if(!isset($_GET["id"])){
 //    echo "您不是從正常程序進入此頁";
 //    exit();
@@ -16,45 +15,40 @@ $subscribe = $_POST["subscribe"];
 $tag_id = $_POST["tag"];
 //echo"$name,$account,$password,$email,$phone,$gender,$birthday,$subscribe";
 
-header("Refresh:3;url=http://localhost/colorful-room/");
-
-// $sqlCheck = "SELECT * FROM member WHERE account=? AND email=? ";
-// $stmt = $db_host->prepare($sqlCheck);
-// try {
-//     $stmt->execute([$account, $email]);
-//     $memberExist = $stmt->rowCount();
-//     if ($memberExist > 0) {
-//         //        echo "帳號已存在";
-//         $row = $stmt->fetch();
-//         $user = [
-//             "id" => $row["id"],
-//             "account" => $row["account"],
-//             "name" => $row["name"],
-//             "email" => $row["email"]
-//         ];
-//         $_SESSION["user"] = $user;
-//         // url=./create-member.php
-//         // header("Refresh:3;url=create-member.php");
-//         header("Refresh:3;url=$url_page_customer_create");
-//         //        exit();
-//     }
-// } catch (PDOException $e) {
-//     echo $e->getMessage();
-// }
-// if ($memberExist == 0) {
-//     $now = date("Y-m-d H:i:s");
-//     $crPassword = md5($password); // 密碼加密
-//     $sql = "INSERT INTO member (account,name,password,email,phone,gender,birthday,subscribe,created_at,valid,tag_id) VALUES (?,?,?,?,?,?,?,?,?,1,?)";
-//     $stmt = $db_host->prepare($sql);
-//     try {
-//         $result = $stmt->execute([$account, $name, $crPassword, $email, $phone, $gender, $birthday, $subscribe, $now, $tag_id]);
-//         //        echo "新增會員成功";
-//         // header("Refresh:2;url=user-list.php");
-//         header("Refres:2;url=$url_page_customer");
-//     } catch (PDOException $e) {
-//         echo $e->getMessage();
-//     }
-// }
+$sqlCheck = "SELECT * FROM member WHERE account=? AND email=? ";
+$stmt = $db_host->prepare($sqlCheck);
+try {
+    $stmt->execute([$account, $email]);
+    $memberExist = $stmt->rowCount();
+    if ($memberExist > 0) {
+        //        echo "帳號已存在";
+        $row = $stmt->fetch();
+        $user = [
+            "id" => $row["id"],
+            "account" => $row["account"],
+            "name" => $row["name"],
+            "email" => $row["email"]
+        ];
+        $_SESSION["user"] = $user;
+        header("Refresh:3;url=create-member.php");
+        //        exit();
+    }
+} catch (PDOException $e) {
+    echo $e->getMessage();
+}
+if ($memberExist == 0) {
+    $now = date("Y-m-d H:i:s");
+    $crPassword = md5($password); // 密碼加密
+    $sql = "INSERT INTO member (account,name,password,email,phone,gender,birthday,subscribe,created_at,valid,tag_id) VALUES (?,?,?,?,?,?,?,?,?,1,?)";
+    $stmt = $db_host->prepare($sql);
+    try {
+        $result = $stmt->execute([$account, $name, $crPassword, $email, $phone, $gender, $birthday, $subscribe, $now, $tag_id]);
+        //        echo "新增會員成功";
+        header("Refresh:2;url=user-list.php");
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
 ?>
 <!doctype html>
 <html lang="en">
