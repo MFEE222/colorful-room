@@ -1,16 +1,16 @@
   <div>
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">全部</a>
+                <a class="nav-link active" aria-current="page" href="#">全部(不寫valid)</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">架上商品</a>
+                <a class="nav-link" href="#">架上商品(valid=1)</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">未上架</a>
+                <a class="nav-link" href="#">未上架(valid=2)</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">已下架</a>
+                <a class="nav-link" href="#">已下架(valid=0)</a>
             </li>
             </li>
         </ul>
