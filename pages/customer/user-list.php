@@ -5,7 +5,9 @@ $rowsMemebr = NULL;
 
 if (isset($_GET['keyword'])) {
     // 致緯...
-
+    if ($_GET['table'] == 'member') {
+    } elseif ($_GET['table'] == 'customer') {
+    }
 } else {
     //member的資料
     $sqlMember = "SELECT member. *,tag.name AS tag_name FROM member
@@ -311,8 +313,14 @@ if (isset($_GET['keyword'])) {
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-member-tab" data-bs-toggle="tab" data-bs-target="#nav-member" type="button" role="tab" aria-controls="nav-member" aria-selected="true">會員</button>
                         <button class="nav-link" id="nav-customer-tab" data-bs-toggle="tab" data-bs-target="#nav-customer" type="button" role="tab" aria-controls="nav-customer" aria-selected="false">非會員</button>
+                        <!-- a href -->
+                        <!-- <a class="nav-link" href="user-list.php?table=customer"></a>
+                        <a class="nav-link" href="user-list.php?table=member"></a> -->
+
                     </div>
                 </nav>
+                <?php //if ($_GET['table'] == 'member') : 
+                ?>
                 <div class="tab-content col-lg-10" id="nav-tabContent">
                     <div class="tab-pane fade show active " id="nav-member" role="tabpanel" aria-labelledby="nav-member-tab">
                         <table class="table table-bordered table-hover table-sm">
@@ -371,7 +379,8 @@ if (isset($_GET['keyword'])) {
                         </table>
 
                     </div>
-
+                    <?php // elseif ($_GET['table'] == "customer") : 
+                    ?>
                     <div class="tab-pane fade " id="nav-customer" role="tabpanel" aria-labelledby="nav-customer-tab">
                         <table class="table table-bordered table-hover table-sm">
                             <thead>
@@ -422,6 +431,8 @@ if (isset($_GET['keyword'])) {
 
                         </table>
                     </div>
+                    <?php //endif; 
+                    ?>
                 </div>
             </div>
             <!-- 
