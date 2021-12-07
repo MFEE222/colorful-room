@@ -48,7 +48,7 @@
                         <td>$400</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                <button type="button" class="btn btn-danger"><a class="link-none" href="#">明細</a></button>
+                                <button type="button" class="btn btn-danger"><a href="#">明細</a></button>
                             </div>
                         </td>
                     </tr>
