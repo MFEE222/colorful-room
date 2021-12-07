@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+git-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- 主機： 127.0.0.1
+-- 產生時間： 2021-12-06 17:27:33
+-- 伺服器版本： 10.4.21-MariaDB
+-- PHP 版本： 8.0.12
+=======
 -- phpMyAdmin SQL Dump
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
@@ -6,6 +16,7 @@
 -- Generation Time: Dec 06, 2021 at 05:39 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
+>>>>>>> bca4caf62176a4d87ddd599993af2b4a26ac8ff7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;

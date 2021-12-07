@@ -1,4 +1,4 @@
-    <div>
+  <div>
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">全部</a>
