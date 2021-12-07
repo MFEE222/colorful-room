@@ -16,8 +16,12 @@
 <?php
 require_once("components/pdo-connect.php");
 include_once("pages/var.php");
-// 驗證登入
 // include("pages/signin/do-authorize.php");
+
+// 純 php 檔案 include
+if ($query_page == $query_page_customer_doinsert) {
+    include $page_customer_doinsert;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -289,13 +293,6 @@ include_once("pages/var.php");
             <?php elseif ($query_page == $query_page_customer_create) : ?>
                 <div class="row mt-4">
                     <?php include $page_customer_create; ?>
-                </div>
-            <?php elseif ($query_page == $query_page_customer_doinsert) : ?>
-                <div class="row mt-4">
-                    <?php
-                    header("Refresh:3;url=http://localhost/colorful-room/index.php");
-                    ?>
-                    <?php include $page_customer_doinsert; ?>
                 </div>
                 <!-- 總覽頁面 -->
             <?php else : ?>

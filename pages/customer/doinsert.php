@@ -16,7 +16,7 @@ $subscribe = $_POST["subscribe"];
 $tag_id = $_POST["tag"];
 //echo"$name,$account,$password,$email,$phone,$gender,$birthday,$subscribe";
 
-header("Refresh:3;url=http://localhost/colorful-room/");
+header("Refresh:3;url=$url_page_customer_create");
 
 // $sqlCheck = "SELECT * FROM member WHERE account=? AND email=? ";
 // $stmt = $db_host->prepare($sqlCheck);
