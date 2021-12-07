@@ -23,8 +23,9 @@ $query_page_customer_doinsert = 'customer_doinsert';
 // 變數名稱格式：<url>_<路徑資料夾>_<自訂名稱>
 // 想要 網址位置，變數就下 url ...
 // ============================================================================
-// 總覽
-$url_page_summary   = 'index.php';
+// 總覽 / 主頁
+$url_page_summary   = 'http://localhost/colorful-room/index.php';
+$url_page_index     = 'http://localhost/colorful-room/index.php';
 // 訂單
 $url_page_order     = 'index.php?page=' . $query_page_order;
 // 商品
@@ -34,7 +35,9 @@ $url_page_customer  = 'index.php?page=' . $query_page_customer;
 $url_page_customer_create = 'index.php?page=' . $query_page_customer_create;
 $url_page_customer_doinsert  = 'index.php?page=' . $query_page_customer_doinsert;
 // 登入
-$url_page_signin    = 'index.php/pages/signin/signin.php';
+$url_page_signin    = '/colorful-room/pages/signin/signin.php';
+$url_page_signin_do = '/colorful-room/pages/signin/do-signin.php';
+// $url_page_signin_do = './do-signin.php';
 
 
 // ============================================================================
@@ -50,7 +53,8 @@ $page_order         = 'pages/order/order.php';
 $page_product       = 'pages/product/product.php';
 // 顧客
 $page_customer      = 'pages/customer/user-list.php';
-$page_customer_create  = 'pages/customer/create-member.php';
+$page_customer_create   = 'pages/customer/create-member.php';
 $page_customer_doinsert = 'pages/customer/doinsert.php';
 // 登入
-$page_signin        = 'pages/signin/signin.php';
+$page_signin            = 'pages/signin/signin.php';
+$page_signin_do         = 'pages/signin/do-signin.php';
