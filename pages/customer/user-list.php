@@ -1,31 +1,38 @@
 <?php
 require_once("../../components/pdo-connect.php");
 
-//member的資料
-$sqlMember = "SELECT member. *,tag.name AS tag_name FROM member
-JOIN tag ON member.tag_id = tag.id
-WHERE member.valid=1";
+$rowsMemebr = NULL;
 
-//$sqlMember="SELECT * FROM member WHERE valid=1";
-$stmt = $db_host->prepare($sqlMember);
-try {
-    $stmt->execute();
-    $rowsMember = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //    $rowsCountMember=$stmt->rowCount();
-    //    var_dump($rowsMember);
-} catch (PDOException $e) {
-    echo $e->getMessage();
-}
-//customer的資料
-$sqlCustomer = "SELECT * FROM customer WHERE valid=1";
-$stmt = $db_host->prepare($sqlCustomer);
-try {
-    $stmt->execute();
-    $rowsCustomer = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //    $rowsCountCustomer=$stmt->rowCount();
-    //    var_dump($rows);
-} catch (PDOException $e) {
-    echo $e->getMessage();
+if (isset($_GET['keyword'])) {
+    // 致緯...
+
+} else {
+    //member的資料
+    $sqlMember = "SELECT member. *,tag.name AS tag_name FROM member
+                    JOIN tag ON member.tag_id = tag.id
+                    WHERE member.valid=1";
+
+    //$sqlMember="SELECT * FROM member WHERE valid=1";
+    $stmt = $db_host->prepare($sqlMember);
+    try {
+        $stmt->execute();
+        $rowsMember = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //    $rowsCountMember=$stmt->rowCount();
+        //    var_dump($rowsMember);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    //customer的資料
+    $sqlCustomer = "SELECT * FROM customer WHERE valid=1";
+    $stmt = $db_host->prepare($sqlCustomer);
+    try {
+        $stmt->execute();
+        $rowsCustomer = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //    $rowsCountCustomer=$stmt->rowCount();
+        //    var_dump($rows);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -283,9 +290,9 @@ try {
             <div class="container ">
                 <div class="row ">
                     <label for="">搜尋</label>
-                    <form action="" method="get">
+                    <form action="user-list.php" method="get">
                         <div class="col-4 d-flex align-items-center ">
-                            <input type="search" class="form-control mx-3" name="" value="">
+                            <input type="search" class="form-control mx-3" name="keyword" value="">
                             <button type="submit" class="btn btn-primary text-nowrap ">搜尋</button>
                         </div>
                     </form>
