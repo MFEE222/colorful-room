@@ -305,11 +305,13 @@ require_once("../../components/pdo-connect.php");
                         </div>
                     </div>
                 </div>
+                <form action="user-list-test.php" method="get">
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <button class="nav-link active" id="nav-member-tab" data-bs-toggle="tab" data-bs-target="#nav-member" type="button" role="tab" aria-controls="nav-member" aria-selected="true"><a href="user-list-test.php?keyword=member">會員</a></button>
-                    <button class="nav-link" id="nav-customer-tab" data-bs-toggle="tab" data-bs-target="#nav-customer" type="button" role="tab" aria-controls="nav-customer" aria-selected="false"><a href="user-list-test.php?keyword=customer">非會員</a></button>
-
+<!--                    <a href="user-list-test.php?keyword=member" class="btn nav-link active" id="nav-member-tab" data-bs-toggle="tab" data-bs-target="#nav-member" type="button" role="tab" aria-controls="nav-member" aria-selected="true">會員</a>-->
+                   <button class="nav-link active" id="nav-member-tab" data-bs-toggle="tab" data-bs-target="#nav-member" type="button" role="tab" aria-controls="nav-member" aria-selected="true" type="submit" name="member" >會員</button>
+                    <button class="nav-link" id="nav-customer-tab" data-bs-toggle="tab" data-bs-target="#nav-customer" type="button" role="tab" aria-controls="nav-customer" aria-selected="false" type="submit" name="customer" >非會員</button>
                 </div>
+                </form>
                 <?php //if ($_GET['table'] == 'member') :
                 ?>
                 <div class="tab-content col-lg-10" id="nav-tabContent">
