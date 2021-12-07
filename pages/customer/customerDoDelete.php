@@ -1,9 +1,10 @@
 <?php
-require_once ("../../components/pdo-connect.php");
+
 if(!isset($_GET["id"])){
     echo "您不是從正常程序進入此頁";
     exit();
 }
+require_once ("../../components/pdo-connect.php");
 $id=$_GET["id"];
 $sql="UPDATE customer SET valid=0 WHERE id=?";
 $stmt=$db_host->prepare($sql);
