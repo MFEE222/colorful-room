@@ -16,7 +16,8 @@
 <?php
 require_once("components/pdo-connect.php");
 include_once("pages/var.php");
-
+// 驗證登入
+// include("pages/signin/do-authorize.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -270,26 +271,33 @@ include_once("pages/var.php");
         </nav>
         <!-- main part 2 of 3 下方內容頁 -->
         <div class="container-fluid py-4">
+            <!-- 訂單頁面 -->
             <?php if ($query_page == $query_page_order) : ?>
                 <div class="row">
                     <?php include $page_order; ?>
                 </div>
+                <!-- 商品頁面 -->
             <?php elseif ($query_page == $query_page_product) : ?>
                 <div class="row mt-4">
                     <?php include $page_product; ?>
                 </div>
+                <!-- 顧客頁面 -->
             <?php elseif ($query_page == $query_page_customer) : ?>
                 <div class="row mt-4">
                     <?php include $page_customer; ?>
                 </div>
-            <?php elseif ($query_page == $query_page_add_customer) : ?>
+            <?php elseif ($query_page == $query_page_customer_create) : ?>
                 <div class="row mt-4">
-                    <?php include $page_add_customer; ?>
+                    <?php include $page_customer_create; ?>
                 </div>
-            <?php elseif ($query_page == $query_page_doinsert) : ?>
+            <?php elseif ($query_page == $query_page_customer_doinsert) : ?>
                 <div class="row mt-4">
-                    <?php include $page_doinsert; ?>
+                    <?php
+                    header("Refresh:3;url=http://localhost/colorful-room/index.php");
+                    ?>
+                    <?php include $page_customer_doinsert; ?>
                 </div>
+                <!-- 總覽頁面 -->
             <?php else : ?>
                 <div class="row mb-4">
                     <?php include $page_summary; ?>

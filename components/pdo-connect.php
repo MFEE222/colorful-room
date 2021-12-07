@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 $colorful_servername = "localhost";
 $colorful_username = "mfee222";

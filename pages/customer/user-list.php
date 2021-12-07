@@ -1,5 +1,5 @@
 <?php
-// require_once("../../components/pdo-connect.php");
+include_once('../var.php');
 //member的資料
 $sqlMember = "SELECT member. *,tag.name AS tag_name FROM member
 JOIN tag ON member.tag_id = tag.id
@@ -61,7 +61,7 @@ try {
 
         <nav class="col-lg-10">
             <div class="p-2 d-flex justify-content-end">
-                <a class="btn btn-primary   justify-content-end" href="pages/customer/create-member.php">新增使用者</a>
+                <a class="btn btn-primary   justify-content-end" href="<?= $url_page_customer_create ?>">新增使用者</a>
             </div>
 
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -73,7 +73,7 @@ try {
             <div class="tab-pane fade show active " id="nav-member" role="tabpanel" aria-labelledby="nav-member-tab">
                 <table class="table table-bordered table-hover table-sm">
                     <thead>
-                        <tr >
+                        <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Account</th>
                             <th scope="col">Name</th>

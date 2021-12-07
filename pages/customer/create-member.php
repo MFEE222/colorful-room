@@ -1,7 +1,6 @@
 <?php
+include_once('../var.php');
 
-//include_once('../var.php');
-require_once ("../../components/pdo-connect.php");
 if (isset($_SESSION["user"])) {
     unset($_SESSION["user"]);
 }
@@ -17,20 +16,19 @@ if (isset($_SESSION["user"])) {
 
     <!-- Bootstrap CSS v5.0.2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
 </head>
 
 <body>
     <div class="container">
         <div class="py-2 d-flex  mx-5">
             <div>
-                <a class="btn btn-primary" href="user-list.php">使用者列表</a>
-
+                <a class="btn btn-primary" href="<?= $url_page_customer ?>">使用者列表</a>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-3">
-                <form action="doinsert.php " method="post">
+                <!-- index.php?page=customer_doinsert -->
+                <form action="<?= $url_page_customer_doinsert ?>" method="post">
                     <div class="mb-4 input-group-sm">
                         <label for="name">姓名</label>
                         <input id="name" type="text" name="name" class="form-control" required>
