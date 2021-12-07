@@ -16,7 +16,8 @@
 <?php
 require_once("components/pdo-connect.php");
 include_once("pages/var.php");
-// include("pages/signin/do-authorize.php");
+// 驗證身份
+include("pages/signin/do-authorize.php");
 
 // 純 php 檔案 include
 if ($query_page == $query_page_customer_doinsert) {
@@ -31,9 +32,7 @@ if ($query_page == $query_page_customer_doinsert) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="./assets/img/favicon.png">
-    <title>
-        Material Dashboard 2 by Creative Tim
-    </title>
+    <title>MFEE222 Colorful Room</title>
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <!-- Nucleo Icons -->
