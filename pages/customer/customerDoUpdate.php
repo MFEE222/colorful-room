@@ -2,7 +2,7 @@
 require_once ("../../components/pdo-connect.php");
 if(!isset($_POST["id"])){
     echo "您不是從正常程序進入此頁";
-//    header("Refresh:2;url=user-list.php");
+//    header("Refresh:2;url=user-list-test.php");
     exit();
 }
 $id=$_POST["id"];
@@ -25,7 +25,7 @@ try {
          ];
          $_SESSION["customer"] = $customer;
 //         var_dump( $_SESSION["customer"]);
-//         header("Refresh:3;url=user-list.php");
+//         header("Refresh:3;url=user-list-test.php");
 //        exit();
      }else{
          $sql="UPDATE customer SET account=?, name=?, email=?, phone=?, edit_at=? WHERE id=?";
@@ -33,7 +33,7 @@ try {
          try {
              $result=$stmt->execute([$account,$name,$email,$phone,$editNow,$id]);
 //    var_dump($result);
-             header("Refresh:2;url=user-list.php");
+             header("Refresh:2;url=user-list-test.php");
          }catch(PDOException $e){
              echo $e->getMessage();
          }

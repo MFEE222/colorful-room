@@ -18,7 +18,7 @@ $sql="UPDATE member SET account=?, name=?, email=?, phone=?, birthday=?, gender=
 $stmt=$db_host->prepare($sql);
 try {
     $result=$stmt->execute([$account,$name,$email,$phone,$birthday,$gender,$subscribe,$tag_id,$editNow,$id]);
-    header("Refresh:2;url=user-list.php");
+    header("Refresh:2;url=user-list-test.php");
 }catch(PDOException $e){
     echo $e->getMessage();
 }

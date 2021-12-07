@@ -49,7 +49,7 @@ $page_order         = 'pages/order/order.php';
 // 商品
 $page_product       = 'pages/product/product.php';
 // 顧客
-$page_customer      = 'pages/customer/user-list.php';
+$page_customer      = 'pages/customer/user-list-test.php';
 $page_customer_create  = 'pages/customer/create-member.php';
 $page_customer_doinsert = 'pages/customer/doinsert.php';
 // 登入

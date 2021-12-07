@@ -10,7 +10,7 @@ $stmt = $db_host->prepare($sql);
 try {
     if ($stmt->execute([$id]) === TRUE) {
         //      echo "刪除資料完成" ;
-        header("Refresh:2;url=user-list.php");
+        header("Refresh:2;url=user-list-test.php");
     }
 } catch (PDOException $e) {
     echo  $e->getMessage();
