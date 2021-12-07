@@ -1,14 +1,14 @@
 <?php
 require_once("../../components/pdo-connect.php");
 
-$rowsMemebr = NULL;
-
-if (isset($_GET['keyword'])) {
-    // 致緯...
-    if ($_GET['table'] == 'member') {
-    } elseif ($_GET['table'] == 'customer') {
-    }
-} else {
+//$rowsMemebr = NULL;
+//
+//if (isset($_GET['keyword'])) {
+//    // 致緯...
+//    if ($_GET['table'] == 'member') {
+//    } elseif ($_GET['table'] == 'customer') {
+//    }
+//} else {
     //member的資料
     $sqlMember = "SELECT member. *,tag.name AS tag_name FROM member
                     JOIN tag ON member.tag_id = tag.id
@@ -35,7 +35,8 @@ if (isset($_GET['keyword'])) {
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -292,7 +293,7 @@ if (isset($_GET['keyword'])) {
             <div class="container ">
                 <div class="row ">
                     <label for="">搜尋</label>
-                    <form action="user-list.php" method="get">
+                    <form action="user-list-test.php" method="get">
                         <div class="col-4 d-flex align-items-center ">
                             <input type="search" class="form-control mx-3" name="keyword" value="">
                             <button type="submit" class="btn btn-primary text-nowrap ">搜尋</button>
@@ -304,15 +305,13 @@ if (isset($_GET['keyword'])) {
                         </div>
                     </div>
                 </div>
+                <form action="user-list-test.php" method="get">
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <button class="nav-link active" id="nav-member-tab" data-bs-toggle="tab" data-bs-target="#nav-member" type="button" role="tab" aria-controls="nav-member" aria-selected="true">會員</button>
-                    <button class="nav-link" id="nav-customer-tab" data-bs-toggle="tab" data-bs-target="#nav-customer" type="button" role="tab" aria-controls="nav-customer" aria-selected="false">非會員</button>
-                    <!-- a href -->
-                    <!-- <a class="nav-link" href="user-list.php?table=customer"></a>
-                    <a class="nav-link" href="user-list.php?table=member"></a> -->
-
+<!--                    <a href="user-list-test.php?keyword=member" class="btn nav-link active" id="nav-member-tab" data-bs-toggle="tab" data-bs-target="#nav-member" type="button" role="tab" aria-controls="nav-member" aria-selected="true">會員</a>-->
+                   <button class="nav-link active" id="nav-member-tab" data-bs-toggle="tab" data-bs-target="#nav-member" type="button" role="tab" aria-controls="nav-member" aria-selected="true" type="submit" name="member" >會員</button>
+                    <button class="nav-link" id="nav-customer-tab" data-bs-toggle="tab" data-bs-target="#nav-customer" type="button" role="tab" aria-controls="nav-customer" aria-selected="false" type="submit" name="customer" >非會員</button>
                 </div>
-                </nav>
+                </form>
                 <?php //if ($_GET['table'] == 'member') :
                 ?>
                 <div class="tab-content col-lg-10" id="nav-tabContent">
@@ -369,7 +368,9 @@ if (isset($_GET['keyword'])) {
                                 </tr>
                                 </tbody>
                             <?php endforeach; ?>
+
                         </table>
+
                     </div>
                     <?php // elseif ($_GET['table'] == "customer") :
                     ?>
@@ -385,6 +386,7 @@ if (isset($_GET['keyword'])) {
                                 <th scope="col"></th>
                             </tr>
                             </thead>
+
                             <?php foreach ($rowsCustomer as $value) : ?>
                                 <tbody>
                                 <tr>
@@ -396,9 +398,9 @@ if (isset($_GET['keyword'])) {
                                     <td class="text-center d-flex justify-content-evenly">
                                         <a class="btn btn-primary btn-sm me-2" href="customer.php?id=<?= $value["id"] ?>">內容</a>
                                         <a class="btn btn-primary btn-sm me-2" href="customer-edit.php?id=<?= $value["id"] ?>">修改</a>
-                                        <a class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="<?= '#staticBackdrop1' . $value['id'] ?>">刪除</a>
+                                        <a class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="<?= '#staticBackdrop' . $value['id'] ?>">刪除</a>
                                         <!-- Modal -->
-                                        <div class="modal fade" id="<?= 'staticBackdrop1' . $value['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+                                        <div class="modal fade" id="<?= 'staticBackdrop' . $value['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -410,7 +412,7 @@ if (isset($_GET['keyword'])) {
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                                                        <a class="btn btn-primary" href="customerDoDelete.php?id=<?= $value["id"] ?>">確定</a>
+                                                        <a type="submit" class="btn btn-primary" href="customerDoDelete.php?id=<?= $value["id"] ?>">確定</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -419,6 +421,7 @@ if (isset($_GET['keyword'])) {
                                 </tr>
                                 </tbody>
                             <?php endforeach; ?>
+
                         </table>
                     </div>
                     <?php //endif;
