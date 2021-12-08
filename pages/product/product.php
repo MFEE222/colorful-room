@@ -33,6 +33,8 @@
         </ul>
     </div>
 
+    <!--valid=0 -> 下架 ；valid=1 -> 已上架 ; valid=2 ; 未上架 -->
+
     <div class="bg-white">
         <form>
             <div class="mt-3">
@@ -40,6 +42,7 @@
                 <input id="basic-addon1" type="text" placeholder="請輸入...">
                 <span class="m-3" id="basic-addon1">類別</span>
                 <input id="basic-addon1" type="text" placeholder="請輸入...">
+                <span class="m-3" id="basic-addon1">已售出</span>
                 <span class="m-3" id="basic-addon1">已售出</span>
                 <input id="basic-addon1" type="text" placeholder="請輸入...">
                 <button type="submit" class="btn btn-primary mx-3">搜尋</button>
