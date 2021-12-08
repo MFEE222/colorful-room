@@ -12,3 +12,6 @@ ecbo($_SERVER['DOCUMENT_ROOT']);
 ecbo($_SERVER['SERVER_NAME']);
 // 當前檔案相對路徑
 ecbo($_SERVER['PHP_SELF']);
+
+ecbo(__FILE__);
+ecbo(__DIR__);

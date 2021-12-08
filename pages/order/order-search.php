@@ -19,6 +19,7 @@ include('../signin/do-authorize.php');
 //  付款方式：側邊有『排序按鈕』(考慮放明細？)
 //  退貨狀態：側邊有『排序按鈕』
 //  金額：側邊有『排序按鈕』
+// 分頁功能
 // ============================================================================
 //  Flow
 // ============================================================================
@@ -42,7 +43,42 @@ include('../signin/do-authorize.php');
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col">
-
+            <div class="card">
+                <!-- card 1 : header -->
+                <div class="card-header d-flex p-3 pt-2">
+                    <div class="d-flex align-items-center align-content-center bg-gradient-info shadow-info text-center border-radius-xl mt-n4">
+                        <!-- <div class="text-white ps-4">
+                            <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
+                        </div> -->
+                        <p class="h3 text-white px-4 py-3">訂單管理</p>
+                    </div>
+                    <!-- <div class="text-end pt-1">
+                        <p class="text-sm mb-0 text-capitalize">Sales</p>
+                        <h4 class="mb-0">$103,430</h4>
+                    </div> -->
+                </div>
+                <hr class="dark horizontal my-0">
+                <!-- card 2 body -->
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#14283</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- card 3 footer -->
+                <hr class="dark horizontal my-0">
+                <div class="card-footer p-3">
+                    <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>than yesterday</p>
+                </div>
+            </div>
         </div>
     </div>
 
