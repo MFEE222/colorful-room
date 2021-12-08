@@ -2,7 +2,11 @@
 //目前測試絕對路徑無法
 require_once("components/pdo-connect.php");
 include_once("pages/var.php");
+include("pages/signin/do-authorize.php");
+
+// unset($_SESSION['status']);
 ?>
+
 <!-- html head 標籤 -->
 <!-- !!! include 中路徑記得自己改 !!! -->
 <?php include "template/head.php"; ?>

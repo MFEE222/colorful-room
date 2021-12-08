@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- 主機： 127.0.0.1
--- 產生時間： 2021-12-07 11:54:45
--- 伺服器版本： 10.4.21-MariaDB
--- PHP 版本： 8.0.12
+-- Host: localhost
+-- Generation Time: Dec 08, 2021 at 02:45 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫: `colorful`
+-- Database: `colorful`
 --
 CREATE DATABASE IF NOT EXISTS `colorful` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `colorful`;
@@ -26,7 +26,7 @@ USE `colorful`;
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `admin`
+-- Table structure for table `admin`
 --
 
 DROP TABLE IF EXISTS `admin`;
@@ -34,20 +34,22 @@ CREATE TABLE `admin` (
   `admin_id` int(6) UNSIGNED NOT NULL,
   `admin_account` varchar(30) DEFAULT NULL,
   `admin_password` varchar(50) DEFAULT NULL,
-  `admin_name` varchar(30) DEFAULT NULL
+  `admin_name` varchar(30) DEFAULT NULL,
+  `admin_valid` tinyint(4) NOT NULL DEFAULT 1,
+  `admin_hint` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `admin`
+-- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`admin_id`, `admin_account`, `admin_password`, `admin_name`) VALUES
-(1, 'colorful', 'abc123', 'Chris');
+INSERT INTO `admin` (`admin_id`, `admin_account`, `admin_password`, `admin_name`, `admin_valid`, `admin_hint`) VALUES
+(1, 'colorful', 'abc123', 'Chris', 1, '');
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `category`
+-- Table structure for table `category`
 --
 
 DROP TABLE IF EXISTS `category`;
@@ -58,7 +60,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `category`
+-- Dumping data for table `category`
 --
 
 INSERT INTO `category` (`category_id`, `category_name`, `category_description`) VALUES
@@ -71,7 +73,7 @@ INSERT INTO `category` (`category_id`, `category_name`, `category_description`) 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `customer`
+-- Table structure for table `customer`
 --
 
 DROP TABLE IF EXISTS `customer`;
@@ -88,7 +90,7 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `customer`
+-- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`id`, `account`, `name`, `password`, `email`, `phone`, `created_at`, `edit_at`, `valid`) VALUES
@@ -97,7 +99,7 @@ INSERT INTO `customer` (`id`, `account`, `name`, `password`, `email`, `phone`, `
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `member`
+-- Table structure for table `member`
 --
 
 DROP TABLE IF EXISTS `member`;
@@ -118,7 +120,7 @@ CREATE TABLE `member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `member`
+-- Dumping data for table `member`
 --
 
 INSERT INTO `member` (`id`, `account`, `name`, `birthday`, `gender`, `password`, `email`, `phone`, `subscribe`, `created_at`, `edit_at`, `valid`, `tag_id`) VALUES
@@ -133,7 +135,7 @@ INSERT INTO `member` (`id`, `account`, `name`, `birthday`, `gender`, `password`,
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `products`
+-- Table structure for table `products`
 --
 
 DROP TABLE IF EXISTS `products`;
@@ -142,7 +144,9 @@ CREATE TABLE `products` (
   `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` int(5) NOT NULL,
   `descriptions` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_before` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_after` varchar(50) NOT NULL,
+  `dng_pkg` varchar(50) NOT NULL,
   `category_id` int(3) UNSIGNED DEFAULT NULL,
   `create_date` datetime NOT NULL,
   `auto_create_date` datetime NOT NULL,
@@ -151,20 +155,20 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `products`
+-- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `price`, `descriptions`, `image`, `category_id`, `create_date`, `auto_create_date`, `auto_delete_date`, `valid`) VALUES
-(1, '濾鏡1', 100, '調色專用', 'image1.jpg', 1, '2021-12-07 11:49:55', '2021-12-07 11:49:55', '2021-12-07 11:49:55', 1),
-(2, '濾鏡2', 100, '調色專用', 'image2.jpg', 2, '2021-12-07 11:49:55', '2021-12-07 11:49:55', '2021-12-07 11:49:55', 1),
-(3, '濾鏡3', 100, '調色專用', 'image3.jpg', 3, '2021-12-07 11:51:52', '2021-12-07 11:51:52', '2021-12-07 11:51:52', 1),
-(4, '濾鏡4', 100, '調色專用', 'image4.jpg', 4, '2021-12-07 11:51:52', '2021-12-07 11:51:52', '2021-12-07 11:51:52', 1),
-(5, '濾鏡5', 100, '調色專用', 'image5.jpg', 5, '2021-12-07 11:53:15', '2021-12-07 11:53:15', '2021-12-07 11:53:15', 1);
+INSERT INTO `products` (`id`, `name`, `price`, `descriptions`, `image_before`, `image_after`, `dng_pkg`, `category_id`, `create_date`, `auto_create_date`, `auto_delete_date`, `valid`) VALUES
+(1, '濾鏡1', 100, '調色專用', 'image1.jpg', '', '', 1, '2021-12-07 11:49:55', '2021-12-07 11:49:55', '2021-12-07 11:49:55', 1),
+(2, '濾鏡2', 100, '調色專用', 'image2.jpg', '', '', 2, '2021-12-07 11:49:55', '2021-12-07 11:49:55', '2021-12-07 11:49:55', 1),
+(3, '濾鏡3', 100, '調色專用', 'image3.jpg', '', '', 3, '2021-12-07 11:51:52', '2021-12-07 11:51:52', '2021-12-07 11:51:52', 1),
+(4, '濾鏡4', 100, '調色專用', 'image4.jpg', '', '', 4, '2021-12-07 11:51:52', '2021-12-07 11:51:52', '2021-12-07 11:51:52', 1),
+(5, '濾鏡5', 100, '調色專用', 'image5.jpg', '', '', 5, '2021-12-07 11:53:15', '2021-12-07 11:53:15', '2021-12-07 11:53:15', 1);
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `subscribe`
+-- Table structure for table `subscribe`
 --
 
 DROP TABLE IF EXISTS `subscribe`;
@@ -175,7 +179,7 @@ CREATE TABLE `subscribe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `subscribe`
+-- Dumping data for table `subscribe`
 --
 
 INSERT INTO `subscribe` (`id`, `subscribe_name`, `subscribe_describe`) VALUES
@@ -187,7 +191,7 @@ INSERT INTO `subscribe` (`id`, `subscribe_name`, `subscribe_describe`) VALUES
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `tag`
+-- Table structure for table `tag`
 --
 
 DROP TABLE IF EXISTS `tag`;
@@ -197,7 +201,7 @@ CREATE TABLE `tag` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `tag`
+-- Dumping data for table `tag`
 --
 
 INSERT INTO `tag` (`id`, `name`) VALUES
@@ -205,93 +209,93 @@ INSERT INTO `tag` (`id`, `name`) VALUES
 (2, '一般會員');
 
 --
--- 已傾印資料表的索引
+-- Indexes for dumped tables
 --
 
 --
--- 資料表索引 `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`);
 
 --
--- 資料表索引 `category`
+-- Indexes for table `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- 資料表索引 `customer`
+-- Indexes for table `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`);
 
 --
--- 資料表索引 `member`
+-- Indexes for table `member`
 --
 ALTER TABLE `member`
   ADD PRIMARY KEY (`id`);
 
 --
--- 資料表索引 `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- 資料表索引 `subscribe`
+-- Indexes for table `subscribe`
 --
 ALTER TABLE `subscribe`
   ADD PRIMARY KEY (`id`);
 
 --
--- 資料表索引 `tag`
+-- Indexes for table `tag`
 --
 ALTER TABLE `tag`
   ADD PRIMARY KEY (`id`);
 
 --
--- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
   MODIFY `admin_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `category`
+-- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
   MODIFY `category_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `customer`
+-- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
   MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `member`
+-- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
   MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `subscribe`
+-- AUTO_INCREMENT for table `subscribe`
 --
 ALTER TABLE `subscribe`
   MODIFY `id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `tag`
+-- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
   MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
