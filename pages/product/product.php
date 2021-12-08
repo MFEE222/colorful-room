@@ -3,8 +3,11 @@ require_once("../../components/pdo-connect.php");
 include_once("../var.php");
 include_once("../signin/do-authorize.php");
 
+// GET
 $view = $_GET['view'];
 $valid = $_GET['valid'];
+$sold_min = $_GET['sold_min'];
+$sold_max = $_GET['sold_max'];
 
 //產品分類
 $sqlCategory = "SELECT * FROM category ";
@@ -172,7 +175,9 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                 <?php endforeach; ?>
             </select>
             <label class="m-3" id="sold">已售出</label>
-            <input type="text" id="sold" name="sold" value="<?php if (isset($sold)) echo $sold; ?>">
+            <input type="text" id="sold" name="sold-min" value="<?php if (isset($sold_min)) echo $sold_min; ?>">
+            <span>~</span>
+            <input type="text" id="sold" name="sold-max" value="<?php if (isset($sold_max)) echo $sold_max; ?>">
             <button type="submit" class="btn btn-primary mx-3">搜尋</button>
             <a type="reset" role="button" value="Reset" class="btn btn-secondary" href="product.php">重設</a>
 
