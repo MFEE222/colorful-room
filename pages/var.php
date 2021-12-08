@@ -1,60 +1,19 @@
 <?php
 // ============================================================================
-//  說明
-// ============================================================================
-// var.php 變數儲存路徑都是從 /colorful-room/index.php 出發
-// ============================================================================
-// GET
-// 變數名稱格式：<query>_<GET 參數名稱]>_<自訂名稱> 
-// 想要 GET 參數值，變數就下 query ...
-// ============================================================================
-$query_page = $_GET['page'];
-// 訂單
-$query_page_order   = 'order';
-// 商品
-$query_page_product = 'product';
-// 顧客
-$query_page_customer = 'customer';
-$query_page_customer_create = 'customer_create';
-$query_page_customer_doinsert = 'customer_doinsert';
-
-// ============================================================================
 // URL
 // 變數名稱格式：<url>_<路徑資料夾>_<自訂名稱>
 // 想要 網址位置，變數就下 url ...
 // ============================================================================
 // 總覽 / 主頁
-$url_page_summary   = 'http://localhost/colorful-room/index.php';
-$url_page_index     = 'http://localhost/colorful-room/index.php';
+$url_page_index     = '/colorful-room/index.php';
 // 訂單
-$url_page_order     = 'index.php?page=' . $query_page_order;
+$url_page_order     = '/colorful-room/pages/order/order.php';
 // 商品
-$url_page_product   = 'index.php?page=' . $query_page_product;
+$url_page_product   = '/colorful-room/pages/product/product.php';
 // 顧客
-$url_page_customer  = 'index.php?page=' . $query_page_customer;
-$url_page_customer_create = 'index.php?page=' . $query_page_customer_create;
-$url_page_customer_doinsert  = 'index.php?page=' . $query_page_customer_doinsert;
+$url_page_customer  = '/colorful-room/pages/customer/user-list.php';
+$url_page_customer_create = '/colorful-room/pages/customer/create-member.php';
+$url_page_customer_doinsert  = '/colorful-room/pages/customer/doinsert.php';
 // 登入
 $url_page_signin    = '/colorful-room/pages/signin/signin.php';
 $url_page_signin_do = '/colorful-room/pages/signin/do-signin.php';
-// $url_page_signin_do = './do-signin.php';
-
-
-// ============================================================================
-// Page
-// 變數名稱格式：<路徑資料夾>_<自訂名稱>
-// 想要 實際資源路徑，變數就下 page ...
-// ============================================================================
-// 總覽
-$page_summary       = 'pages/summary/summary.php';
-// 訂單
-$page_order         = 'pages/order/order.php';
-// 商品
-$page_product       = 'pages/product/product.php';
-// 顧客
-$page_customer      = 'pages/customer/user-list.php';
-$page_customer_create   = 'pages/customer/create-member.php';
-$page_customer_doinsert = 'pages/customer/doinsert.php';
-// 登入
-$page_signin            = 'pages/signin/signin.php';
-$page_signin_do         = 'pages/signin/do-signin.php';
