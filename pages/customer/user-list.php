@@ -65,6 +65,7 @@ if (isset($_GET['keyword'])) {
                 <div>
                     共 ? 位使用者
                 </div>
+                <a class="btn btn-primary" href="create-member.php">新增使用者</a>
             </div>
         </div>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -78,10 +79,7 @@ if (isset($_GET['keyword'])) {
         <?php //if ($_GET['table'] == 'member') : 
         ?>
         <div class="tab-content col-lg-10" id="nav-tabContent">
-
             <div class="tab-pane fade show active " id="nav-member" role="tabpanel" aria-labelledby="nav-member-tab">
-
-
                 <table class="table table-bordered table-hover table-sm">
                     <thead>
                         <tr>
@@ -139,7 +137,6 @@ if (isset($_GET['keyword'])) {
             <?php // elseif ($_GET['table'] == "customer") :
             ?>
             <div class="tab-pane fade " id="nav-customer" role="tabpanel" aria-labelledby="nav-customer-tab">
-
                 <table class="table table-bordered table-hover table-sm">
                     <thead>
                         <tr>

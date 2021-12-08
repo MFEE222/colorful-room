@@ -41,6 +41,7 @@ try {
                 $rowsCustomer = $stmt->fetch();
                 //            var_dump($rowsCustomer);
             ?>
+
                 <form action="customerDoUpdate.php" method="post">
                     <div class="mb-3 input-group-sm">
                         <label for="id" class="form-label">ID</label>
@@ -88,12 +89,12 @@ try {
                         </div>
                     </div>
                 </form>
-                <?php if (isset($_SESSION["customer"])) : ?>
-                    <?php unset($_SESSION["customer"]); ?>
-                <?php endif; ?>
+
             <?php endif; ?>
         </div>
-
+        <?php if (isset($_SESSION["customer"])) : ?>
+            <?php unset($_SESSION["customer"]); ?>
+        <?php endif; ?>
     </div>
 </div>
 <!-- body 2 > main 3 : 右側主內容下方頁尾 -->

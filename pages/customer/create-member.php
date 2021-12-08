@@ -21,7 +21,7 @@ if (isset($_SESSION["user"])) {
 <!-- body 2 > main 2 : 右側主內容頁 -->
 <div class="py-2 d-flex  mx-5">
     <div>
-        <a class="btn btn-primary" href="<?= $url_page_user_list ?>">使用者列表</a>
+        <a class="btn btn-primary" href="<?= $url_page_user_list ?>">回使用者列表</a>
     </div>
 </div>
 <div class="row justify-content-center">
