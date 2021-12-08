@@ -1,5 +1,7 @@
 <?php
 require_once("../../components/pdo-connect.php");
+include_once('../var.php');
+
 if (isset($_SESSION["user"])) {
     unset($_SESSION["user"]);
 }
@@ -18,7 +20,7 @@ if (isset($_SESSION["user"])) {
 <!-- body 2 > main 2 : 右側主內容頁 -->
 <div class="py-2 d-flex  mx-5">
     <div>
-        <a class="btn btn-primary" href="user-list.php">使用者列表</a>
+        <a class="btn btn-primary" href="<?= $url_page_user_list ?>">使用者列表</a>
     </div>
 </div>
 <div class="row justify-content-center">
