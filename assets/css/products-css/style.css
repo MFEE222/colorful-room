@@ -1,14 +1,11 @@
-.category-list li a{
+.category-list li.active a{
+    background: #e91e63 !important;
+}
+
+.category-list li:not(.active) a:hover{
     display: block;
-    padding: 10px 20px;
     text-decoration: none;
-    color: #333;
-    border-bottom: 1px solid #ccc;
-}
-.category-list li.active a, .category-list li.active a:hover{
-    background: #e91e63;
-    color:#fff;
-}
-.category-list li a:hover{
-    background: #eee;
+    /* border-bottom: 1px solid #ccc; */
+    background: #aaa !important;
+    /* color:#333 !important; */
 }

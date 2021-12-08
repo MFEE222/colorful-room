@@ -37,6 +37,7 @@ if (isset($_GET['keyword'])) {
         echo $e->getMessage();
     }
 }
+// var_dump($_SESSION);
 ?>
 
 <!-- html head 標籤 -->
