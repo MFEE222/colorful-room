@@ -1,9 +1,15 @@
 <?php
-
 require_once("../../components/pdo-connect.php");
 //新增
 include_once("../var.php");
 include_once("../signin/do-authorize.php");
+
+// function redirect($url)
+// {
+//     header("Location:$url");
+//     // exit;
+//     die();
+// }
 //
 $rowsMemebr = NULL;
 //if(!isset($_GET["id"])){
@@ -37,6 +43,7 @@ try {
         ];
         $_SESSION["user"] = $user;
         header("location:create-member.php");
+        // redirect('create-member.php');
         //        exit();
     }
 } catch (PDOException $e) {
@@ -55,4 +62,3 @@ if ($memberExist == 0) {
         echo $e->getMessage();
     }
 }
-?>

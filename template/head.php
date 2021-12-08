@@ -23,4 +23,7 @@
     <!-- temp -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
     <!-- <link rel="stylesheet" href="fontawesome-free-5.0.1/web-fonts-with-css/css/fontawesome-all.min.css"> -->
+
+    <!--products stylesheet-->
+    <link type="text/css" rel="stylesheet" href="/colorful-room/assets/css/products-css/style.css">
 </head>

@@ -3,9 +3,10 @@ require_once("../../components/pdo-connect.php");
 include_once('../var.php');
 include_once("../signin/do-authorize.php");
 
-if (isset($_SESSION["user"])) {
-    unset($_SESSION["user"]);
-}
+// var_dump($_SESSION);
+// if (isset($_SESSION["user"])) {
+//     unset($_SESSION["user"]);
+// }
 //session_start();
 ?>
 <!-- html head 標籤 -->
