@@ -5,13 +5,27 @@ include('../signin/do-authorize.php');
 // ============================================================================
 //  Structure
 // ============================================================================
-// 勾選方框
-// 訂單編號
-// 建立時間
-// 修改時間
-// 付款狀態
-// 付款方式
-// 
+// 搜尋：
+//  搜尋輸入
+//  確認按鈕（考慮不做，離開輸入狀態直接搜尋？）
+//  篩選條件
+// 欄位：
+//  勾選方框
+//  訂單編號：可點擊連結到訂單明細，側邊有『排序按鈕』
+//  顧客名稱：側邊有『排序按鈕』
+//  建立時間：側邊有『排序按鈕』
+//  修改時間：側邊有『排序按鈕』
+//  付款狀態：側邊有『排序按鈕』
+//  付款方式：側邊有『排序按鈕』(考慮放明細？)
+//  退貨狀態：側邊有『排序按鈕』
+//  金額：側邊有『排序按鈕』
+// ============================================================================
+//  Flow
+// ============================================================================
+// 搜尋：
+//  輸入關鍵字 -> 回車鍵 -> 進入資料庫查詢
+//  點擊篩選條件 -> 進入資料庫查詢
+
 
 ?>
 <!-- html head 標籤 -->
@@ -25,6 +39,24 @@ include('../signin/do-authorize.php');
 <?php include "../../template/body-main-header.php" ?>
 
 <!-- body 2 > main 2 : 右側主內容頁 -->
+<div class="container-lg">
+    <h1>Hello world</h1>
+
+
+    <script>
+        var input = document.querySelector("#order-search-input");
+
+        input.addEventListener('keyup', function(event) {
+            // number 13 is the 'enter' key on the keyboard
+            if (event.keyCode === 13) {
+                // cancel the default action, if needed
+                event.preventDefault();
+                // trigger the button element to submit form
+                document.querySelector('#order-search-submit').click();
+            }
+        })
+    </script>
+</div>
 
 
 <!-- body 2 > main 3 : 右側主內容下方頁尾 -->
