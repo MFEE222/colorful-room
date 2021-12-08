@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 $colorful_servername = "localhost";
 $colorful_username = "mfee222";
 $colorful_password = "222eefm";
