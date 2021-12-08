@@ -13,8 +13,8 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <?php
+include_once '../var.php';
 session_start();
-$page_do_signin = './do-signin.php';
 $session = $_SESSION;
 ?>
 <!DOCTYPE html>
@@ -131,7 +131,7 @@ $session = $_SESSION;
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form action="<?= $page_do_signin ?>" method="POST" role="form" class="text-start">
+                                <form action="<?= $url_page_signin_do ?>" method="POST" role="form" class="text-start">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Account</label>
                                         <input type="text" class="form-control" name="admin_account">
@@ -144,10 +144,11 @@ $session = $_SESSION;
                                         <input class="form-check-input" type="checkbox" id="rememberMe" name="admin_remember_me">
                                         <label class="form-check-label mb-0 ms-2" for="rememberMe">Remember me</label>
                                     </div>
-                                    <?php if ($session['error'] != NULL) : ?>
+                                    <?php if (!empty($session['error'])) : ?>
                                         <div class="text-center">
                                             <p><?= $session['error'] ?></p>
                                         </div>
+                                        <?php unset($_SESSION['error']); ?>
                                     <?php endif; ?>
                                     <div class="text-center">
                                         <!-- <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button> -->
