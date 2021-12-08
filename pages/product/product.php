@@ -42,8 +42,7 @@
                 <input id="basic-addon1" type="text" placeholder="請輸入...">
                 <span class="m-3" id="basic-addon1">類別</span>
                 <input id="basic-addon1" type="text" placeholder="請輸入...">
-                <span class="m-3" id="basic-addon1">已售出</span>
-                <span class="m-3" id="basic-addon1">已售出</span>
+                <span class="m-3" id="basic-addon1">已售出</span>~<span class="m-3" id="basic-addon1">已售出</span>
                 <input id="basic-addon1" type="text" placeholder="請輸入...">
                 <button type="submit" class="btn btn-primary mx-3">搜尋</button>
                 <button type="submit" class="btn btn-secondary">重設</button>
