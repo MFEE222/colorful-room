@@ -170,8 +170,9 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
             <label class="m-3" id="cate">類別</label>
             <select name="cate" id="cate">
                 <option selected>請選擇類別</option>
+<!--                selected="--><?php //if (isset($value["category_id"])) echo "selected"; ?>
                 <?php foreach ($row as $value) : ?>
-                    <option value="<?php if (isset($value["category_id"])) echo $value["category_id"]; ?>" selected="<?php if (isset($value["category_id"])) echo "selected"; ?>"> <?= $value["category_name"] ?> </option>
+                    <option value="<?php if (isset($value["category_id"])) echo $value["category_id"]; ?>""> <?= $value["category_name"] ?> </option>
                 <?php endforeach; ?>
             </select>
             <label class="m-3" id="sold">已售出</label>
