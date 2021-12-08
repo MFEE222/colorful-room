@@ -1,7 +1,7 @@
 <?php
 require_once('../../components/pdo-connect.php');
 include '../var.php';
-// session_start();
+session_start();
 // 檢查 SESSION 參數
 //      超過限制：返回登入頁（錯誤訊息）
 // 檢查 POST 參數
@@ -98,6 +98,7 @@ echo 'init<br>';
 $rest_times = $setting['max_attempt_times'] - $_SESSION['attempt_times'];
 if ($rest_times <= 0) {
     $_SESSION['error'] = $setting['error_reach_limit'];
+    // echo __LINE__ . '<br>';
     redirect($url_page_signin);
 }
 echo 'verify session<br>';
@@ -107,11 +108,13 @@ echo 'verify session<br>';
 if (empty($_POST['admin_account'])) {
     $_SESSION['error'] .= $setting['error_empty_account'];
     $_SESSION['error'] .= $setting['error_rest_times'] . $rest_times;
+    // echo __LINE__ . '<br>';
     redirect($url_page_signin);
 }
 if (empty($_POST['admin_password'])) {
     $_SESSION['error'] .= $setting['error_empty_password'];
     $_SESSION['error'] .= $setting['error_rest_times'] . $rest_times;
+    // echo __LINE__ . '<br>';
     redirect($url_page_signin);
 }
 echo 'verify post<br>';
@@ -133,6 +136,7 @@ try {
         $_SESSION['account'] = $data['admin_account'];
         $_SESSION['name'] = $data['admin_name'];
         $_SESSION['status'] = true;
+        // echo __LINE__ . '<br>';
         redirect($url_page_index);
     }
 } catch (PDOException $e) {

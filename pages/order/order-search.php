@@ -39,9 +39,16 @@ include('../signin/do-authorize.php');
 <?php include "../../template/body-main-header.php" ?>
 
 <!-- body 2 > main 2 : 右側主內容頁 -->
-<div class="container-lg">
-    <h1>Hello world</h1>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col">
 
+        </div>
+    </div>
+
+    <div class="row">
+
+    </div>
 
     <script>
         var input = document.querySelector("#order-search-input");
