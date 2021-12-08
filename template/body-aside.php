@@ -1,4 +1,3 @@
-<?php include_once("../pages/var.php"); ?>
 
 <body class="g-sidenav-show  bg-gray-200">
     <!-- body part 1 of 3 左側主內容 -->
