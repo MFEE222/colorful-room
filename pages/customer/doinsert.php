@@ -36,7 +36,7 @@ try {
             "email" => $row["email"]
         ];
         $_SESSION["user"] = $user;
-        header("location:create-member.php");
+        header("location:create-member.php?id=".$row["id"]);
         //        exit();
     }
 } catch (PDOException $e) {

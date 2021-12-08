@@ -156,7 +156,7 @@
   <?php include "../../template/body-main-header.php" ?>
 
   <!-- body 2 > main 2 : 右側主內容頁 -->
-  <link rel="stylesheet" href="../../assets/css/products-css/style.css">
+
 <div class="container">
   <form action="product.php" method="get">
       <div class="mt-3 ">
