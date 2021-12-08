@@ -2,8 +2,8 @@
 require_once("components/pdo-connect.php");
 include_once("pages/var.php");
 ?>
-<?php echo 123; ?>
 <!-- html head 標籤 -->
+<!-- !!! include 中路徑記得自己改 !!! -->
 <?php include "template/head.php"; ?>
 
 <!-- body 1 : 左側功能導覽列 -->
