@@ -27,7 +27,7 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>order details</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -44,14 +44,14 @@
 
 <body>
     <div class="container">
-        <h3>的訂單明細</h3>
+        <h3>訂單明細</h3>
         <div class="row">
             <div class="col-9">
                 <p>訂單編號:</p>
                 <p>訂購日期:</p>
             </div>
             <div class="col-3">
-                <button type="button" class="btn btn-outline-danger">編輯訂單</button>
+                <a href="order-edit.php" class="btn btn-outline-danger">編輯訂單</a>
                 <a href="order.php" class="btn btn-danger">回列表</a>
             </div>
         </div>

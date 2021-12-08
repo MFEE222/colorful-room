@@ -38,7 +38,7 @@ try {
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>order</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -125,55 +125,6 @@ try {
                 </li>
             </ul>
         </nav>
-
-        <!-- <tr>
-                    <td><input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="..."></td>
-                    <td><?= $value["order-num"] ?></td>
-                    <td><?= $value["user-id"] ?></td>
-                    <td><?= $value["date"] ?></td>
-                    <td><?= $value["payment-status"] ?></td>
-                    <td><?= $value["payment-method"] ?></td>
-                    <td>
-                        <select>
-                            <option>處理中</option>
-                            <option>待付款</option>
-                            <option>已完成</option>
-                            <option>不成立</option>
-                            <option>退貨/退款</option>
-                            <option>已取消</option>
-                        </select>
-                    </td>
-                    <td><?= $value["sum"] ?></td>
-                    <td>
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <button type="button" class="btn btn-danger"><a href="/pages/order/order-details.php">明細</a></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="..."></td>
-                    <td><?= $value["order-num"] ?></td>
-                    <td><?= $value["user-id"] ?></td>
-                    <td><?= $value["date"] ?></td>
-                    <td><?= $value["payment-status"] ?></td>
-                    <td><?= $value["payment-method"] ?></td>
-                    <td>
-                        <select>
-                            <option>處理中</option>
-                            <option>待付款</option>
-                            <option>已完成</option>
-                            <option>不成立</option>
-                            <option>退貨/退款</option>
-                            <option>已取消</option>
-                        </select>
-                    </td>
-                    <td><?= $value["sum"] ?></td>
-                    <td>
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <button type="button" class="btn btn-danger"><a href="/pages/order/order-details.php">明細</a></button>
-                        </div>
-                    </td>
-                </tr> -->
-
-
     </div>
+</body>
+</html>
