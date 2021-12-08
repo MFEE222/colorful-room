@@ -1,9 +1,11 @@
 <?php
-require_once ("../../components/pdo-connect.php");
 if(!isset($_POST["id"])){
     echo "您不是從正常程序進入此頁";
     exit();
 }
+include_once("../var.php");
+include_once("../signin/do-authorize.php");
+require_once ("../../components/pdo-connect.php");
 $id=$_POST["id"];
 $account=$_POST["account"];
 $name=$_POST["name"];
@@ -18,7 +20,7 @@ $sql="UPDATE member SET account=?, name=?, email=?, phone=?, birthday=?, gender=
 $stmt=$db_host->prepare($sql);
 try {
     $result=$stmt->execute([$account,$name,$email,$phone,$birthday,$gender,$subscribe,$tag_id,$editNow,$id]);
-    header("Refresh:2;url=user-list-test.php");
+    header("location:user-list.php");
 }catch(PDOException $e){
     echo $e->getMessage();
 }

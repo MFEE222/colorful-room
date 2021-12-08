@@ -3,6 +3,8 @@ if (!isset($_GET["id"])) {
     echo "您不是從正常程序進入此頁";
     exit();
 }
+include_once("../var.php");
+include_once("../signin/do-authorize.php");
 require_once("../../components/pdo-connect.php");
 $id = $_GET["id"];
 $sql = "UPDATE member SET valid=0 WHERE id=?";
@@ -10,7 +12,7 @@ $stmt = $db_host->prepare($sql);
 try {
     if ($stmt->execute([$id]) === TRUE) {
         //      echo "刪除資料完成" ;
-        header("Refresh:2;url=user-list-test.php");
+        header("location:user-list.php");
     }
 } catch (PDOException $e) {
     echo  $e->getMessage();
