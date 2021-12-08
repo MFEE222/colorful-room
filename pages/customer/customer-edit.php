@@ -92,9 +92,7 @@ try {
 
             <?php endif; ?>
         </div>
-        <?php if (isset($_SESSION["customer"])) : ?>
             <?php unset($_SESSION["customer"]); ?>
-        <?php endif; ?>
     </div>
 </div>
 <!-- body 2 > main 3 : 右側主內容下方頁尾 -->
