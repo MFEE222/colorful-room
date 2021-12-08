@@ -194,6 +194,7 @@
       </ul>
   </div>
 
+<<<<<<< HEAD
   <div class="row product-list">
       <div class="col-md-6 col-lg-4 mb-3">
           <table class="table table-hover mt-3">
@@ -222,6 +223,29 @@
                       <td><?=$value["sold_total"]?></td>
                       <td><?=$value["dng_pkg"]?></td>
                       <td><a class="btn btn-primary" role="button" href="#">編輯</a> <a class="btn btn-primary" role="button" href="#">更多</a></td>
+=======
+    <!--valid=0 -> 下架 ；valid=1 -> 已上架 ; valid=2 ; 未上架 -->
+
+    <div class="bg-white">
+        <form>
+            <div class="mt-3">
+                <span class="m-3" id="basic-addon1">商品名稱</span>
+                <input id="basic-addon1" type="text" placeholder="請輸入...">
+                <span class="m-3" id="basic-addon1">類別</span>
+                <input id="basic-addon1" type="text" placeholder="請輸入...">
+                <span class="m-3" id="basic-addon1">已售出</span>~<span class="m-3" id="basic-addon2">已售出</span>
+                <table span="1" width="500">
+<tr>
+<td>已售出</td>
+<td>已售出</td>
+</tr>
+</table>
+                <input id="basic-addon1" type="text" placeholder="請輸入...">
+                <button type="submit" class="btn btn-primary mx-3">搜尋</button>
+                <button type="submit" class="btn btn-secondary">重設</button>
+            </div>
+        </form>
+>>>>>>> b49e6f91b5b4fd4bca06e0c4ea41016536345d56
 
                   </tr>
                   </tbody>
