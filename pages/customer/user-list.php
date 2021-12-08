@@ -1,6 +1,7 @@
 <?php
 require_once("../../components/pdo-connect.php");
 include_once("../var.php");
+include_once("../signin/do-authorize.php");
 $rowsMemebr = NULL;
 
 if (isset($_GET['keyword'])) {

@@ -1,5 +1,7 @@
 <?php
 include_once('../var.php');
+include_once("../signin/do-authorize.php");
+
 
 if (!isset($_GET["id"])) {
     echo "您不是從正常程序進入此頁";

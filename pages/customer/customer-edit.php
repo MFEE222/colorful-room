@@ -1,6 +1,7 @@
 <?php
 require_once("../../components/pdo-connect.php");
 include_once("../var.php");
+include_once("../signin/do-authorize.php");
 
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
