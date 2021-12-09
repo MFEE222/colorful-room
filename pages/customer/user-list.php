@@ -6,8 +6,43 @@ $rowsMemebr = NULL;
 
 if (isset($_GET['keyword'])) {
     // 致緯...
+    //搜尋member
     if ($_GET['table'] == 'member') {
+        $search1 = $_GET["keyword"];
+        $search2 = $_GET["keyword"];
+        $sql = "SELECT member. * ,tag.name AS tag_name FROM member
+                jOIN tag ON member.tag_id = tag.id
+                WHERE member.account LIKE :SERCH1 OR member.name LIKE :SERCH2";
+        $stmt = $db_host->prepare($sql);
+        try {
+            $stmt->execute([
+              'SERCH1'=>'%'. $search1 .'%',
+              'SERCH2'=>'%'. $search2 .'%'
+            ]);
+            $rowsMember = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        } catch (PDOException $e) {
+        echo $e->getMessage();
+        }
+        //搜尋customer
     } elseif ($_GET['table'] == 'customer') {
+        $search1 = $_GET["keyword"];
+        $search2 = $_GET["keyword"];
+        $sql = "SELECT member. * ,tag.name AS tag_name FROM member
+                jOIN tag ON customer.tag_id = tag.id
+                WHERE customer.account LIKE :SERCH3 OR customer.name LIKE :SERCH4";
+        $stmt = $db_host->prepare($sql);
+        try {
+            $stmt->execute([
+              'SERCH3'=>'%'. $search3 .'%',
+              'SERCH4'=>'%'. $search4 .'%'
+            ]);
+            $rowsMember = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        } catch (PDOException $e) {
+        echo $e->getMessage();
+        }
+
     }
 } else {
     //member的資料
