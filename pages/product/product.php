@@ -4,36 +4,30 @@ include_once("../var.php");
 include_once("../signin/do-authorize.php");
 
 // valid badge
-$sqlValidAll = "SELECT COUNT(valid) FROM products WHERE valid=1";
+$sqlValidAll = "SELECT COUNT(valid) FROM products ";
 // $sqlValidAll = "SELECT COUNT(valid) AS 'pd' FROM products WHERE valid=1";
 $stmt = $db_host->prepare($sqlValidAll);
-$countAll = $stmt->execute();
-$row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$stmt->execute();
+$rowAll = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // $row = $stmt->fetch();
-
-// var_dump($row);
-// echo ($row[0]) . '<br>';
-// echo ($row['pd']);
-
-
-// echo $row[0]['COUNT(price)'];
-// echo $row[0]['pd'];
-
-
-
+// var_dump($rowAll);
+// echo $rowAll[0]["COUNT(valid)"] . '<br>';
 //
 $sqlValid0 = "SELECT COUNT(valid) FROM products WHERE valid=0";
 $stmt = $db_host->prepare($sqlValid0);
-$count0 = $stmt->execute();
+$stmt->execute();
+$row0 = $stmt->fetchAll(PDO::FETCH_ASSOC);
 //echo "$count0";
 //
 $sqlValid1 = "SELECT COUNT(valid) FROM products WHERE valid=1";
 $stmt = $db_host->prepare($sqlValid1);
-$count1 = $stmt->execute();
+$stmt->execute();
+$row1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
 //
 $sqlValid2 = "SELECT COUNT(valid) FROM products WHERE valid=2";
-$stmt = $db_host->prepare($sqlValid2);
-$count2 = $stmt->execute();
+$db_host->prepare($sqlValid2);
+$stmt->execute();
+$row2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 //產品分類
@@ -189,7 +183,7 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
 <?php include "../../template/head.php"; ?>
 
 <!-- body 1 : 左側功能導覽列 -->
-<?php //include "../../template/body-aside.php"; 
+<?php include "../../template/body-aside.php";
 ?>
 
 <!-- body 2 > main 1 : 右側主內容上方導覽列 -->
@@ -216,23 +210,23 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                         <span>~</span>
                         <input type="text" id="sold" name="sold_max" value="<?php if (isset($sold_max)) echo $sold_max; ?>">
                         <button type="submit" class="btn btn-primary mx-3">搜尋</button>
-                        <a type="reset" role="button" value="Reset" class="btn btn-secondary" href="product.php">重設</a>
+                        <a type="reset" class="btn btn-primary" role="button" value="Reset"  href="product.php">重設</a>
 
         </div>
     </form>
     <div>
         <ul class="nav nav-pills category-list list-unstyled">
             <li class="nav-item <?php if (isset($view)) echo "active"; ?>">
-                <a class="nav-link " aria-current="page" href="product.php?view">全部<span class="badge badge-secondary"><?php echo "$countAll"; ?></span></a>
+                <a class="nav-link " aria-current="page" href="product.php?view">全部<span class="badge text-dark"><?php echo $rowAll[0]["COUNT(valid)"]; ?></span></a>
             </li>
             <li class="nav-item <?php if (isset($valid) && $valid === "1") echo "active"; ?>">
-                <a class="nav-link " href="product.php?valid=1">架上商品<span class="badge badge-info"><?php echo "$count1"; ?></span></span></a>
+                <a class="nav-link " href="product.php?valid=1">架上商品<span class="badge text-dark"><?php echo $row1[0]["COUNT(valid)"]; ?></span></span></a>
             </li>
             <li class="nav-item <?php if (isset($valid) && $valid === "2") echo "active"; ?>">
-                <a class="nav-link " href="product.php?valid=2">未上架<span class="badge badge-default"><?php echo "$count2"; ?></span></a>
+                <a class="nav-link " href="product.php?valid=2">未上架<span class="badge text-dark"><?php echo $row2[0]["COUNT(valid)"]; ?></span></a>
             </li>
             <li class="nav-item <?php if (isset($valid) && $valid === "0") echo "active"; ?>">
-                <a class="nav-link " href="product.php?valid=0">已下架<span class="badge badge-default"><?php echo "$count0"; ?></span></a>
+                <a class="nav-link " href="product.php?valid=0">已下架<span class="badge text-dark"><?php echo $row0[0]["COUNT(valid)"]; ?></span></a>
             </li>
         </ul>
     </div>
