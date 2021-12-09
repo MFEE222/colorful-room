@@ -210,11 +210,12 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                         <span>~</span>
                         <input type="text" id="sold" name="sold_max" value="<?php if (isset($sold_max)) echo $sold_max; ?>">
                         <button type="submit" class="btn btn-primary mx-3">搜尋</button>
-                        <a type="reset" class="btn btn-primary" role="button" value="Reset"  href="product.php">重設</a>
+                        <a type="reset" class="btn btn-primary" role="button" value="Reset" href="product.php">重設</a>
+
 
         </div>
     </form>
-    <div>
+    <div class="d-flex">
         <ul class="nav nav-pills category-list list-unstyled">
             <li class="nav-item <?php if (isset($view)) echo "active"; ?>">
                 <a class="nav-link " aria-current="page" href="product.php?view">全部<span class="badge text-dark"><?php echo $rowAll[0]["COUNT(valid)"]; ?></span></a>
@@ -228,7 +229,12 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
             <li class="nav-item <?php if (isset($valid) && $valid === "0") echo "active"; ?>">
                 <a class="nav-link " href="product.php?valid=0">已下架<span class="badge text-dark"><?php echo $row0[0]["COUNT(valid)"]; ?></span></a>
             </li>
+            <li>
+                <a type="button" class="btn btn-lg btn-success" href="product-add.php">商品上架</a>
+            </li>
+
         </ul>
+
     </div>
 
     <div class="row product-list">

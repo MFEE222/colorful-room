@@ -17,35 +17,29 @@ include_once("../signin/do-authorize.php");
 <?php include "../../template/body-main-header.php" ?>
 
 
-
-
-
-
-
 <form action="./do-product-add.php" method="POST">
-    <label for="fname">Product Name:</label>
+    <label for="fname">名稱:</label>
     <input type="text" name="product_name"><br>
-    <label for="fname">Product Price:</label>
+    <label for="fname">價格:</label>
     <input type="text" name="product_price"><br>
-    <label for="fname">Descriptions</label>
+    <label for="fname">描述:</label>
     <input type="text" name="descriptions"><br>
-    <label for="fname">Category</label>
+    <label for="fname">類別:</label>
     <input type="text" name="category_id"><br>
 
-    <!-- 人像1 -->
-    <label for="img">image_before:</label>
+    <!-- 圖片上傳 -->
+    <label for="img">修圖前:</label>
     <input type="file" id="img" name="image_before" accept="image/*">
-    <label for="img">image_after:</label>
+    <label for="img">修圖後:</label>
     <input type="file" id="img" name="image_after" accept="image/*">
-    <label for="img">dng_pkg:</label>
+    <label for="img">DNG檔案:</label>
     <input type="file" id="img" name="dng_pkg" accept="image/*">
 
-
-
-    <button type="submit">Submit</button>
+    <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+    
 </form>
 
-<script src="../../assets/js/core/bootstrap.bundle.min.js"></script>
+<a type="button" class="btn btn-lg btn-success" href="product.php">返回</a>
 
 <!-- body 2 > main 3 : 右側主內容下方頁尾 -->
 <?php include "../../template/body-main-footer.php" ?>
