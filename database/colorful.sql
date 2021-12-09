@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2021-12-09 13:46:06
+-- 產生時間： 2021-12-09 16:46:51
 -- 伺服器版本： 10.4.21-MariaDB
 -- PHP 版本： 8.0.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- 資料庫: `colorful`
 --
+CREATE DATABASE IF NOT EXISTS `colorful` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `colorful`;
 
 -- --------------------------------------------------------
 
@@ -27,6 +29,7 @@ SET time_zone = "+00:00";
 -- 資料表結構 `admin`
 --
 
+DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `admin_id` int(6) UNSIGNED NOT NULL,
   `admin_account` varchar(30) DEFAULT NULL,
@@ -49,6 +52,7 @@ INSERT INTO `admin` (`admin_id`, `admin_account`, `admin_password`, `admin_name`
 -- 資料表結構 `category`
 --
 
+DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `category_id` int(6) UNSIGNED NOT NULL,
   `category_name` varchar(30) NOT NULL,
@@ -72,6 +76,7 @@ INSERT INTO `category` (`category_id`, `category_name`, `category_description`) 
 -- 資料表結構 `customer`
 --
 
+DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `id` int(6) UNSIGNED NOT NULL,
   `account` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -97,6 +102,7 @@ INSERT INTO `customer` (`id`, `account`, `name`, `password`, `email`, `phone`, `
 -- 資料表結構 `member`
 --
 
+DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
   `id` int(6) UNSIGNED NOT NULL,
   `account` varchar(30) DEFAULT NULL,
@@ -133,6 +139,7 @@ INSERT INTO `member` (`id`, `account`, `name`, `birthday`, `gender`, `password`,
 -- 資料表結構 `products`
 --
 
+DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` int(3) UNSIGNED NOT NULL,
   `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -158,7 +165,12 @@ INSERT INTO `products` (`id`, `name`, `price`, `descriptions`, `image_before`, `
 (2, '濾鏡2', 100, '調色專用', 'image2.jpg', '', '', 2, 10, '2021-12-07 11:49:55', '2021-12-07 11:49:55', '2021-12-07 11:49:55', 0),
 (3, '濾鏡3', 100, '調色專用', 'image3.jpg', '', '', 3, 15, '2021-12-07 11:51:52', '2021-12-07 11:51:52', '2021-12-07 11:51:52', 1),
 (4, '濾鏡4', 100, '調色專用', 'image4.jpg', '', '', 4, 20, '2021-12-07 11:51:52', '2021-12-07 11:51:52', '2021-12-07 11:51:52', 2),
-(5, '濾鏡5', 100, '調色專用', 'image5.jpg', '', '', 5, 0, '2021-12-07 11:53:15', '2021-12-07 11:53:15', '2021-12-07 11:53:15', 0);
+(5, '濾鏡5', 100, '調色專用', 'image5.jpg', '', '', 5, 0, '2021-12-07 11:53:15', '2021-12-07 11:53:15', '2021-12-07 11:53:15', 0),
+(25, '人像1', 100, '人像1', 'A人像_1.jpg', 'B人像_1.jpg', '人像_1.dng', 1, 0, '2021-12-09 16:14:57', '2021-12-09 16:14:57', '2021-12-09 16:14:57', 1),
+(26, '人像2', 100, '人像2', 'B人像_2.jpg', 'A人像_2.jpg', '人像_2.dng', 2, 0, '2021-12-09 16:16:05', '2021-12-09 16:16:05', '2021-12-09 16:16:05', 1),
+(27, '底片1', 100, '底片1', 'b-Film_1.jpg', 'a-Film_1.jpg', 'Film_1.dng', 3, 0, '2021-12-09 16:18:31', '2021-12-09 16:18:31', '2021-12-09 16:18:31', 1),
+(28, '', 0, '', '', '', '', 0, 0, '2021-12-09 16:19:07', '2021-12-09 16:19:07', '2021-12-09 16:19:07', 1),
+(29, '', 0, '', '', '', '', 0, 0, '2021-12-09 16:19:08', '2021-12-09 16:19:08', '2021-12-09 16:19:08', 1);
 
 -- --------------------------------------------------------
 
@@ -166,6 +178,7 @@ INSERT INTO `products` (`id`, `name`, `price`, `descriptions`, `image_before`, `
 -- 資料表結構 `subscribe`
 --
 
+DROP TABLE IF EXISTS `subscribe`;
 CREATE TABLE `subscribe` (
   `id` int(3) UNSIGNED NOT NULL,
   `subscribe_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -188,6 +201,7 @@ INSERT INTO `subscribe` (`id`, `subscribe_name`, `subscribe_describe`) VALUES
 -- 資料表結構 `tag`
 --
 
+DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag` (
   `id` int(6) UNSIGNED NOT NULL,
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
@@ -279,7 +293,7 @@ ALTER TABLE `member`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `subscribe`
