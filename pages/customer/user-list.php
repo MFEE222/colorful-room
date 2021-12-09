@@ -20,7 +20,7 @@ if (isset($_GET['keyword'])) {
     try {
         $stmt->execute();
         $rowsMember = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        //    $rowsCountMember=$stmt->rowCount();
+            $rowsCountMember=$stmt->rowCount();
         //    var_dump($rowsMember);
     } catch (PDOException $e) {
         echo $e->getMessage();
@@ -31,7 +31,7 @@ if (isset($_GET['keyword'])) {
     try {
         $stmt->execute();
         $rowsCustomer = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        //    $rowsCountCustomer=$stmt->rowCount();
+        $rowsCount=$stmt->rowCount();
         //    var_dump($rows);
     } catch (PDOException $e) {
         echo $e->getMessage();
@@ -53,18 +53,19 @@ if (isset($_GET['keyword'])) {
 <!-- body 2 > main 2 : 右側主內容頁 -->
 <div class="container-fluid py-4">
     <div class="container ">
-
-        <div class="row ">
-            <label for="">搜尋</label>
+        <div class="row">
+            <p class="h6">搜尋</p>
             <form action="user-list.php" method="get">
-                <div class="col-4 d-flex align-items-center ">
-                    <input type="search" class="form-control mx-3" name="keyword" value="">
-                    <button type="submit" class="btn btn-primary text-nowrap ">搜尋</button>
+                <div class="col-lg-5 d-flex align-items-center">
+                    <input type="search" class="form-control border border-secondary me-3 " name="keyword" value="">
+                    <button type="submit" class="btn btn-primary text-nowrap m-0">搜尋</button>
                 </div>
             </form>
-            <div class="p-2 d-flex justify-content-between">
+            <div class="my-3 d-flex justify-content-between">
                 <div>
-                    共 ? 位使用者
+                    共 <?=$rowsCountMember?> 位會員
+                    <br>
+                    共 <?=$rowsCount?> 位非會員
                 </div>
                 <a class="btn btn-primary" href="create-member.php">新增使用者</a>
             </div>

@@ -34,8 +34,8 @@ try {
 <?php include "../../template/body-main-header.php" ?>
 
 <!-- body 2 > main 2 : 右側主內容頁 -->
-<div class="container">
-    <div class="row justify-content-center">
+<div class="container mx-5">
+    <div class="row justify-content-start">
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="py-2 my-3">
                 <a href="<?= $url_page_user_list ?>" class="btn btn-primary">回列表</a>
@@ -48,35 +48,41 @@ try {
                 <form action="memberDoUpdate.php" method="post">
                     <div class="mb-3 input-group-sm">
                         <label for="id" class="form-label">ID</label>
-                        <input type="text" class="form-control" id="id" name="id" value="<?= $rowsMember["id"] ?>" readonly>
+                        <input type="text" class="form-control border border-secondary" id="id" name="id" value="<?= $rowsMember["id"] ?>" readonly>
                     </div>
                     <div class="mb-3 input-group-sm">
                         <label for="account" class="form-label">Account</label>
-                        <input type="text" class="form-control" id="account" name="account" value="<?= $rowsMember["account"] ?>">
+                        <input type="text" class="form-control border border-secondary" id="account" name="account" value="<?= $rowsMember["account"] ?>">
                     </div>
                     <div class="mb-3 input-group-sm">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="<?= $rowsMember["name"] ?>">
+                        <input type="text" class="form-control border border-secondary" id="name" name="name" value="<?= $rowsMember["name"] ?>">
                     </div>
                     <div class="mb-3 input-group-sm">
                         <label for="email" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" value="<?= $rowsMember["email"] ?>">
+                        <input type="text" class="form-control border border-secondary" id="email" name="email" value="<?= $rowsMember["email"] ?>">
                     </div>
                     <div class="mb-3 input-group-sm">
                         <label for="phone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" value="<?= $rowsMember["phone"] ?>">
+                        <input type="text" class="form-control border border-secondary" id="phone" name="phone" value="<?= $rowsMember["phone"] ?>">
                     </div>
                     <div class="mb-3 input-group-sm">
                         <label for="birthday" class="form-label">Birthday</label>
-                        <input type="text" class="form-control" id="birthday" name="birthday" value="<?= $rowsMember["birthday"] ?>">
+                        <input type="text" class="form-control border border-secondary" id="birthday" name="birthday" value="<?= $rowsMember["birthday"] ?>">
                     </div>
                     <div class="mb-3 input-group-sm">
-                        <label for="gender" class="form-label">性別</label> <span class="text-secondary"> male:1;female:0</span>
-                        <input type="text" class="form-control" id="gender" name="gender" value="<?= $rowsMember["gender"] ?>">
+                        <label for="gender" class="form-label">性別</label> <span class="text-secondary"> male:0;female:1</span>
+                        <input type="text" class="form-control border border-secondary" id="gender" name="gender" value="<?php switch ($rowsMember["gender"]):
+    case "0":
+        echo "male";
+        break;
+    case "1":
+        echo "female";
+        break; ?> <?php endswitch; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="subscribe" class="form-label">訂閱方案</label> <span class="text-secondary">會員原先訂閱方案:<?= $rowsMember["subscribe"] ?></span>
-                        <select class="form-select form-select-sm" aria-label=".form-select-sm " name="subscribe">
+                        <select class="form-select form-select-sm border border-secondary" aria-label=".form-select-sm " name="subscribe">
                             <option selected>請選擇訂閱方案</option>
                             <option value="1">30天</option>
                             <option value="2">60天</option>
@@ -97,7 +103,7 @@ try {
                     </div>
                     <div class="mb-3">
                         <label for="tag">會員等級</label> <span class="text-secondary">會員原先等級:<?= $rowsMember["tag_name"] ?></span>
-                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="tag">
+                        <select class="form-select form-select-sm border border-secondary" aria-label=".form-select-sm example" name="tag">
                             <option value="1">VIP</option>
                             <option value="2" selected>一般會員</option>
                         </select>
