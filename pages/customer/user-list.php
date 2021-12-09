@@ -6,14 +6,25 @@ $rowsMemebr = NULL;
 
 if (isset($_GET['keyword'])) {
     // 致緯...
+<<<<<<< Updated upstream
     //搜尋member
     if ($_GET['table'] == 'member') {
+=======
+
+    //搜尋member
+    if ($_GET['table'] == 'member'){
+>>>>>>> Stashed changes
         $search1 = $_GET["keyword"];
         $search2 = $_GET["keyword"];
         $sql = "SELECT member. * ,tag.name AS tag_name FROM member
                 jOIN tag ON member.tag_id = tag.id
                 WHERE member.account LIKE :SERCH1 OR member.name LIKE :SERCH2";
         $stmt = $db_host->prepare($sql);
+<<<<<<< Updated upstream
+=======
+        //$result=$conn->query($sql);
+        //$resultCount=$result->num_rows;
+>>>>>>> Stashed changes
         try {
             $stmt->execute([
               'SERCH1'=>'%'. $search1 .'%',
@@ -24,6 +35,7 @@ if (isset($_GET['keyword'])) {
         } catch (PDOException $e) {
         echo $e->getMessage();
         }
+<<<<<<< Updated upstream
         //搜尋customer
     } elseif ($_GET['table'] == 'customer') {
         $search1 = $_GET["keyword"];
@@ -43,6 +55,25 @@ if (isset($_GET['keyword'])) {
         echo $e->getMessage();
         }
 
+=======
+    //搜尋customer
+    } if ($_GET['table'] == 'customer') {
+        $search3 = $_GET["keyword"];
+        $search4 = $_GET["keyword"];
+        $sql = "SELECT * ,tag.name AS tag_name FROM customer
+                jOIN tag ON customer.tag_id = tag.id
+                WHERE customer.account LIKE :SERCH3 OR customer.name LIKE :SERCH4";
+        $stmt = $db_host->prepare($sql);
+        try{
+            $stmt->execute([
+            'SEARCH3'=>'%'.$search3.'%',
+            'SEARCH4'=>'%'.$search4.'%'
+        ]);
+            $rowsCustomer=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        }   catch(PDOException $e) {
+            echo $e->getMessage();
+        }
+>>>>>>> Stashed changes
     }
 } else {
     //member的資料
