@@ -1,26 +1,3 @@
-<?php
-// if (isset($_GET["id"])) {
-//     $id = $_GET["id"];
-// } else {
-//     $id = 0;
-// }
-// require_once("../../components/pdo-connect.php");
-// $sqlMember = "SELECT member. *,tag.name AS tag_name FROM member
-// JOIN tag ON member.tag_id = tag.id
-// WHERE  member.id=? AND member.valid=1";
-
-// //$sqlMember="SELECT * FROM member WHERE valid=1";
-// $stmt = $db_host->prepare($sqlMember);
-// try {
-//     $stmt->execute([$id]);
-//     $rowsMember = $stmt->fetch();
-//     //    $rowsCountMember=$stmt->rowCount();
-//     //    var_dump($rows);
-// } catch (PDOException $e) {
-//     echo $e->getMessage();
-// }
-?>
-
 
 
 <!doctype html>
