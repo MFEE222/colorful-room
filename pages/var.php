@@ -12,7 +12,7 @@ $url_page_order_search = '/colorful-room/pages/order/order-search.php';
 // 商品
 $url_page_product   = '/colorful-room/pages/product/product.php';
 // 顧客
-$url_page_user_list     = '/colorful-room/pages/customer/user-list.php';
+$url_page_user_list     = '/colorful-room/pages/customer/user-list.php?table=member';
 $url_page_member        = '/colorful-room/pages/customer/member.php';
 $url_page_customer      = '/colorful-room/pages/customer/customer.php';
 $url_page_member_create = '/colorful-room/pages/customer/create-member.php';
