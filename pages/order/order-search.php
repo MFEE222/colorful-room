@@ -10,7 +10,7 @@ include('../signin/do-authorize.php');
 //  確認按鈕（考慮不做，離開輸入狀態直接搜尋？）
 //  篩選條件
 // 欄位：
-//  勾選方框
+//  勾選方框（應該不需要，訂單沒有多選執行動作）
 //  訂單編號：可點擊連結到訂單明細，側邊有『排序按鈕』
 //  顧客名稱：側邊有『排序按鈕』
 //  建立時間：側邊有『排序按鈕』
@@ -28,6 +28,15 @@ include('../signin/do-authorize.php');
 //  點擊篩選條件 -> 進入資料庫查詢
 
 
+$order_search_keyword = $_GET['order_search_keyword'];
+
+
+function get($query_string)
+{
+    if (isset($_GET[$query_string]) && !empty($_GET[$query_string]))
+        return $_GET[$query_string];
+    return '';
+}
 ?>
 <!-- html head 標籤 -->
 <!-- !!! include 中路徑記得自己改 !!! -->
@@ -59,6 +68,35 @@ include('../signin/do-authorize.php');
                 </div>
                 <hr class="dark horizontal my-0">
                 <!-- card 2 body -->
+                <div class="card-body p-3">
+                    <form action="./do-order-search.php" method="POST" role="form">
+                        <!-- form : input keyword -->
+                        <div class="row px-3 py-2">
+                            <div class="col-auto form-group">
+                                <label for="order-search-input" class="form-label m-0 font-weight-bold">Order Search</label>
+                                <input type="text" class="form-control border-bottom border-2 rounded-0 py-1" id="order-search-input" placeholder="enter keyword..." name="order-search-keyword" value="<?= get('order_search_keyword') ?>">
+                                <small class="form-text text-muted">order number, member name, member account, member phone</small>
+                                <!-- <small class="form-text text-muted">訂單編號 / 會員名稱 / 帳號 / 電話</small> -->
+                                <span class="form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <!-- form : filter -->
+                        <div class="row px-3 py-2">
+                            <div class="form-check">
+                                <label for="1-month" class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="" id="1-month">
+                                    + 1 month
+                                </label>
+                            </div>
+                        </div>
+                        <!-- form : submit !is hidden! -->
+                        <div class="row">
+                            <button type="submit" id="order-search-submit" class="d-none"></button>
+                        </div>
+                    </form>
+                </div>
+                <hr class="dark horizontal my-0">
+                <!-- card 3 body -->
                 <div class="card-body">
                     <table class="table">
                         <thead>
@@ -143,6 +181,7 @@ include('../signin/do-authorize.php');
     </div>
 
     <script>
+        // order search input 
         var input = document.querySelector("#order-search-input");
 
         input.addEventListener('keyup', function(event) {
@@ -153,7 +192,7 @@ include('../signin/do-authorize.php');
                 // trigger the button element to submit form
                 document.querySelector('#order-search-submit').click();
             }
-        })
+        });
     </script>
 </div>
 

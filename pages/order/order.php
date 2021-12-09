@@ -28,9 +28,7 @@ try {
     echo $e->getMessage();
 }
 
-
-
-
+echo 123;
 ?>
 
 
@@ -127,4 +125,5 @@ try {
         </nav>
     </div>
 </body>
+
 </html>
