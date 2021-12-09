@@ -32,7 +32,7 @@
                             <a class="nav-link text-white " href="<?= $url_page_order_search ?>">
                             <?php endif; ?>
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
+                                <i class="material-icons opacity-10">receipt_long</i>
                             </div>
                             <span class="nav-link-text ms-1">Order Search</span>
                             </a>
@@ -45,7 +45,7 @@
                             <a class="nav-link text-white " href="<?= $url_page_order ?>">
                             <?php endif; ?>
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="material-icons opacity-10">table_view</i>
+                                <i class="material-icons opacity-10">payments</i>
                             </div>
                             <span class="nav-link-text ms-1">Order</span>
                             </a>
@@ -58,7 +58,8 @@
                             <a class="nav-link text-white " href="<?= $url_page_product ?>">
                             <?php endif; ?>
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="material-icons opacity-10">receipt_long</i>
+                                <!-- <i class="material-icons opacity-10">receipt_long</i> -->
+                                <i class="material-icons opacity-10">shopping_cart</i>
                             </div>
                             <span class="nav-link-text ms-1">Product</span>
                             </a>
@@ -71,7 +72,8 @@
                             <a class="nav-link text-white " href="<?= $url_page_user_list ?>">
                             <?php endif; ?>
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="material-icons opacity-10">view_in_ar</i>
+                                <!-- <i class="material-icons opacity-10">view_in_ar</i> -->
+                                <i class="material-icons opacity-10">person</i>
                             </div>
                             <span class="nav-link-text ms-1">Customer</span>
                             </a>
