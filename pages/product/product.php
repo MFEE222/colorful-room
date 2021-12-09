@@ -4,31 +4,36 @@ include_once("../var.php");
 include_once("../signin/do-authorize.php");
 
 // valid badge
-$sqlValidAll="SELECT COUNT(valid) AS '1' FROM products ";
+$sqlValidAll = "SELECT COUNT(valid) FROM products WHERE valid=1";
+// $sqlValidAll = "SELECT COUNT(valid) AS 'pd' FROM products WHERE valid=1";
 $stmt = $db_host->prepare($sqlValidAll);
-$countAll=$stmt->execute();
+$countAll = $stmt->execute();
 $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//var_dump($row[0]);
-echo "<br>";
-print_r($row);
-echo "<br>";
-echo "$row[0]['1']";
+// $row = $stmt->fetch();
 
-print_r($row[0]);
-//echo "$row[0]['COUNT(*)']";
+// var_dump($row);
+// echo ($row[0]) . '<br>';
+// echo ($row['pd']);
+
+
+// echo $row[0]['COUNT(price)'];
+// echo $row[0]['pd'];
+
+
+
 //
-$sqlValid0="SELECT COUNT(valid) FROM products WHERE valid=0";
+$sqlValid0 = "SELECT COUNT(valid) FROM products WHERE valid=0";
 $stmt = $db_host->prepare($sqlValid0);
-$count0=$stmt->execute();
+$count0 = $stmt->execute();
 //echo "$count0";
 //
-$sqlValid1="SELECT COUNT(valid) FROM products WHERE valid=1";
+$sqlValid1 = "SELECT COUNT(valid) FROM products WHERE valid=1";
 $stmt = $db_host->prepare($sqlValid1);
-$count1=$stmt->execute();
+$count1 = $stmt->execute();
 //
-$sqlValid2="SELECT COUNT(valid) FROM products WHERE valid=2";
+$sqlValid2 = "SELECT COUNT(valid) FROM products WHERE valid=2";
 $stmt = $db_host->prepare($sqlValid2);
-$count2=$stmt->execute();
+$count2 = $stmt->execute();
 
 
 //產品分類
@@ -67,7 +72,7 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
         echo $e->getMessage();
     }
 } else if (isset($_GET["sold_min"]) && $_GET["sold_min"] != " " && isset($_GET["sold_max"]) && $_GET["sold_max"] != " " && $_GET["s"] == "" && $_GET["cate"] == "請選擇類別") {
-      echo "sold";
+    echo "sold";
     $sold_min = $_GET['sold_min'];
     $sold_max = $_GET['sold_max'];
     $sql = "SELECT products. *, category. * FROM products
@@ -76,7 +81,7 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
     $stmt = $db_host->prepare($sql);
     echo "sold 2";
     try {
-        $stmt->execute([$sold_min,$sold_max]);
+        $stmt->execute([$sold_min, $sold_max]);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         echo $e->getMessage();
@@ -170,8 +175,8 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
     try {
         $stmt->execute();
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $validAll=$stmt->rowCount();
-//                  echo "$validAll";
+        $validAll = $stmt->rowCount();
+        //                  echo "$validAll";
         //        var_dump($rows);
     } catch (PDOException $e) {
         echo $e->getMessage();
@@ -184,7 +189,8 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
 <?php include "../../template/head.php"; ?>
 
 <!-- body 1 : 左側功能導覽列 -->
-<?php include "../../template/body-aside.php"; ?>
+<?php //include "../../template/body-aside.php"; 
+?>
 
 <!-- body 2 > main 1 : 右側主內容上方導覽列 -->
 <?php include "../../template/body-main-header.php" ?>
@@ -199,33 +205,34 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
             <label class="m-3" id="cate">類別</label>
             <select name="cate" id="cate">
                 <option selected>請選擇類別</option>
-<!--                selected="--><?php //if (isset($value["category_id"])) echo "selected"; ?>
+                <!--                selected="--><?php //if (isset($value["category_id"])) echo "selected"; 
+                                                    ?>
                 <?php foreach ($row as $value) : ?>
                     <option value="<?php if (isset($value["category_id"])) echo $value["category_id"]; ?>""> <?= $value["category_name"] ?> </option>
                 <?php endforeach; ?>
             </select>
-            <label class="m-3" id="sold">已售出</label>
-            <input type="text" id="sold" name="sold_min" value="<?php if (isset($sold_min)) echo $sold_min; ?>">
-            <span>~</span>
-            <input type="text" id="sold" name="sold_max" value="<?php if (isset($sold_max)) echo $sold_max; ?>">
-            <button type="submit" class="btn btn-primary mx-3">搜尋</button>
-            <a type="reset" role="button" value="Reset" class="btn btn-secondary" href="product.php">重設</a>
+            <label class=" m-3" id="sold">已售出</label>
+                        <input type="text" id="sold" name="sold_min" value="<?php if (isset($sold_min)) echo $sold_min; ?>">
+                        <span>~</span>
+                        <input type="text" id="sold" name="sold_max" value="<?php if (isset($sold_max)) echo $sold_max; ?>">
+                        <button type="submit" class="btn btn-primary mx-3">搜尋</button>
+                        <a type="reset" role="button" value="Reset" class="btn btn-secondary" href="product.php">重設</a>
 
         </div>
     </form>
     <div>
         <ul class="nav nav-pills category-list list-unstyled">
             <li class="nav-item <?php if (isset($view)) echo "active"; ?>">
-                <a class="nav-link " aria-current="page" href="product.php?view">全部<span class="badge badge-secondary"><?php echo "$countAll";?></span></a>
+                <a class="nav-link " aria-current="page" href="product.php?view">全部<span class="badge badge-secondary"><?php echo "$countAll"; ?></span></a>
             </li>
             <li class="nav-item <?php if (isset($valid) && $valid === "1") echo "active"; ?>">
                 <a class="nav-link " href="product.php?valid=1">架上商品<span class="badge badge-info"><?php echo "$count1"; ?></span></span></a>
             </li>
             <li class="nav-item <?php if (isset($valid) && $valid === "2") echo "active"; ?>">
-                <a class="nav-link " href="product.php?valid=2">未上架<span class="badge badge-default"><?php echo "$count2";?></span></a>
+                <a class="nav-link " href="product.php?valid=2">未上架<span class="badge badge-default"><?php echo "$count2"; ?></span></a>
             </li>
-            <li class="nav-item <?php if (isset($valid) && $valid === "0") echo "active";?>">
-                <a class="nav-link " href="product.php?valid=0">已下架<span class="badge badge-default"><?php echo "$count0";?></span></a>
+            <li class="nav-item <?php if (isset($valid) && $valid === "0") echo "active"; ?>">
+                <a class="nav-link " href="product.php?valid=0">已下架<span class="badge badge-default"><?php echo "$count0"; ?></span></a>
             </li>
         </ul>
     </div>
@@ -251,19 +258,19 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                     <tbody>
                         <tr>
                             <th><?= $value["name"] ?></th>
-                            <td><?php  switch($value["valid"]):
-                                    case "0" :
+                            <td><?php switch ($value["valid"]):
+                                    case "0":
                                         echo "已下架";
                                         break;
-                                    case "1" :
+                                    case "1":
                                         echo "架上商品";
                                         break;
-                                    case "2" :
+                                    case "2":
                                         echo "未上架";
                                         break;
-                             ?>
-                             <?php endswitch;?>
-                             </td>
+                                ?>
+                                <?php endswitch; ?>
+                            </td>
                             <td><?= $value["category_name"] ?></td>
                             <td><?= $value["price"] ?></td>
                             <td><?= $value["descriptions"] ?></td>
