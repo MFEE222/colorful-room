@@ -211,9 +211,8 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                         <input type="text" id="sold" name="sold_max" value="<?php if (isset($sold_max)) echo $sold_max; ?>">
                         <button type="submit" class="btn btn-primary mx-3">搜尋</button>
                         <a type="reset" class="btn btn-primary" role="button" value="Reset" href="product.php">重設</a>
-
-
         </div>
+        
     </form>
     <div class="d-flex">
         <ul class="nav nav-pills category-list list-unstyled">
@@ -232,9 +231,7 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
             <li>
                 <a type="button" class="btn btn-lg btn-success" href="product-add.php">商品上架</a>
             </li>
-
         </ul>
-
     </div>
 
     <div class="row product-list">
