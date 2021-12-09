@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2021-12-09 04:03:40
+-- 產生時間： 2021-12-09 13:46:06
 -- 伺服器版本： 10.4.21-MariaDB
 -- PHP 版本： 8.0.12
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- 資料庫: `colorful`
 --
-CREATE DATABASE IF NOT EXISTS `colorful` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `colorful`;
 
 -- --------------------------------------------------------
 
@@ -29,7 +27,6 @@ USE `colorful`;
 -- 資料表結構 `admin`
 --
 
-DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `admin_id` int(6) UNSIGNED NOT NULL,
   `admin_account` varchar(30) DEFAULT NULL,
@@ -52,7 +49,6 @@ INSERT INTO `admin` (`admin_id`, `admin_account`, `admin_password`, `admin_name`
 -- 資料表結構 `category`
 --
 
-DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `category_id` int(6) UNSIGNED NOT NULL,
   `category_name` varchar(30) NOT NULL,
@@ -76,7 +72,6 @@ INSERT INTO `category` (`category_id`, `category_name`, `category_description`) 
 -- 資料表結構 `customer`
 --
 
-DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `id` int(6) UNSIGNED NOT NULL,
   `account` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -102,7 +97,6 @@ INSERT INTO `customer` (`id`, `account`, `name`, `password`, `email`, `phone`, `
 -- 資料表結構 `member`
 --
 
-DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
   `id` int(6) UNSIGNED NOT NULL,
   `account` varchar(30) DEFAULT NULL,
@@ -136,59 +130,9 @@ INSERT INTO `member` (`id`, `account`, `name`, `birthday`, `gender`, `password`,
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `order-detail`
---
-
-DROP TABLE IF EXISTS `order-detail`;
-CREATE TABLE `order-detail` (
-  `product_id` int(6) UNSIGNED NOT NULL,
-  `amount` int(4) UNSIGNED NOT NULL,
-  `order_id` int(6) NOT NULL,
-  `sum` varchar(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- 傾印資料表的資料 `order-detail`
---
-
-INSERT INTO `order-detail` (`product_id`, `amount`, `order_id`, `sum`) VALUES
-(1, 1, 1, '400'),
-(2, 1, 2, '600');
-
--- --------------------------------------------------------
-
---
--- 資料表結構 `order_tracking`
---
-
-DROP TABLE IF EXISTS `order_tracking`;
-CREATE TABLE `order_tracking` (
-  `id` int(6) NOT NULL,
-  `order-num` int(6) NOT NULL,
-  `user-id` varchar(20) NOT NULL,
-  `date` datetime NOT NULL,
-  `payment-status` varchar(10) NOT NULL,
-  `payment-method` varchar(10) NOT NULL,
-  `order-status` varchar(20) NOT NULL,
-  `sum` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- 傾印資料表的資料 `order_tracking`
---
-
-INSERT INTO `order_tracking` (`id`, `order-num`, `user-id`, `date`, `payment-status`, `payment-method`, `order-status`, `sum`) VALUES
-(1, 202101, '多多', '2021-12-07 07:59:51', 'Paid', 'Swipe', '處理中待付款已完成不成立退貨/退款已取消', '400'),
-(2, 202102, '花花花', '2021-12-08 10:45:02', 'Paid', 'Swipe', '處理中待付款已完成不成立退貨/退款已取消', '600'),
-(3, 202103, '毛毛', '2021-12-08 15:23:50', 'Paid', 'Swipe', '處理中待付款已完成不成立退貨/退款已取消', '200');
-
--- --------------------------------------------------------
-
---
 -- 資料表結構 `products`
 --
 
-DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` int(3) UNSIGNED NOT NULL,
   `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -222,7 +166,6 @@ INSERT INTO `products` (`id`, `name`, `price`, `descriptions`, `image_before`, `
 -- 資料表結構 `subscribe`
 --
 
-DROP TABLE IF EXISTS `subscribe`;
 CREATE TABLE `subscribe` (
   `id` int(3) UNSIGNED NOT NULL,
   `subscribe_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -245,7 +188,6 @@ INSERT INTO `subscribe` (`id`, `subscribe_name`, `subscribe_describe`) VALUES
 -- 資料表結構 `tag`
 --
 
-DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag` (
   `id` int(6) UNSIGNED NOT NULL,
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
@@ -285,12 +227,6 @@ ALTER TABLE `customer`
 -- 資料表索引 `member`
 --
 ALTER TABLE `member`
-  ADD PRIMARY KEY (`id`);
-
---
--- 資料表索引 `order_tracking`
---
-ALTER TABLE `order_tracking`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -338,12 +274,6 @@ ALTER TABLE `customer`
 --
 ALTER TABLE `member`
   MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- 使用資料表自動遞增(AUTO_INCREMENT) `order_tracking`
---
-ALTER TABLE `order_tracking`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `products`
