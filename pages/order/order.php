@@ -15,13 +15,15 @@ try {
 
 
 // bug...
-$sqluser = "SELECT * FROM member";
+$sqlMember = "SELECT *,tag.name AS tag_name FROM member
+JOIN tag ON member.tag_id = tag.id
+WHERE member.valid=1";
 
-$stmt = $db_host->prepare($sqluser);
+$stmt = $db_host->prepare($sqlMember);
 
 try {
     $stmt->execute();
-    $rowsuser = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $sqlMember = $stmt->fetchAll(PDO::FETCH_ASSOC);
     //    $rowsCountMember=$stmt->rowCount();
     //    print_r($rowsuser);
 } catch (PDOException $e) {
@@ -68,6 +70,7 @@ try {
                         <th>訂單狀態</th>
                         <th>金額</th>
                         <th>備註</th>
+                        <th></th>
                     </tr>
                     <?php
                     foreach ($rowsOrder as $value) :
@@ -102,9 +105,10 @@ try {
                                 </select>
                             </td>
                             <td><?= $value["sum"] ?></td>
+                            <td></td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                    <a href="./order-details.php" class="btn btn-danger">明細</a>
+                                    <a href="./order-details.php?id=<?= $value["id"] ?>" class="btn btn-danger">明細</a>
                                 </div>
                             </td>
                         </tr>
@@ -119,7 +123,6 @@ try {
                 </li>
                 <li class="page-item"><a class="page-link" href="#">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item">
                     <a class="page-link" href="#">Next</a>
                 </li>
@@ -127,4 +130,5 @@ try {
         </nav>
     </div>
 </body>
+
 </html>
