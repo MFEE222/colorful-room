@@ -149,7 +149,7 @@ function get($query_string)
                             <div class="form-check form-check-inline m-0">
                                 <label for="filter_time_this_season" class="form-check-label text-dark ms-0">
                                     <?php if (get('order_search_filter_time') === 'filter_time_this_season') : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_time_this_season" name="order_search_filter_time" value="filter_time_this_season">
+                                        <input type="radio" class=" form-check-input" id="filter_time_this_season" name="order_search_filter_time" value="filter_time_this_season" checked>
                                     <?php else : ?>
                                         <input type="radio" class=" form-check-input" id="filter_time_this_season" name="order_search_filter_time" value="filter_time_this_season">
                                     <?php endif; ?>
@@ -174,7 +174,7 @@ function get($query_string)
                         <div>
                             <div class="form-check form-check-inline m-0 ps-3">
                                 <label for="filter_status_none" class="form-check-label text-dark ms-0">
-                                    <?php if (get('order_search_filter_time') === 'filter_status_none') : ?>
+                                    <?php if (get('order_search_filter_status') === 'filter_status_none') : ?>
                                         <input type="radio" class=" form-check-input" id="filter_status_none" name="order_search_filter_status" value="filter_status_none" checked>
                                     <?php else : ?>
                                         <input type="radio" class=" form-check-input" id="filter_status_none" name="order_search_filter_status" value="filter_status_none">
@@ -219,7 +219,7 @@ function get($query_string)
                             <div class="form-check form-check-inline m-0">
                                 <label for="filter_status_returning" class="form-check-label text-dark ms-0">
                                     <?php if (get('order_search_filter_status') === 'filter_status_returning') : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_status_returning" name="order_search_filter_status" value="filter_status_returning">
+                                        <input type="radio" class=" form-check-input" id="filter_status_returning" name="order_search_filter_status" value="filter_status_returning" checked>
                                     <?php else : ?>
                                         <input type="radio" class=" form-check-input" id="filter_status_returning" name="order_search_filter_status" value="filter_status_returning">
                                     <?php endif; ?>

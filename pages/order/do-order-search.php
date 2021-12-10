@@ -2,6 +2,9 @@
 require_once('../../components/pdo-connect.php');
 include_once('../var.php');
 include_once('../signin/do-authorize.php');
+
+redirect($url_page_order_search . "?order_search_keyword=" . post('order_search_keyword') . "&order_search_filter_time=" . post('order_search_filter_time') . "&order_search_filter_status=" . post('order_search_filter_status'));
+// redirect($url_page_order_search . "?order_search_keyword=" . post('order_search_keyword') . "&order_search_filter_time=" . post('order_search_filter_time') . "&order_search_filter_status=" . post('order_search_filter_status'));
 // ============================================================================
 //  Test
 // ============================================================================
