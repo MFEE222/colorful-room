@@ -9,8 +9,8 @@ $url_page_index     = '/colorful-room/index.php';
 // 訂單
 $url_page_order     = '/colorful-room/pages/order/order.php';
 $url_page_order_search = '/colorful-room/pages/order/order-search.php';
-$url_page_order_detail = '/colorful-room/pages/order/order-detail.php';
-$url_page_order_edit = '/colorful-room/pages/order/order-detail.php';
+$url_page_order_detail = '/colorful-room/pages/order/order-details.php';
+$url_page_order_edit = '/colorful-room/pages/order/order-details.php';
 // 商品
 $url_page_product   = '/colorful-room/pages/product/product.php';
 // 顧客
