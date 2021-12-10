@@ -26,6 +26,11 @@ include_once("../signin/do-authorize.php");
     <input type="text" name="descriptions"><br>
     <label for="fname">類別:</label>
     <input type="text" name="category_id"><br>
+    <label for="fname">自動上架時間:</label>
+    <input type="datetime-local" name="auto_create_date"><br>
+    <label for="fname">自動下架時間:</label>
+    <input type="datetime-local" name="auto_delete_date"><br>
+
 
     <!-- 圖片上傳 -->
     <label for="img">修圖前:</label>
