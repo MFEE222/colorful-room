@@ -12,7 +12,7 @@ $stmt=$db_host->prepare($sql);
 try {
     if ($stmt->execute([$id]) === TRUE) {
 //      echo "刪除資料完成" ;
-        header("location:url=user-list.php");
+        header("location:user-list.php?table=customer");
     }
 }catch(PDOException $e){
     echo  $e->getMessage();

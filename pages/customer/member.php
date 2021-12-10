@@ -46,46 +46,45 @@ try {
 
 <!-- body 2 > main 2 : 右側主內容頁 -->
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-start">
         <div class="col-lg-12">
-            <div class="py-2 my-3">
+            <div class="py-2 my-6">
                 <?php if ($from != NULL) : ?>
                     <a href="<?= $from ?>" class="btn btn-primary">回列表</a>
                 <?php else : ?>
                     <a href="<?= $url_page_user_list ?>" class="btn btn-primary">回列表</a>
                 <?php endif; ?>
             </div>
-            <table class="table table-bordered table-hover table-sm">
-
-                <thead>
+            <table class="table table-hover align-items-center mb-12" >
+                <thead class="mt-2">
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Account</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">生日</th>
-                        <th scope="col">性別</th>
-                        <th scope="col">訂閱方案</th>
-                        <th scope="col">標籤</th>
-                        <th scope="col">建立時間</th>
-                        <th scope="col">修改時間</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">ID</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">Account</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">Name</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">Email</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">Phone</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">生日</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">性別</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">訂閱方案</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">標籤</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">建立時間</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">修改時間</th>
 
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><?= $rowsMember["id"] ?></td>
-                        <td><?= $rowsMember["account"] ?></td>
-                        <td><?= $rowsMember["name"] ?></td>
-                        <td><?= $rowsMember["email"] ?></td>
-                        <td><?= $rowsMember["phone"] ?></td>
-                        <td><?= $rowsMember["birthday"] ?></td>
-                        <td><?= $rowsMember["gender"] ?></td>
-                        <td><?= $rowsMember["subscribe"] ?></td>
-                        <td><?= $rowsMember["tag_name"] ?></td>
-                        <td><?= $rowsMember["created_at"] ?></td>
-                        <td><?= $rowsMember["edit_at"] ?></td>
+                        <td class="align-middle text-center"><?= $rowsMember["id"] ?></td>
+                        <td class="align-middle text-center"><?= $rowsMember["account"] ?></td>
+                        <td class="align-middle text-center "><?= $rowsMember["name"] ?></td>
+                        <td class="align-middle text-center "><?= $rowsMember["email"] ?></td>
+                        <td class="align-middle text-center "><?= $rowsMember["phone"] ?></td>
+                        <td class="align-middle text-center "><?= $rowsMember["birthday"] ?></td>
+                        <td class="align-middle text-center "><?= $rowsMember["gender"] ?></td>
+                        <td class="align-middle text-center "><?= $rowsMember["subscribe"] ?></td>
+                        <td class="align-middle text-center "><?= $rowsMember["tag_name"] ?></td>
+                        <td class="align-middle text-center "><?= $rowsMember["created_at"] ?></td>
+                        <td class="align-middle text-center "><?= $rowsMember["edit_at"] ?></td>
                     </tr>
                 </tbody>
             </table>

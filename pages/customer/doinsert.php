@@ -57,7 +57,7 @@ if ($memberExist == 0) {
     try {
         $result = $stmt->execute([$account, $name, $crPassword, $email, $phone, $gender, $birthday, $subscribe, $now, $tag_id]);
         //        echo "新增會員成功";
-        header("location:user-list.php");
+        header("location:user-list.php?table=member");
     } catch (PDOException $e) {
         echo $e->getMessage();
     }

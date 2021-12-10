@@ -35,32 +35,32 @@ try {
 
 <!-- body 2 > main 2 : 右側主內容頁 -->
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="py-2 my-3">
+    <div class="row justify-content-start">
+        <div class="col-lg-10">
+            <div class="py-2 my-6">
                 <a href="<?= $url_page_user_list ?>" class="btn btn-primary">回列表</a>
             </div>
-            <table class="table table-bordered table-hover table-sm">
-                <thead>
+            <table class="table align-items-center col-lg-10 mb-12">
+                <thead >
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Account</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">建立時間</th>
-                        <th scope="col">修改時間</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">ID</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">Account</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">Name</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">Email</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">Phone</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">建立時間</th>
+                        <th class="text-uppercase text-secondary text-center" scope="col">修改時間</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><?= $rowCustomer["id"] ?></td>
-                        <td><?= $rowCustomer["account"] ?></td>
-                        <td><?= $rowCustomer["name"] ?></td>
-                        <td><?= $rowCustomer["email"] ?></td>
-                        <td><?= $rowCustomer["phone"] ?></td>
-                        <td><?= $rowCustomer["created_at"] ?></td>
-                        <td><?= $rowCustomer["edit_at"] ?></td>
+                        <td class="align-middle text-center "><?= $rowCustomer["id"] ?></td>
+                        <td class="align-middle text-center "><?= $rowCustomer["account"] ?></td>
+                        <td class="align-middle text-center "><?= $rowCustomer["name"] ?></td>
+                        <td class="align-middle text-center "><?= $rowCustomer["email"] ?></td>
+                        <td class="align-middle text-center "><?= $rowCustomer["phone"] ?></td>
+                        <td class="align-middle text-center "><?= $rowCustomer["created_at"] ?></td>
+                        <td class="align-middle text-center "><?= $rowCustomer["edit_at"] ?></td>
                     </tr>
                 </tbody>
             </table>

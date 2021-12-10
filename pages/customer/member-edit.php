@@ -46,13 +46,13 @@ try {
                 $rowsMember = $stmt->fetch();
             ?>
                 <form action="memberDoUpdate.php" method="post">
-                    <div class="mb-3 input-group-sm">
-                        <label for="id" class="form-label">ID</label>
-                        <input type="text" class="form-control border border-secondary" id="id" name="id" value="<?= $rowsMember["id"] ?>" readonly>
+                    <div class="mb-3 input-group-sm input-group-outline">
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control " id="id" name="id" value="<?= $rowsMember["id"] ?>" readonly>
                     </div>
-                    <div class="mb-3 input-group-sm">
-                        <label for="account" class="form-label">Account</label>
-                        <input type="text" class="form-control border border-secondary" id="account" name="account" value="<?= $rowsMember["account"] ?>">
+                    <div class="mb-3 input-group-sm input-group-outline">
+                        <label for="account">Account</label>
+                        <input type="account" class="form-control border border-secondary" id="account" name="account" value="<?= $rowsMember["account"] ?>">
                     </div>
                     <div class="mb-3 input-group-sm">
                         <label for="name" class="form-label">Name</label>
@@ -66,21 +66,37 @@ try {
                         <label for="phone" class="form-label">Phone</label>
                         <input type="text" class="form-control border border-secondary" id="phone" name="phone" value="<?= $rowsMember["phone"] ?>">
                     </div>
-                    <div class="mb-3 input-group-sm">
+                    <div class="mb-4 input-group-sm">
                         <label for="birthday" class="form-label">Birthday</label>
                         <input type="text" class="form-control border border-secondary" id="birthday" name="birthday" value="<?= $rowsMember["birthday"] ?>">
                     </div>
-                    <div class="mb-3 input-group-sm">
-                        <label for="gender" class="form-label">性別</label> <span class="text-secondary"> male:0;female:1</span>
-                        <input type="text" class="form-control border border-secondary" id="gender" name="gender" value="<?php switch ($rowsMember["gender"]):
-    case "0":
-        echo "male";
-        break;
-    case "1":
-        echo "female";
-        break; ?> <?php endswitch; ?>">
+
+                    <div class="form-check form-check-radio form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="male" value="0" name="gender" <?php if (isset($rowsMember["gender"]) && $rowsMember["gender"] ==0)echo "checked" ?> > male
+                            <span class="circle"><span class="check"></span></span>
+                        </label>
                     </div>
-                    <div class="mb-3">
+                    <div class="form-check form-check-radio form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio"  id="female" value="1" name="gender" <?php if (isset($rowsMember["gender"]) && $rowsMember["gender"] ==1)echo "checked" ?>> female
+                            <span class="circle"><span class="check"></span></span>
+                        </label>
+                    </div>
+
+
+<!--                    <div class="mb-3 input-group-sm">-->
+<!--                        <label for="gender" class="form-label">性別</label> <span class="text-secondary"> male:0;female:1</span>-->
+<!--                        <input type="text" class="form-control border border-secondary" id="gender" name="gender" value="--><?php //switch ($rowsMember["gender"]):
+//    case "0":
+//        echo "male";
+//        break;
+//    case "1":
+//        echo "female";
+//        break; ?><!-- --><?php //endswitch; ?><!--">-->
+
+
+                    <div class="my-3">
                         <label for="subscribe" class="form-label">訂閱方案</label> <span class="text-secondary">會員原先訂閱方案:<?= $rowsMember["subscribe"] ?></span>
                         <select class="form-select form-select-sm border border-secondary" aria-label=".form-select-sm " name="subscribe">
                             <option selected>請選擇訂閱方案</option>

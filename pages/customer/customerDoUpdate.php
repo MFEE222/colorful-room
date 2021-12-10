@@ -39,7 +39,7 @@ try {
          try {
              $result=$stmt->execute([$account,$name,$email,$phone,$editNow,$id]);
 //    var_dump($result);
-             header("location:user-list.php");
+             header("location:user-list.php?table=customer");
          }catch(PDOException $e){
              echo $e->getMessage();
          }

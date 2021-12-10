@@ -289,7 +289,7 @@ require_once("../../components/pdo-connect.php");
             </div>
         </nav>
         <!-- main part 2 of 3 下方內容頁 -->
-        <div class="container-fluid py-4">
+        <div class="container py-4">
             <div class="container ">
                 <div class="row ">
                     <label for="">搜尋</label>
@@ -305,46 +305,50 @@ require_once("../../components/pdo-connect.php");
                         </div>
                     </div>
                 </div>
+
+
                 <form action="user-list-test.php" method="get">
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
 <!--                    <a href="user-list-test.php?keyword=member" class="btn nav-link active" id="nav-member-tab" data-bs-toggle="tab" data-bs-target="#nav-member" type="button" role="tab" aria-controls="nav-member" aria-selected="true">會員</a>-->
-                   <button class="nav-link active" id="nav-member-tab" data-bs-toggle="tab" data-bs-target="#nav-member" type="button" role="tab" aria-controls="nav-member" aria-selected="true" type="submit" name="member" >會員</button>
+                   <button  class="nav-link active " id="nav-member-tab" data-bs-toggle="tab" data-bs-target="#nav-member"  role="tab" aria-controls="nav-member" aria-selected="true"  type="button" name="member" >會員</button>
                     <button class="nav-link" id="nav-customer-tab" data-bs-toggle="tab" data-bs-target="#nav-customer" type="button" role="tab" aria-controls="nav-customer" aria-selected="false" type="submit" name="customer" >非會員</button>
                 </div>
                 </form>
                 <?php //if ($_GET['table'] == 'member') :
                 ?>
-                <div class="tab-content col-lg-10" id="nav-tabContent">
-                    <div class="tab-pane fade show active " id="nav-member" role="tabpanel" aria-labelledby="nav-member-tab">
-                        <table class="table table-bordered table-hover table-sm">
-                            <thead>
+
+                <div class="tab-content " id="nav-tabContent">
+                    <div class="tab-pane fade show active  " id="nav-member" role="tabpanel" aria-labelledby="nav-member-tab">
+                        <table class="table table-hover align-items-center col-lg-10">
+                            <thead class="mt-2 ">
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Account</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Phone</th>
-                                <th scope="col">生日</th>
-                                <th scope="col">訂閱方案</th>
-                                <th scope="col">標籤</th>
+                                <th CLASS="text-uppercase text-secondary text-center" scope="col">ID</th>
+                                <th CLASS="text-uppercase text-secondary text-center"  scope="col">Account</th>
+                                <th CLASS="text-uppercase text-secondary text-center"  scope="col">Name</th>
+                                <th CLASS="text-uppercase text-secondary text-center"  scope="col">Email</th>
+                                <th CLASS="text-uppercase text-secondary text-center"  scope="col">Phone</th>
+                                <th CLASS="text-uppercase text-secondary text-center"  scope="col">生日</th>
+                                <th CLASS="text-uppercase text-secondary text-center"  scope="col">訂閱方案</th>
+                                <th CLASS="text-uppercase text-secondary text-center" scope="col">標籤</th>
+                                <th CLASS="text-uppercase text-secondary text-center" scope="col">操作</th>
                             </tr>
                             </thead>
                             <?php foreach ($rowsMember as $value) : ?>
                                 <tbody>
-                                <tr>
-                                    <td><?= $value["id"] ?></td>
-                                    <td><?= $value["account"] ?></td>
-                                    <td><?= $value["name"] ?></td>
-                                    <td><?= $value["email"] ?></td>
-                                    <td><?= $value["phone"] ?></td>
-                                    <td><?= $value["birthday"] ?></td>
-                                    <td><?= $value["subscribe"] ?></td>
-                                    <td><?= $value["tag_name"] ?></td>
-                                    <td class="text-center d-flex justify-content-evenly">
+                                <tr class="mt-3">
+                                    <td class="align-middle text-center m-4"><?= $value["id"] ?></td>
+                                    <td class="align-middle text-center m-4"><?= $value["account"] ?></td>
+                                    <td class="align-middle text-center m-4"><?= $value["name"] ?></td>
+                                    <td class="align-middle text-center m-4"><?= $value["email"] ?></td>
+                                    <td class="align-middle text-center m-4"><?= $value["phone"] ?></td>
+                                    <td class="align-middle text-center m-4"><?= $value["birthday"] ?></td>
+                                    <td class="align-middle text-center m-4"><?= $value["subscribe"] ?></td>
+                                    <td class="align-middle text-center m-4"><?= $value["tag_name"] ?></td>
+                                    <td class="align-middle text-center ps-4">
                                         <!-- index.php -->
-                                        <a class="btn btn-primary btn-sm" href="member.php?id=<?= $value["id"] ?>">內容</a>
-                                        <a class="btn btn-primary btn-sm" href="member-edit.php?id=<?= $value["id"] ?>">修改</a>
-                                        <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="<?= '#staticBackdrop' . $value['id'] ?>">刪除</a>
+                                        <a class="btn btn-primary btn-sm m-2" href="member.php?id=<?= $value["id"] ?>">內容</a>
+                                        <a class="btn btn-primary btn-sm m-2" href="member-edit.php?id=<?= $value["id"] ?>">修改</a>
+                                        <a class="btn btn-primary btn-sm m-2" data-bs-toggle="modal" data-bs-target="<?= '#staticBackdrop' . $value['id'] ?>">刪除</a>
 
                                         <!-- Modal -->
                                         <div class="modal fade" id="<?= 'staticBackdrop' . $value['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -370,8 +374,8 @@ require_once("../../components/pdo-connect.php");
                             <?php endforeach; ?>
 
                         </table>
-
                     </div>
+
                     <?php // elseif ($_GET['table'] == "customer") :
                     ?>
                     <div class="tab-pane fade " id="nav-customer" role="tabpanel" aria-labelledby="nav-customer-tab">

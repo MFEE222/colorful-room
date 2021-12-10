@@ -20,7 +20,7 @@ $sql="UPDATE member SET account=?, name=?, email=?, phone=?, birthday=?, gender=
 $stmt=$db_host->prepare($sql);
 try {
     $result=$stmt->execute([$account,$name,$email,$phone,$birthday,$gender,$subscribe,$tag_id,$editNow,$id]);
-    header("location:user-list.php");
+    header("location:user-list.php?table=member");
 }catch(PDOException $e){
     echo $e->getMessage();
 }

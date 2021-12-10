@@ -28,37 +28,72 @@ include_once("../signin/do-authorize.php");
     </div>
 <div class="row justify-content-start ">
         <form class="col-lg-3" action="doinsert.php" method="post" >
-            <div class="mb-2  input-group-sm">
-                <label for="name">姓名</label>
-                <br>
-                <input class="form-control border border-secondary" id="name" type="text" name="name" class="form-control" required>
+            <!---->
+            <div class="input-group input-group-outline my-3">
+                <label for="name" class="form-label">姓名</label>
+                <input id="name" type="text" name="name" required class="form-control">
             </div>
-            <div class="mb-2 input-group-sm">
-                <label for="account">帳號</label>
-                <br>
-                <input  class="form-control border border-secondary" id="account" type="account" name="account" class="form-control" required>
+            <!---->
+<!--            <div class="mb-2  input-group-sm">-->
+<!--                <label for="name">姓名</label>-->
+<!--                <br>-->
+<!--                <input class="form-control border border-secondary" id="name" type="text" name="name" required>-->
+<!--            </div>-->
+            <div class="input-group input-group-outline my-3">
+                <label for="account" class="form-label">帳號</label>
+                <input id="account" type="account" name="account" class="form-control" required>
                 <?php if (isset($_SESSION["user"]["account"])) : ?>
                     <p class="fs-6 text-danger"><?= ($_SESSION["user"]["account"]) ?>帳號已存在</p>
                 <?php endif; ?>
             </div>
-            <div class="mb-2 input-group-sm">
-                <label for="password">密碼</label>
-                <br>
-                <input  class="form-control border border-secondary" id="password" type=" password" name="password" class="form-control" required>
+
+<!--            <div class="mb-2 input-group-sm">-->
+<!--                <label for="account">帳號</label>-->
+<!--                <br>-->
+<!--                <input  class="form-control border border-secondary" id="account" type="account" name="account" class="form-control" required>-->
+<!--                --><?php //if (isset($_SESSION["user"]["account"])) : ?>
+<!--                    <p class="fs-6 text-danger">--><?//= ($_SESSION["user"]["account"]) ?><!--帳號已存在</p>-->
+<!--                --><?php //endif; ?>
+<!--            </div>-->
+            <div class="input-group input-group-outline my-3">
+                <label for="password" class="form-label">密碼</label>
+                <input id="password" type=" password" name="password" class="form-control" required>
             </div>
-            <div class="mb-2 input-group-sm">
-                <label for="email">Email</label>
-                <br>
-                <input  class="form-control border border-secondary" id="email" type="text" name="email" class="form-control" required>
+
+<!--            <div class="mb-2 input-group-sm">-->
+<!--                <label for="password">密碼</label>-->
+<!--                <br>-->
+<!--                <input  class="form-control border border-secondary" id="password" type=" password" name="password" class="form-control" required>-->
+<!--            </div>-->
+            <div class="input-group input-group-outline my-3">
+                <label for="email" class="form-label">Email</label>
+                <input id="email" type="email" name="email" class="form-control" required>
                 <?php if (isset($_SESSION["user"]["email"])) : ?>
                     <p class="fs-6 text-danger"><?= ($_SESSION["user"]["email"]) ?>信箱已註冊過</p>
                 <?php endif; ?>
             </div>
-            <div class="mb-3 input-group-sm">
-                <label for="phone">電話</label>
-                <br>
-                <input  class="form-control border border-secondary" id="phone" type="text" name="phone" class="form-control" required>
+
+<!--            <div class="mb-2 input-group-sm">-->
+<!--                <label for="email">Email</label>-->
+<!--                <br>-->
+<!--                <input  class="form-control border border-secondary" id="email" type="text" name="email" class="form-control" required>-->
+<!--                --><?php //if (isset($_SESSION["user"]["email"])) : ?>
+<!--                    <p class="fs-6 text-danger">--><?//= ($_SESSION["user"]["email"]) ?><!--信箱已註冊過</p>-->
+<!--                --><?php //endif; ?>
+<!--            </div>-->
+
+
+            <div class="input-group input-group-outline mb-1">
+                <label for="phone" class="form-label">電話</label>
+                <input id="phone" type="tel" name="phone" class="form-control" required>
             </div>
+
+            <br>
+<!--            <div class="mb-3 input-group-sm">-->
+<!--                <label for="phone">電話</label>-->
+<!--                <br>-->
+<!--                <input  class="form-control border border-secondary" id="phone" type="text" name="phone" class="form-control" required>-->
+<!--            </div>-->
 
             <div class="form-check form-check-radio form-check-inline">
                 <label class="form-check-label">
@@ -73,14 +108,20 @@ include_once("../signin/do-authorize.php");
                 </label>
             </div>
 
-            <div class=" mt-2 input-group-sm">
+            <div class="input-group input-group-static my-3">
                 <label for="birthday">出生年月日</label>
-                <br>
-                <input  class="form-control border border-secondary" id="birthday" type="text" name="birthday" class="form-control" placeholder="西元/月/日 19xx/xx/xx">
+                <input type="date" class="form-control" id="birthday"  name="birthday">
             </div>
-            <div class="mt-3">
-                <label for="subscribe">訂閱方案</label>
-                <select class="form-select form-select-sm border border-secondary" aria-label=".form-select-sm example" name="subscribe">
+
+<!--            <div class=" mt-2 input-group-sm">-->
+<!--                <label for="birthday">出生年月日</label>-->
+<!--                <br>-->
+<!--                <input  class="form-control border border-secondary" id="birthday" type="text" name="birthday" class="form-control" placeholder="西元/月/日 19xx/xx/xx">-->
+<!--            </div>-->
+
+            <div class="input-group input-group-static mb-4 mt-3">
+                <label for="subscribe" class="ms-0">訂閱方案</label>
+                <select class="form-control" aria-label=".form-select-sm example" name="subscribe">
                     <option selected>請選擇訂閱方案</option>
                     <option value="1">30天</option>
                     <option value="2">60天</option>
@@ -88,9 +129,9 @@ include_once("../signin/do-authorize.php");
                     <option value="4">1年</option>
                 </select>
             </div>
-            <div class="mt-3 mb-4">
+            <div class="input-group input-group-static mb-4 mt-3">
                 <label for="tag">會員等級</label>
-                <select class="form-select form-select-sm  border border-secondary" aria-label=".form-select-sm example" name="tag" required>
+                <select class="form-control" aria-label=".form-select-sm example" name="tag" required>
                     <option value="1">VIP</option>
                     <option value="2" selected>一般會員</option>
                 </select>
