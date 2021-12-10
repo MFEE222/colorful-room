@@ -60,8 +60,13 @@ function redirect($url)
 // ============================================================================
 //  Database
 // ============================================================================
-switch (post('order_search_filter_time')) {
-    case ''
-}
+
+$sql = "SELECT order.* member.* customer.*
+            FROM order
+            JOIN member ON order.user_id = member.id
+            JOIN customer ON order.user_id = customer.id
+        WHERE order.order_id LIKE %keyword%
+            OR order.order_created_at LIKE ...
+            OR order.order_status = $status";
 
 // redirect($url_page_order_search . "?order_search_keyword=" . post('order_search_keyword') . "&order_search_filter_time=" . post('order_search_filter_time') . "&order_search_filter_status=" . post('order_search_filter_status'));
