@@ -263,7 +263,7 @@ function get($query_string)
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="p-0 text-center text-dark">測試｜202101
+                                <td class="p-0 text-center text-dark">測試用｜202101
                                 </td>
                                 <td class="p-0 text-center text-dark">多多</td>
                                 <td class="p-0 text-center text-dark">123456789</td>

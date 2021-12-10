@@ -1,19 +1,43 @@
 <?php
+require_once('../../components/pdo-connect.php');
 include_once('../var.php');
 include_once('../signin/do-authorize.php');
 // ============================================================================
 //  Test
 // ============================================================================
-echo post('order_search_keyword') . '<br>';
-echo post('order_search_filter_time') . '<br>';
-echo post('order_search_filter_status') . '<br>';
+// echo post('order_search_keyword') . '<br>';
+// echo post('order_search_filter_time') . '<br>';
+// echo post('order_search_filter_status') . '<br>';
 // ============================================================================
-//  Feature
+//  Doing
 // ============================================================================
 // 限制檔案抓取數量 Limit
+
+// ============================================================================
+//  Flow
+// ============================================================================
+//  檢查 POST 參數
+//  組合 SQL 語法
+//  資料庫抓取資料
+//  成功 or 失敗都存入 SESSION
 // ============================================================================
 //  Global Variable / Function
 // ============================================================================
+// 設定值
+$settings = [
+    'error_not_data' => '沒有相關資料'
+];
+// 儲存訂單資訊的資訊
+$orders_head = [
+    'error' => NULL,
+    'count' => NULL
+];
+// 儲存訂單資訊
+$orders_body = NULL;
+// 資料庫
+$sql = NULL;
+$pdo = NULL;
+
 function post($name)
 {
     if (isset($_POST[$name]) && !empty($_POST[$name]))
@@ -24,6 +48,20 @@ function redirect($url)
 {
     header("Location: $url");
     die();
+}
+// ============================================================================
+//  Initialize
+// ============================================================================
+
+// ============================================================================
+//  Verify
+// ============================================================================
+
+// ============================================================================
+//  Database
+// ============================================================================
+switch (post('order_search_filter_time')) {
+    case ''
 }
 
 // redirect($url_page_order_search . "?order_search_keyword=" . post('order_search_keyword') . "&order_search_filter_time=" . post('order_search_filter_time') . "&order_search_filter_status=" . post('order_search_filter_status'));
