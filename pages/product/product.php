@@ -66,14 +66,14 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
         echo $e->getMessage();
     }
 } else if (isset($_GET["sold_min"]) && $_GET["sold_min"] != " " && isset($_GET["sold_max"]) && $_GET["sold_max"] != " " && $_GET["s"] == "" && $_GET["cate"] == "請選擇類別") {
-    echo "sold";
+//    echo "sold";
     $sold_min = $_GET['sold_min'];
     $sold_max = $_GET['sold_max'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
   WHERE  products.sold_total >=? AND  products.sold_total <=? ORDER BY products.sold_total ASC";
     $stmt = $db_host->prepare($sql);
-    echo "sold 2";
+//    echo "sold 2";
     try {
         $stmt->execute([$sold_min, $sold_max]);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -194,7 +194,7 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
     <form action="product.php" method="get">
         <div class="mt-3 ">
             <label class="m-3" id="search">商品名稱</label>
-            <input type="text" id="search" name="s" value="<?php if (isset($search)) echo $search; ?>" placeholder="請輸入...">
+            <input type="search" id="search" name="s" value="<?php if (isset($search))echo $search; ?>" placeholder="請輸入...">
             <!--原本-->
             <label class="m-3" id="cate">類別</label>
             <select name="cate" id="cate">
@@ -202,7 +202,8 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                 <!--                selected="--><?php //if (isset($value["category_id"])) echo "selected"; 
                                                     ?>
                 <?php foreach ($row as $value) : ?>
-                    <option value="<?php if (isset($value["category_id"])) echo $value["category_id"]; ?>""> <?= $value["category_name"] ?> </option>
+                    <option value="<?=$value["category_id"] ?>" <?php if (isset($_GET["cate"]) && $_GET["cate"]==$value["category_id"]) echo "selected";
+                                                    ?>> <?= $value["category_name"] ?> </option>
                 <?php endforeach; ?>
             </select>
             <label class=" m-3" id="sold">已售出</label>
