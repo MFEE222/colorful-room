@@ -2,6 +2,13 @@
 include_once('../var.php');
 include_once("../signin/do-authorize.php");
 
+// ============================================================================
+//  返回 Order Search
+// ============================================================================
+$from = (!empty($_POST['from'])) ? $_POST['from'] : NULL;
+// ============================================================================
+//  ...  
+// ============================================================================
 if (!isset($_GET["id"])) {
     echo "您不是從正常程序進入此頁";
     exit();
@@ -42,7 +49,11 @@ try {
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="py-2 my-3">
-                <a href="<?= $url_page_user_list ?>" class="btn btn-primary">回列表</a>
+                <?php if ($from != NULL) : ?>
+                    <a href="<?= $from ?>" class="btn btn-primary">回列表</a>
+                <?php else : ?>
+                    <a href="<?= $url_page_user_list ?>" class="btn btn-primary">回列表</a>
+                <?php endif; ?>
             </div>
             <table class="table table-bordered table-hover table-sm">
 
