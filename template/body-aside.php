@@ -27,15 +27,15 @@
                 <li class="nav-item">
                     <!-- 依照當前當按路徑替換 <a> class -->
                     <?php if (str_contains($_SERVER['PHP_SELF'], 'pages/order')) : ?>
-                        <a class="nav-link text-white active bg-gradient-primary" href="<?= $url_page_order_search ?>">
+                        <a class="nav-link text-white active bg-gradient-primary" href="<?= $url_page_orders_search ?>">
                         <?php else : ?>
-                            <a class="nav-link text-white " href="<?= $url_page_order_search ?>">
+                            <a class="nav-link text-white " href="<?= $url_page_orders_search ?>">
                             <?php endif; ?>
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="material-icons opacity-10">receipt_long</i>
                                 <!-- <i class="material-icons opacity-10">payments</i> -->
                             </div>
-                            <span class="nav-link-text ms-1">Order</span>
+                            <span class="nav-link-text ms-1">Orders</span>
                             </a>
                 </li>
                 <li class="nav-item">
