@@ -3,7 +3,18 @@ require_once("../../components/pdo-connect.php");
 include_once("../var.php");
 include_once("../signin/do-authorize.php");
 
+//group by
+//$sql="SELECT  COUNT(valid) FROM products GROUP BY valid ";
+//$stmt = $db_host->prepare($sql);
+//$stmt->execute();
+//$row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//var_dump($row);
+//echo $row[0]["COUNT(valid)"];
+//echo $row[1]["COUNT(valid)"];
+//echo $row[2]["COUNT(valid)"];
+
 // valid badge
+//全部商品
 $sqlValidAll = "SELECT COUNT(valid) FROM products ";
 // $sqlValidAll = "SELECT COUNT(valid) AS 'pd' FROM products WHERE valid=1";
 $stmt = $db_host->prepare($sqlValidAll);
@@ -12,23 +23,28 @@ $rowAll = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // $row = $stmt->fetch();
 // var_dump($rowAll);
 // echo $rowAll[0]["COUNT(valid)"] . '<br>';
-//
+
+//valid=0 已下架
 $sqlValid0 = "SELECT COUNT(valid) FROM products WHERE valid=0";
 $stmt = $db_host->prepare($sqlValid0);
 $stmt->execute();
 $row0 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//echo $row0[0]["COUNT(valid)"];
 //echo "$count0";
-//
+
+//valid=1架上
 $sqlValid1 = "SELECT COUNT(valid) FROM products WHERE valid=1";
 $stmt = $db_host->prepare($sqlValid1);
 $stmt->execute();
 $row1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//
+//echo $row1[0]["COUNT(valid)"];
+
+//valid=2 未上架
 $sqlValid2 = "SELECT COUNT(valid) FROM products WHERE valid=2";
-$db_host->prepare($sqlValid2);
+$stmt = $db_host->prepare($sqlValid2);
 $stmt->execute();
 $row2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+//echo $row2[0]["COUNT(valid)"];
 
 //產品分類
 $sqlCategory = "SELECT * FROM category ";
@@ -222,23 +238,25 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                 <button type="submit" class="btn btn-primary text-nowrap m-0">搜尋</button>
                 <a type="reset" class="btn btn-primary m-0 text-nowrap m-3" role="button" href="product.php">重設</a>
             </div>
-        </div>
     </form>
+    
+    <div class="col-lg-12 d-flex justify-content-start ">
+        <a class="btn btn-lg btn-success my-4"  role="button"  href="product-add.php">商品上架</a>
+    </div>
 
-    <a type="button" class="btn btn-lg btn-success my-4" href="product-add.php">商品上架</a>
     <div class="d-flex mt-2">
         <ul class="nav nav-pills category-list mb-2">
             <li class="nav-item <?php if (isset($view)) echo "active"; ?>">
-                <a class="nav-link " aria-current="page" href="product.php?view">全部<span class="badge text-dark"><?php echo $rowAll[0]["COUNT(valid)"]; ?></span></a>
+                <a class="nav-link " aria-current="page" href="product.php?view">全部<span class="badge text-dark"><?php echo $rowAll[0]["COUNT(valid)"];?></span></a>
             </li>
             <li class="nav-item <?php if (isset($valid) && $valid === "1") echo "active"; ?>">
                 <a class="nav-link " href="product.php?valid=1">架上商品<span class="badge text-dark"><?php echo $row1[0]["COUNT(valid)"]; ?></span></span></a>
             </li>
             <li class="nav-item <?php if (isset($valid) && $valid === "2") echo "active"; ?>">
-                <a class="nav-link " href="product.php?valid=2">未上架<span class="badge text-dark"><?php echo $row2[0]["COUNT(valid)"]; ?></span></a>
+                <a class="nav-link " href="product.php?valid=2">未上架<span class="badge text-dark"><?php echo $row2[0]["COUNT(valid)"];; ?></span></a>
             </li>
             <li class="nav-item <?php if (isset($valid) && $valid === "0") echo "active"; ?>">
-                <a class="nav-link " href="product.php?valid=0">已下架<span class="badge text-dark"><?php echo $row0[0]["COUNT(valid)"]; ?></span></a>
+                <a class="nav-link " href="product.php?valid=0">已下架<span class="badge text-dark"><?php echo $row0[0]["COUNT(valid)"];; ?></span></a>
             </li>
         </ul>
     </div>
