@@ -192,31 +192,42 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
 <!-- body 2 > main 2 : 右側主內容頁 -->
 <div class="container">
     <form action="product.php" method="get">
-        <div class="mt-3 ">
-            <label class="m-3" id="search">商品名稱</label>
-            <input type="search" id="search" name="s" value="<?php if (isset($search))echo $search; ?>" placeholder="請輸入...">
-            <!--原本-->
-            <label class="m-3" id="cate">類別</label>
-            <select name="cate" id="cate">
-                <option selected>請選擇類別</option>
-                <!--                selected="--><?php //if (isset($value["category_id"])) echo "selected"; 
-                                                    ?>
-                <?php foreach ($row as $value) : ?>
-                    <option value="<?=$value["category_id"] ?>" <?php if (isset($_GET["cate"]) && $_GET["cate"]==$value["category_id"]) echo "selected";
-                                                    ?>> <?= $value["category_name"] ?> </option>
-                <?php endforeach; ?>
-            </select>
-            <label class=" m-3" id="sold">已售出</label>
-                        <input type="text" id="sold" name="sold_min" value="<?php if (isset($sold_min)) echo $sold_min; ?>">
-                        <span>~</span>
-                        <input type="text" id="sold" name="sold_max" value="<?php if (isset($sold_max)) echo $sold_max; ?>">
-                        <button type="submit" class="btn btn-primary mx-3">搜尋</button>
-                        <a type="reset" class="btn btn-primary" role="button" value="Reset" href="product.php">重設</a>
+        <div class="row mt-3 justify-content-evenly">
+            <div class="col-lg-3 d-flex align-items-center ">
+                <label class="my-0 me-3 form-label text-nowrap" id="search">商品名稱</label>
+                <input type="search" class="form-control border border-secondary "id="search" name="s" value="<?php if (isset($search))echo $search; ?>" placeholder="請輸入...">
+            </div>
+
+            <div class="col-lg-3 d-flex align-items-center ">
+                <label class="my-0 me-3 form-label text-nowrap" id="cate">類別</label>
+                <select name="cate" id="cate" class="form-control border border-secondary">
+                    <option selected>請選擇類別</option>
+                    <!--                selected="--><?php //if (isset($value["category_id"])) echo "selected";
+                    ?>
+                    <?php foreach ($row as $value) : ?>
+                        <option value="<?=$value["category_id"] ?>" <?php if (isset($_GET["cate"]) && $_GET["cate"]==$value["category_id"]) echo "selected";
+                        ?>> <?= $value["category_name"] ?> </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <div class="col-lg-4 d-flex align-items-center ">
+                <label class="me-3 my-0 text-nowrap" id="sold">已售出</label>
+                <input class="form-control border border-secondary" type="text" id="sold" name="sold_min" value="<?php if (isset($sold_min)) echo $sold_min; ?>">
+                <span class="mx-2">~</span>
+                <input class="form-control border border-secondary" type="text" id="sold" name="sold_max" value="<?php if (isset($sold_max)) echo $sold_max; ?>">
+            </div>
+
+            <div class="col-lg-2 d-flex align-items-center ">
+                <button type="submit" class="btn btn-primary text-nowrap m-0">搜尋</button>
+                <a type="reset" class="btn btn-primary m-0 text-nowrap m-3" role="button" href="product.php">重設</a>
+            </div>
         </div>
-        
     </form>
-    <div class="d-flex">
-        <ul class="nav nav-pills category-list list-unstyled">
+
+    <a type="button" class="btn btn-lg btn-success my-4" href="product-add.php">商品上架</a>
+    <div class="d-flex mt-2">
+        <ul class="nav nav-pills category-list mb-2">
             <li class="nav-item <?php if (isset($view)) echo "active"; ?>">
                 <a class="nav-link " aria-current="page" href="product.php?view">全部<span class="badge text-dark"><?php echo $rowAll[0]["COUNT(valid)"]; ?></span></a>
             </li>
@@ -229,34 +240,31 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
             <li class="nav-item <?php if (isset($valid) && $valid === "0") echo "active"; ?>">
                 <a class="nav-link " href="product.php?valid=0">已下架<span class="badge text-dark"><?php echo $row0[0]["COUNT(valid)"]; ?></span></a>
             </li>
-            <li>
-                <a type="button" class="btn btn-lg btn-success" href="product-add.php">商品上架</a>
-            </li>
         </ul>
     </div>
 
     <div class="row product-list">
-        <div class="col-md-6 col-lg-4 mb-3">
-            <table class="table table-hover mt-3">
+        <div class="col-lg-12 mb-3">
+            <table class="table table-hover align-items-center mt-3">
                 <thead>
                     <tr class="table-secondary">
-                        <th scope="col">商品名稱</th>
-                        <th scope="col">商品狀態</th>
-                        <th scope="col">類別</th>
-                        <th scope="col">價格</th>
-                        <th scope="col">描述</th>
-                        <th scope="col">修圖前</th>
-                        <th scope="col">修圖後</th>
-                        <th scope="col">已售出</th>
-                        <th scope="col">檔案</th>
-                        <th scope="col">操作</th>
+                        <th class="align-middle ps-1" scope="col">商品名稱</th>
+                        <th class="align-middle ps-1" scope="col">商品狀態</th>
+                        <th class="align-middle ps-1" scope="col">類別</th>
+                        <th class="align-middle ps-1" scope="col">價格</th>
+                        <th class="align-middle ps-1" scope="col">描述</th>
+                        <th class="align-middle ps-1" scope="col">修圖前</th>
+                        <th class="align-middle ps-1" scope="col">修圖後</th>
+                        <th class="align-middle ps-1" scope="col">已售出</th>
+                        <th class="align-middle ps-1" scope="col">檔案</th>
+                        <th class="align-middle ps-1" scope="col">操作</th>
                     </tr>
                 </thead>
                 <?php foreach ($rows as $value) : ?>
                     <tbody>
                         <tr>
-                            <th><?= $value["name"] ?></th>
-                            <td><?php switch ($value["valid"]):
+                            <td class="ps-1"><?= $value["name"] ?></td>
+                            <td class="ps-1"><?php switch ($value["valid"]):
                                     case "0":
                                         echo "已下架";
                                         break;
@@ -269,14 +277,14 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                                 ?>
                                 <?php endswitch; ?>
                             </td>
-                            <td><?= $value["category_name"] ?></td>
-                            <td><?= $value["price"] ?></td>
-                            <td><?= $value["descriptions"] ?></td>
-                            <td><?= $value["image_before"] ?></td>
-                            <td><?= $value["image_after"] ?></td>
-                            <td><?= $value["sold_total"] ?></td>
-                            <td><?= $value["dng_pkg"] ?></td>
-                            <td><a class="btn btn-primary" role="button" href="#">編輯</a> <a class="btn btn-primary" role="button" href="#">更多</a></td>
+                            <td class="ps-1"><?= $value["category_name"] ?></td>
+                            <td class="ps-1"><?= $value["price"] ?></td>
+                            <td class="ps-1"><?= $value["descriptions"] ?></td>
+                            <td class="ps-1"><?= $value["image_before"] ?></td>
+                            <td class="ps-1"><?= $value["image_after"] ?></td>
+                            <td class="ps-1"><?= $value["sold_total"] ?></td>
+                            <td class="ps-1"><?= $value["dng_pkg"] ?></td>
+                            <td class="ps-1"><a class="btn btn-primary" role="button" href="#">編輯</a> <a class="btn btn-primary" role="button" href="#">更多</a></td>
                         </tr>
                     </tbody>
 
