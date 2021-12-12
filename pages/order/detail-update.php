@@ -11,7 +11,7 @@ require_once("../../components/pdo-connect.php");
 // $payment_status=$_POST["payment_status"];
 // $payment_method=$_POST["payment_method"];
 // $remark=$_POST["remark"];
-// $record=$_POST["record"];
+// $order_id=$_POST["order_id"];
 
 // function post($query)
 // {
@@ -21,7 +21,6 @@ require_once("../../components/pdo-connect.php");
 // post('payment_method');
 // post('payment_status');
 // post('remark');
-
 
 $sql = "UPDATE order_tracking
             SET payment_method = ?,
@@ -36,15 +35,9 @@ try {
         $_POST['payment_method'],
         $_POST['payment_status'],
         $_POST['remark'],
-        $_POST['order_id']
+        // $_POST[],
     );
-    // 
-
-
-
-
-
-    // header("location:order.php");
+    header("location:order.php");
 } catch (PDOException $e) {
     echo $e->getMessage();
 }

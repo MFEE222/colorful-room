@@ -9,7 +9,11 @@ if (isset($_GET["id"])) {
 }
 require_once("../../components/pdo-connect.php");
 
-$sqlorder = "SELECT * FROM order_tracking WHERE id = $id";
+// $sqlorder = "SELECT * FROM order_tracking WHERE id = $id";
+$sqlorder = "SELECT *
+                FROM order_tracking
+                JOIN member ON order_tracking.user_id = member.id
+             WHERE order_tracking.id = ?";
 // "SELECT order_detail. *,tag.name AS tag_name FROM order_detail
 // JOIN tag ON order_detail.tag_id = tag.id
 // WHERE  order_detail.id=? AND order_detail.valid=1";
@@ -17,7 +21,7 @@ $sqlorder = "SELECT * FROM order_tracking WHERE id = $id";
 $stmt = $db_host->prepare($sqlorder);
 
 try {
-    $stmt->execute();
+    $stmt->execute([$id]);
     $rowsOrder = $stmt->fetchAll(PDO::FETCH_ASSOC);
     //    $rowsCountMember=$stmt->rowCount();
     //    var_dump($rowsOrder);
@@ -134,7 +138,7 @@ try {
             <?php
             foreach ($rowsOrder as $value) :
             ?>
-                <p>訂單編號 : <?= $value["order-num"] ?></p>
+                <p>訂單編號 : <?= $value["order_num"] ?></p>
                 <p>訂購日期 : <?= $value["date"] ?></p>
         </div>
     </div>
@@ -149,7 +153,7 @@ try {
             </thead>
             <tbody>
                 <tr>
-                    <td><?= $value["product-id"] ?></td>
+                    <td><?= $value["product_id"] ?></td>
                     <td></td>
                     <td>NT &#36 <?= $value["sum"] ?></td>
                 </tr>
@@ -190,9 +194,9 @@ try {
                 <div class="card-body">
                     <h5 class="card-title">訂購人資訊</h5>
                     <hr>
-                    <p class="card-text">顧客姓名 : <?= $value["user-id"] ?></p>
-                    <p class="card-text">電話號碼 : <?= $value["user-phone"] ?></p>
-                    <p class="card-text">電子郵件 : <?= $value["user-email"] ?></p>
+                    <p class="card-text">顧客姓名 : <?= $value["name"] ?></p>
+                    <p class="card-text">電話號碼 : <?= $value["phone"] ?></p>
+                    <p class="card-text">電子郵件 : <?= $value["email"] ?></p>
                 </div>
             </div>
         </div>

@@ -134,7 +134,7 @@ try {
                 <tbody>
                     <tr>
                         <td></td>
-                        <td><?= $value["order-num"] ?></td>
+                        <td><?= $value["order_num"] ?></td>
                         <td><?=
                             // foreach ($rowsuser as $row) {
                             //     if ($row['id'] == $value['user-id']) {
@@ -144,7 +144,7 @@ try {
                             //  }
 
                             // $rowsuser[$value["user-id"]] 
-                            $value["user-id"] ?></td>
+                            $value["user_id"] ?></td>
                         <td><?= $value["date"] ?></td>
                         <td><?= $value["payment_status"] ?></td>
                         <td><?= $value["payment_method"] ?></td>
