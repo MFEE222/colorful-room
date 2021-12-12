@@ -20,6 +20,7 @@ $sqlorder = "SELECT *
 
 $stmt = $db_host->prepare($sqlorder);
 
+
 try {
     $stmt->execute([$id]);
     $rowsOrder = $stmt->fetchAll(PDO::FETCH_ASSOC);
