@@ -1,26 +1,48 @@
 <?php
 include_once('../var.php');
-// include('../signin/do-authorize.php');
-
-if (isset($_GET["id"])) {
-    $id = $_GET["id"];
-} else {
-    $id = 0;
-}
+include('../signin/do-authorize.php');
 require_once("../../components/pdo-connect.php");
+// 
+// 1 筆訂單 -> 多 個明細
+// 1 筆明細 -> 1 個商品
+// 1 筆明細 -> 1 個會員 or 顧客
 
-$sqlorder = "SELECT * FROM order_tracking WHERE id = $id";
-// "SELECT order_detail. *,tag.name AS tag_name FROM order_detail
-// JOIN tag ON order_detail.tag_id = tag.id
-// WHERE  order_detail.id=? AND order_detail.valid=1";
 
-$stmt = $db_host->prepare($sqlorder);
+// 檢查GET
+if (isset($_GET["oid"])) {
+    $oid = $_GET["oid"];
+} else {
+    $oid = 0;
+}
 
+$sql = "SELECT orders_detail.*,
+               products.name AS p_name,
+               products.price AS p_price,
+               member.name AS m_name,
+               member.email AS m_email,
+               member.phone AS m_phone
+            FROM orders_detail
+            JOIN products ON orders_detail.products_id = products.id
+            JOIN member ON orders_detail.member_id = member.id
+        WHERE orders_id = :orders_id";
+
+
+// $sql = "SELECT orders_detail.*
+//             FROM orders_detail
+//         WHERE orders_id = :orders_id";
+
+$pdo = $db_host->prepare($sql);
 try {
-    $stmt->execute();
-    $rowsOrder = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //    $rowsCountMember=$stmt->rowCount();
-    //    var_dump($rowsOrder);
+    $pdo->execute([
+        'orders_id' => $oid
+    ]);
+    if ($pdo->rowCount() > 0) {
+        $rows = $pdo->fetchAll(PDO::FETCH_ASSOC);
+        echo $pdo->rowCount();
+        // var_dump($rows);
+    } else {
+        $rows = '暫時抓不到資料';
+    }
 } catch (PDOException $e) {
     echo $e->getMessage();
 }
@@ -116,6 +138,15 @@ try {
 <?php include "../../template/body-main-header.php" ?>
 
 <!-- body 2 > main 2 : 右側主內容頁 -->
+
+<?php foreach ($rows as $row) : ?>
+    <div>
+        <?php var_dump($row); ?>
+    </div>
+    <br>
+<?php endforeach; ?>
+
+
 <div class="container">
     <div class="row">
         <div class="col">
@@ -134,7 +165,7 @@ try {
             <?php
             foreach ($rowsOrder as $value) :
             ?>
-                <p>訂單編號 : <?= $value["order-num"] ?></p>
+                <p>訂單編號 : <?= $value["order_num"] ?></p>
                 <p>訂購日期 : <?= $value["date"] ?></p>
         </div>
     </div>
@@ -149,7 +180,7 @@ try {
             </thead>
             <tbody>
                 <tr>
-                    <td><?= $value["product-id"] ?></td>
+                    <td><?= $value["product_id"] ?></td>
                     <td></td>
                     <td>NT &#36 <?= $value["sum"] ?></td>
                 </tr>
@@ -190,9 +221,9 @@ try {
                 <div class="card-body">
                     <h5 class="card-title">訂購人資訊</h5>
                     <hr>
-                    <p class="card-text">顧客姓名 : <?= $value["user-id"] ?></p>
-                    <p class="card-text">電話號碼 : <?= $value["user-phone"] ?></p>
-                    <p class="card-text">電子郵件 : <?= $value["user-email"] ?></p>
+                    <p class="card-text">顧客姓名 : <?= $value["name"] ?></p>
+                    <p class="card-text">電話號碼 : <?= $value["phone"] ?></p>
+                    <p class="card-text">電子郵件 : <?= $value["email"] ?></p>
                 </div>
             </div>
         </div>

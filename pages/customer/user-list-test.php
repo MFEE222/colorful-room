@@ -10,11 +10,32 @@ require_once("../../components/pdo-connect.php");
 //    }
 //} else {
     //member的資料
-    $sqlMember = "SELECT member. *,tag.name AS tag_name FROM member
-                    JOIN tag ON member.tag_id = tag.id
-                    WHERE member.valid=1";
 
-    //$sqlMember="SELECT * FROM member WHERE valid=1";
+if(isset($_GET["p"])){
+    $p=$_GET["p"];
+}else{
+    $p=1;
+}
+$sqlTotal="SELECT * FROM member WHERE valid=1";  //WHERE 後接條件式
+$stmt = $db_host->prepare($sqlTotal);
+$stmt->execute();
+$rowsCountMember = $stmt->rowCount(); //總共筆數
+$pageItems=15;
+$startItem=($p-1)*$pageItems;
+//$pageCount=$rowsCountMember/$pageItems; //頁數
+//$pageR=$rowsCountMember%$pageItems; //取餘數
+//$startNo=($p-1)*$pageItems+1;
+//$endNo=$p*$pageItems;
+//if($pageR!=0){
+//    $pageCount=ceil($pageCount); //如果餘數不為0,則無條件進位
+//    if($pageCount==$p){
+//        $endNo=$endNo-($pageItems-$pageR);
+//    }
+//}
+$sqlMember = "SELECT member. *,tag.name AS tag_name FROM member
+                    JOIN tag ON member.tag_id = tag.id
+                    WHERE member.valid=1 ORDER BY id LIMIT $startItem, $pageItems";
+
     $stmt = $db_host->prepare($sqlMember);
     try {
         $stmt->execute();
@@ -374,6 +395,26 @@ require_once("../../components/pdo-connect.php");
                             <?php endforeach; ?>
 
                         </table>
+<!--                        --><?php //if(isset($p)): ?>
+<!---->
+<!--                            <nav aria-label="Page navigation example">-->
+<!--                                <ul class="pager">-->
+<!--                                    <li><a href="#">&laquo;上一頁</a></li>-->
+<!--                                    <li><a href="#">下一頁&raquo;</a></li>-->
+<!--                                </ul>-->
+<!--                                <ul class="pagination justify-content-center">-->
+<!--                                    <li class="page-item">-->
+<!--                                        <a class="page-link" href="user-list-test.php?p=--><?//=$i?><!--" aria-label="Previous">-->
+<!--                                            <span aria-hidden="true">&laquo;</span>-->
+<!--                                        </a>-->
+<!--                                    </li>-->
+<!--                                    --><?php //for($i=1; $i<=$pageCount; $i++): ?>
+<!---->
+<!--                                        <li class="page-item --><?php //if($p==$i)echo "active" ?><!--"><a class="page-link" href="user-list-test.php?p=--><?//=$i?><!--">--><?//=$i?><!--</a></li>-->
+<!--                                    --><?php //endfor; ?>
+<!--                                </ul>-->
+<!--                            </nav>-->
+<!--                        --><?php //endif; ?>
                     </div>
 
                     <?php // elseif ($_GET['table'] == "customer") :

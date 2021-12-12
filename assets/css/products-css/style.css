@@ -9,3 +9,9 @@
 .category-list li.active a{
     background: #e91e63 !important;
 }
+/*td.ellipsis{*/
+/*overflow:hidden;*/
+/*white-space: nowrap;*/
+/*text-overflow: ellipsis;*/
+/*}*/
+
