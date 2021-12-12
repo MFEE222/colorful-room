@@ -72,7 +72,32 @@ try {
 }
 
 // 搜尋
-if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate"] != "請選擇類別") {
+if(isset($_GET["order"])){
+    $order=$_GET["order"];
+    if($order==="nameDesc"){
+    $sql=" SELECT products. *,category. * FROM products
+  JOIN category ON products.category_id = category.category_id ORDER BY name DESC";
+    }else if($order==="nameAsc"){
+    $sql=" SELECT products. *,category. * FROM products
+  JOIN category ON products.category_id = category.category_id ORDER BY name ASC";
+    }
+    else if($order==="priceAsc"){
+    $sql=" SELECT products. *,category. * FROM products
+  JOIN category ON products.category_id = category.category_id ORDER BY price ASC";
+    }
+    else if($order==="priceDesc"){
+    $sql=" SELECT products. *,category. * FROM products
+  JOIN category ON products.category_id = category.category_id ORDER BY price DESC";
+    }
+    $stmt = $db_host->prepare($sql);
+    try {
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //  echo "search&cate";
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}else if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate"] != "請選擇類別") {
     $search = $_GET["s"];
     $cate = $_GET["cate"];
     $sql = "SELECT products. *, category. * FROM products
@@ -95,7 +120,7 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
     $sold_max = $_GET['sold_max'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
-  WHERE  products.sold_total >=? AND  products.sold_total <=? ORDER BY products.sold_total ASC";
+  WHERE  products.sold_total >=? AND  products.sold_total <=? ORDER BY products.sold_total DESC";
     $stmt = $db_host->prepare($sql);
     //    echo "sold 2";
     try {
@@ -253,7 +278,7 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
         <a class="btn btn-lg btn-success my-4" role="button" href="product-add.php">商品上架</a>
     </div>
 
-    <div class="d-flex mt-2">
+    <div class="d-flex mt-2 justify-content-between">
         <ul class="nav nav-pills category-list mb-2">
             <li class="nav-item <?php if (isset($view)) echo "active"; ?>">
                 <a class="nav-link " aria-current="page" href="product.php?view">全部<span class="badge text-dark"><?php echo $rowAll[0]["COUNT(valid)"]; ?></span></a>
@@ -268,6 +293,14 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                 <a class="nav-link " href="product.php?valid=0">已下架<span class="badge text-dark"><?php echo $row0[0]["COUNT(valid)"];; ?></span></a>
             </li>
         </ul>
+        <div class="py-2 d-flex justify-content-end order-block">
+            <div>排序
+                <a class="<?php if(isset($order) && $order==="nameDesc")echo "active"?> font-weight-bold" href="product.php?order=nameDesc">名稱 ↓</a>
+                <a class="<?php if(isset($order) && $order==="nameAsc")echo "active" ?> font-weight-bold" href="product.php?order=nameAsc">名稱 ↑</a>
+                <a class="<?php if(isset($order) && $order==="priceDesc")echo "active" ?> font-weight-bold" href="product.php?order=priceDesc">價錢 ↓</a>
+                <a class="<?php if(isset($order) && $order==="priceAsc")echo "active" ?> font-weight-bold" href="product.php?order=priceAsc">價錢 ↑</a>
+            </div>
+        </div>
     </div>
 
     <div class="row product-list table-responsive">
@@ -325,92 +358,6 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
             </table>
         </div>
     </div>
-    <!--原本的-->
-    <!--  <div>-->
-    <!--        <ul class="nav nav-pills">-->
-    <!--            <li class="nav-item">-->
-    <!--                <a class="nav-link active" aria-current="page" href="#">全部(不寫valid)</a>-->
-    <!--            </li>-->
-    <!--            <li class="nav-item">-->
-    <!--                <a class="nav-link" href="#">架上商品(valid=1)</a>-->
-    <!--            </li>-->
-    <!--            <li class="nav-item">-->
-    <!--                <a class="nav-link" href="#">未上架(valid=2)</a>-->
-    <!--            </li>-->
-    <!--            <li class="nav-item">-->
-    <!--                <a class="nav-link" href="#">已下架(valid=0)</a>-->
-    <!--            </li>-->
-    <!--            </li>-->
-    <!--        </ul>-->
-    <!--    </div>-->
-    <!---->
-    <!--    <div class="bg-white">-->
-    <!--        <form>-->
-    <!--            <div class="mt-3">-->
-    <!--                <span class="m-3" id="basic-addon1">商品名稱</span>-->
-    <!--                <input id="basic-addon1" type="text" placeholder="請輸入...">-->
-    <!--                <span class="m-3" id="basic-addon1">類別</span>-->
-    <!--                <input id="basic-addon1" type="text" placeholder="請輸入...">-->
-    <!--                <span class="m-3" id="basic-addon1">已售出</span>-->
-    <!--                <input id="basic-addon1" type="text" placeholder="請輸入...">-->
-    <!--                <button type="submit" class="btn btn-primary mx-3">搜尋</button>-->
-    <!--                <button type="submit" class="btn btn-secondary">重設</button>-->
-    <!--            </div>-->
-    <!--        </form>-->
-    <!---->
-    <!--        <h3 class="m-3">20 Products</h3>-->
-    <!--        <button type="button" class="btn btn-danger m-2">新增商品</button>-->
-    <!--        <button type="button" class="btn btn-light m-2">批次工具</button>-->
-    <!---->
-    <!--        <table class="table table-hover mt-3">-->
-    <!--            <thead>-->
-    <!--                <tr class="table-secondary">-->
-    <!--                    <th scope="col">商品名稱</th>-->
-    <!--                    <th scope="col">類別</th>-->
-    <!--                    <th scope="col">價格</th>-->
-    <!--                    <th scope="col">已售出</th>-->
-    <!--                    <th scope="col">操作</th>-->
-    <!--                </tr>-->
-    <!--            </thead>-->
-    <!--            <tbody>-->
-    <!--                <tr>-->
-    <!--                    <th scope="row"><img src="https://picsum.photos/200/100" alt="Italian Trulli">商品名稱1</th>-->
-    <!--                    <td>類別1</td>-->
-    <!--                    <td>價格1</td>-->
-    <!--                    <td>已售出1</td>-->
-    <!--                    <td><a href="#">編輯</a> <a href="#">更多</a></td>-->
-    <!--                </tr>-->
-    <!--                <tr>-->
-    <!--                    <th scope="row"><img src="https://picsum.photos/200/100" alt="Italian Trulli">商品名稱2</th>-->
-    <!--                    <td>類別2</td>-->
-    <!--                    <td>價格2</td>-->
-    <!--                    <td>已售出2</td>-->
-    <!--                    <td><a href="#">編輯</a> <a href="#">更多</a></td>-->
-    <!--                </tr>-->
-    <!--                <tr>-->
-    <!--                    <th scope="row"><img src="https://picsum.photos/200/100" alt="Italian Trulli">商品名稱3</th>-->
-    <!--                    <td>類別3</td>-->
-    <!--                    <td>價格3</td>-->
-    <!--                    <td>已售出3</td>-->
-    <!--                    <td><a href="#">編輯</a> <a href="#">更多</a></td>-->
-    <!--                <tr>-->
-    <!--                    <th scope="row"><img src="https://picsum.photos/200/100" alt="Italian Trulli">商品名稱3</th>-->
-    <!--                    <td>類別4</td>-->
-    <!--                    <td>價格4</td>-->
-    <!--                    <td>已售出4</td>-->
-    <!--                    <td><a href="#">編輯</a> <a href="#">更多</a></td>-->
-    <!--                </tr>-->
-    <!--                <tr>-->
-    <!--                    <th scope="row"><img src="https://picsum.photos/200/100" alt="Italian Trulli">商品名稱3</th>-->
-    <!--                    <td>類別5</td>-->
-    <!--                    <td>價格5</td>-->
-    <!--                    <td>已售出5</td>-->
-    <!--                    <td><a href="#">編輯</a> <a href="#">更多</a></td>-->
-    <!--                </tr>-->
-    <!--                </tr>-->
-    <!--            </tbody>-->
-    <!--        </table>-->
-    <!--    </div>-->
 
     <!-- body 2 > main 3 : 右側主內容下方頁尾 -->
     <?php include "../../template/body-main-footer.php" ?>
@@ -423,7 +370,7 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
     <button id="select-all" class="btn button-default">SelectAll/Cancel</button>
 <button id="select-invert" class="btn button-default">Invert</button>
 <button id="selected" class="btn button-default">GetSelected</button>
-</body>
+</div>
 <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script>

@@ -101,6 +101,7 @@ if (isset($_GET['keyword'])) {
                 </div>
             </form>
             <div class="my-5 d-flex justify-content-start">
+
                 <a class="btn btn-primary me-4" href="create-member.php">新增使用者</a>
                 <?php if(isset($rowsCountMember) && $rowsCount):?>
                 <div>
@@ -109,8 +110,8 @@ if (isset($_GET['keyword'])) {
                     共 <?= $rowsCount ?> 位非會員
                 </div>
                 <?php endif ; ?>
-
             </div>
+
         </div>
         <div class="nav nav-tabs pb-3" id="nav-tab" role="tablist">
             <!-- <button class="nav-link active" id="nav-member-tab" data-bs-toggle="tab" data-bs-target="#nav-member" type="button" role="tab" aria-controls="nav-member" aria-selected="true">會員</button>
