@@ -3,14 +3,20 @@ require_once('../../components/pdo-connect.php');
 include_once('../var.php');
 include_once('../signin/do-authorize.php');
 
-redirect($url_page_order_search . "?order_search_keyword=" . post('order_search_keyword') . "&order_search_filter_time=" . post('order_search_filter_time') . "&order_search_filter_status=" . post('order_search_filter_status'));
 // redirect($url_page_order_search . "?order_search_keyword=" . post('order_search_keyword') . "&order_search_filter_time=" . post('order_search_filter_time') . "&order_search_filter_status=" . post('order_search_filter_status'));
+
+
+redirect($url_page_order_search
+    . '?keyword=' . post('keyword')
+    . '&filter_time=' . post('filter_time')
+    . '&filter_status=' . post('filter_status'));
 // ============================================================================
 //  Test
 // ============================================================================
-// echo post('order_search_keyword') . '<br>';
-// echo post('order_search_filter_time') . '<br>';
-// echo post('order_search_filter_status') . '<br>';
+// echo $url_page_orders_search . '<br>';
+// echo post('keyword') . '<br>';
+// echo post('filter_time') . '<br>';
+// echo post('filter_status') . '<br>';
 // ============================================================================
 //  Doing
 // ============================================================================
@@ -64,12 +70,10 @@ function redirect($url)
 //  Database
 // ============================================================================
 
-$sql = "SELECT order.* member.* customer.*
-            FROM order
-            JOIN member ON order.user_id = member.id
-            JOIN customer ON order.user_id = customer.id
-        WHERE order.order_id LIKE %keyword%
-            OR order.order_created_at LIKE ...
-            OR order.order_status = $status";
-
-redirect($url_page_order_search . "?order_search_keyword=" . post('order_search_keyword') . "&order_search_filter_time=" . post('order_search_filter_time') . "&order_search_filter_status=" . post('order_search_filter_status'));
+// $sql = "SELECT order.* member.* customer.*
+//             FROM order
+//             JOIN member ON order.user_id = member.id
+//             JOIN customer ON order.user_id = customer.id
+//         WHERE order.order_id LIKE %keyword%
+//             OR order.order_created_at LIKE ...";
+// redirect($url_page_order_search . "?order_search_keyword=" . post('order_search_keyword') . "&order_search_filter_time=" . post('order_search_filter_time') . "&order_search_filter_status=" . post('order_search_filter_status'));

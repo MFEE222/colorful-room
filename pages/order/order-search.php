@@ -38,11 +38,19 @@ include('../signin/do-authorize.php');
 //  輸入關鍵字 -> 回車鍵 -> 進入資料庫查詢
 //  點擊篩選條件 -> 進入資料庫查詢
 
-$form_action = './do-order-search.php';
+class OrderSearch
+{
+    public $form_action = './do-order-search.php';
+    public $page_header = '訂單管理';
+    public $search_header = '搜尋訂單';
+    public $search_keyword_hint = '訂單號碼 or 會員名稱 or 會員電話';
+}
+$os = new OrderSearch();
+
 // Get parameter
-//  - order_search_keyword
-//  - order_search_filter_time
-//  - order_search_filter_status
+//  - keyword
+//  - filter_time
+//  - filter_status
 
 // Session (array)
 if (!empty($_SESSION['orders_head']))
@@ -76,93 +84,85 @@ function get($query_string)
                 <!-- card 1 : header -->
                 <div class="card-header d-flex p-3 pt-2">
                     <div class="d-flex align-items-center align-content-center bg-gradient-info shadow-info text-center border-radius-xl mt-n4">
-                        <!-- <div class="text-white ps-4">
-                            <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
-                        </div> -->
-                        <p class="h3 text-white px-4 py-3">訂單管理</p>
+                        <p class="h3 text-white px-4 py-3"><?= $os->page_header ?></p>
                     </div>
-                    <!-- <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Sales</p>
-                        <h4 class="mb-0">$103,430</h4>
-                    </div> -->
                 </div>
                 <hr class="dark horizontal my-0">
                 <!-- card 2 body -->
                 <div class="card-body p-3">
-                    <form action="<?= $form_action ?>" method="POST" role="form">
+                    <form action="<?= $os->form_action ?>" method="POST" role="form">
                         <!-- 關鍵字搜尋 -->
                         <div class="row px-3 py-2">
                             <div class="col-4 form-group">
-                                <label for="order_search_keyword" class="form-label m-0 font-weight-bold h5 text-dark">訂單搜尋</label>
-                                <input type="text" class="form-control border-bottom border-2 rounded-0 py-1" id="order_search_keyword" placeholder="enter keyword..." name="order_search_keyword" value="<?= get('order_search_keyword') ?>">
-                                <small class="form-text text-muted">訂單號碼 or 會員名稱 or 會員電話</small>
-                                <!-- <small class="form-text text-muted">訂單編號 / 會員名稱 / 帳號 / 電話</small> -->
+                                <label for="s_keyword" class="form-label m-0 font-weight-bold h5 text-dark"><?= $os->search_header ?></label>
+                                <input type="text" class="form-control border-bottom border-2 rounded-0 py-1" id="s_keyword" placeholder="enter keyword..." name="keyword" value="<?= get('keyword') ?>">
+                                <small class="form-text text-muted"><?= $os->search_keyword_hint ?></small>
                                 <span class="form-control-feedback"></span>
                             </div>
                         </div>
                         <!-- 篩選器：時間 -->
                         <div>
                             <div class="form-check form-check-inline m-0 ps-3">
-                                <label for="filter_time_none" class="form-check-label text-dark ms-0">
-                                    <?php if (get('order_search_filter_time') === 'filter_time_none') : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_time_none" name="order_search_filter_time" value="filter_time_none" checked>
+                                <label for="ft_none" class="form-check-label text-dark ms-0">
+                                    <?php if (get('filter_time') == 0) : ?>
+                                        <input type="radio" class=" form-check-input" id="ft_none" name="filter_time" value="0" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_time_none" name="order_search_filter_time" value="filter_time_none">
+                                        <input type="radio" class=" form-check-input" id="ft_none" name="filter_time" value="0">
                                     <?php endif; ?>
                                     <!-- none -->
                                     無
                                 </label>
                             </div>
                             <div class="form-check form-check-inline m-0">
-                                <label for="filter_time_today" class="form-check-label text-dark ms-0">
-                                    <?php if (get('order_search_filter_time') === 'filter_time_today') : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_time_today" name="order_search_filter_time" value="filter_time_today" checked>
+                                <label for="ft_today" class="form-check-label text-dark ms-0">
+                                    <?php if (get('filter_time') == 1) : ?>
+                                        <input type="radio" class=" form-check-input" id="ft_today" name="filter_time" value="1" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_time_today" name="order_search_filter_time" value="filter_time_today">
+                                        <input type="radio" class=" form-check-input" id="ft_today" name="filter_time" value="1">
                                     <?php endif; ?>
                                     <!-- today -->
                                     當日
                                 </label>
                             </div>
                             <div class="form-check form-check-inline m-0">
-                                <label for="filter_time_this_week" class="form-check-label text-dark ms-0">
-                                    <?php if (get('order_search_filter_time') === 'filter_time_this_week') : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_time_this_week" name="order_search_filter_time" value="filter_time_this_week" checked>
+                                <label for="ft_week" class="form-check-label text-dark ms-0">
+                                    <?php if (get('filter_time') == 2) : ?>
+                                        <input type="radio" class=" form-check-input" id="ft_week" name="filter_time" value="2" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_time_this_week" name="order_search_filter_time" value="filter_time_this_week">
+                                        <input type="radio" class=" form-check-input" id="ft_week" name="filter_time" value="2">
                                     <?php endif; ?>
                                     <!-- this week -->
                                     當週
                                 </label>
                             </div>
                             <div class="form-check form-check-inline m-0">
-                                <label for="filter_time_this_month" class="form-check-label text-dark ms-0">
-                                    <?php if (get('order_search_filter_time') === 'filter_time_this_month') : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_time_this_month" name="order_search_filter_time" value="filter_time_this_month" checked>
+                                <label for="ft_month" class="form-check-label text-dark ms-0">
+                                    <?php if (get('filter_time') == 3) : ?>
+                                        <input type="radio" class=" form-check-input" id="ft_month" name="filter_time" value="3" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_time_this_month" name="order_search_filter_time" value="filter_time_this_month">
+                                        <input type="radio" class=" form-check-input" id="ft_month" name="filter_time" value="3">
                                     <?php endif; ?>
                                     <!-- this month -->
                                     當月
                                 </label>
                             </div>
                             <div class="form-check form-check-inline m-0">
-                                <label for="filter_time_this_season" class="form-check-label text-dark ms-0">
-                                    <?php if (get('order_search_filter_time') === 'filter_time_this_season') : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_time_this_season" name="order_search_filter_time" value="filter_time_this_season" checked>
+                                <label for="ft_season" class="form-check-label text-dark ms-0">
+                                    <?php if (get('filter_time') == 4) : ?>
+                                        <input type="radio" class=" form-check-input" id="ft_season" name="filter_time" value="4" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_time_this_season" name="order_search_filter_time" value="filter_time_this_season">
+                                        <input type="radio" class=" form-check-input" id="ft_season" name="filter_time" value="4">
                                     <?php endif; ?>
                                     <!-- this season -->
                                     當季
                                 </label>
                             </div>
                             <div class="form-check form-check-inline m-0">
-                                <label for="filter_time_this_year" class="form-check-label text-dark ms-0">
-                                    <?php if (get('order_search_filter_time') === 'filter_time_this_year') : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_time_this_year" name="order_search_filter_time" value="filter_time_this_year" checked>
+                                <label for="ft_year" class="form-check-label text-dark ms-0">
+                                    <?php if (get('filter_time') == 5) : ?>
+                                        <input type="radio" class=" form-check-input" id="ft_year" name="filter_time" value="5" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_time_this_year" name="order_search_filter_time" value="filter_time_this_year">
+                                        <input type="radio" class=" form-check-input" id="ft_year" name="filter_time" value="5">
                                     <?php endif; ?>
                                     <!-- this year -->
                                     當年度
@@ -173,66 +173,66 @@ function get($query_string)
                         <!-- 篩選器：訂單狀態 -->
                         <div>
                             <div class="form-check form-check-inline m-0 ps-3">
-                                <label for="filter_status_none" class="form-check-label text-dark ms-0">
-                                    <?php if (get('order_search_filter_status') === 'filter_status_none') : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_status_none" name="order_search_filter_status" value="filter_status_none" checked>
+                                <label for="fs_none" class="form-check-label text-dark ms-0">
+                                    <?php if (get('filter_status') == 0) : ?>
+                                        <input type="radio" class=" form-check-input" id="fs_none" name="filter_status" value="0" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_status_none" name="order_search_filter_status" value="filter_status_none">
+                                        <input type="radio" class=" form-check-input" id="fs_none" name="filter_status" value="0">
                                     <?php endif; ?>
                                     <!-- none -->
                                     無
                                 </label>
                             </div>
                             <div class="form-check form-check-inline m-0">
-                                <label for="filter_status_non_payment" class="form-check-label text-dark ms-0">
-                                    <?php if (get('order_search_filter_status') === 'filter_status_non_payment') : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_status_non_payment" name="order_search_filter_status" value="filter_status_non_payment" checked>
+                                <label for="fs_non_payment" class="form-check-label text-dark ms-0">
+                                    <?php if (get('filter_status') == 1) : ?>
+                                        <input type="radio" class=" form-check-input" id="fs_non_payment" name="filter_status" value="1" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_status_non_payment" name="order_search_filter_status" value="filter_status_non_payment">
+                                        <input type="radio" class=" form-check-input" id="fs_non_payment" name="filter_status" value="1">
                                     <?php endif; ?>
                                     <!-- non-payment -->
                                     未付款
                                 </label>
                             </div>
                             <div class="form-check form-check-inline m-0">
-                                <label for="filter_status_paid" class="form-check-label text-dark ms-0">
-                                    <?php if (get('order_search_filter_status') === 'filter_status_paid') : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_status_paid" name="order_search_filter_status" value="filter_status_paid" checked>
+                                <label for="fs_paid" class="form-check-label text-dark ms-0">
+                                    <?php if (get('filter_status') == 2) : ?>
+                                        <input type="radio" class=" form-check-input" id="fs_paid" name="filter_status" value="2" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_status_paid" name="order_search_filter_status" value="filter_status_paid">
+                                        <input type="radio" class=" form-check-input" id="fs_paid" name="filter_status" value="2">
                                     <?php endif; ?>
                                     <!-- paid -->
                                     已付款
                                 </label>
                             </div>
                             <div class="form-check form-check-inline m-0">
-                                <label for="filter_status_cancelled" class="form-check-label text-dark ms-0">
-                                    <?php if (get('order_search_filter_status') === 'filter_status_cancelled') : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_status_cancelled" name="order_search_filter_status" value="filter_status_cancelled" checked>
+                                <label for="fs_cancelled" class="form-check-label text-dark ms-0">
+                                    <?php if (get('filter_status') == 3) : ?>
+                                        <input type="radio" class=" form-check-input" id="fs_cancelled" name="filter_status" value="3" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_status_cancelled" name="order_search_filter_status" value="filter_status_cancelled">
+                                        <input type="radio" class=" form-check-input" id="fs_cancelled" name="filter_status" value="3">
                                     <?php endif; ?>
                                     <!-- cancelled -->
                                     已取消
                                 </label>
                             </div>
                             <div class="form-check form-check-inline m-0">
-                                <label for="filter_status_returning" class="form-check-label text-dark ms-0">
-                                    <?php if (get('order_search_filter_status') === 'filter_status_returning') : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_status_returning" name="order_search_filter_status" value="filter_status_returning" checked>
+                                <label for="fs_returning" class="form-check-label text-dark ms-0">
+                                    <?php if (get('filter_status') == 4) : ?>
+                                        <input type="radio" class=" form-check-input" id="fs_returning" name="filter_status" value="4" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_status_returning" name="order_search_filter_status" value="filter_status_returning">
+                                        <input type="radio" class=" form-check-input" id="fs_returning" name="filter_status" value="4">
                                     <?php endif; ?>
                                     <!-- returning -->
                                     退貨中
                                 </label>
                             </div>
                             <div class="form-check form-check-inline m-0">
-                                <label for="filter_status_returned" class="form-check-label text-dark ms-0">
-                                    <?php if (get('order_search_filter_status') === 'filter_status_returned') : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_status_returned" name="order_search_filter_status" value="filter_status_returned" checked>
+                                <label for="fs_returned" class="form-check-label text-dark ms-0">
+                                    <?php if (get('filter_status') == 5) : ?>
+                                        <input type="radio" class=" form-check-input" id="fs_returned" name="filter_status" value="5" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="filter_status_returned" name="order_search_filter_status" value="filter_status_returned">
+                                        <input type="radio" class=" form-check-input" id="fs_returned" name="filter_status" value="5">
                                     <?php endif; ?>
                                     <!-- returned -->
                                     已退貨
@@ -242,7 +242,7 @@ function get($query_string)
                         </div>
                         <!-- 表單提交按鈕 : 隱藏-->
                         <div class="row">
-                            <button type="submit" id="order_search_submit" class="d-none"></button>
+                            <button type="submit" id="s_submit" class="d-none"></button>
                         </div>
                     </form>
                 </div>
@@ -277,7 +277,7 @@ function get($query_string)
                                             Edit
                                         </a>
                                         <form action="<?= $url_page_member . '?id=1' ?>" method="POST" class="d-inline">
-                                            <?php $from = $url_page_order_search . '?order_search_keyword=' . get('order_search_keyword') . '&order_search_filter_time=' . get('order_search_filter_time') . '$order_search_filter_status=' . get('order_search_filter_status');  ?>
+                                            <?php $from = $url_page_order_search . '?keyword=' . get('keyword') . '&filter_time=' . get('filter_time') . '$filter_status=' . get('filter_status');  ?>
                                             <input type="text" name="from" value="<?= $from ?>" class="d-none">
                                             <button type="submit" rel="tooltip" class="btn btn-round btn-success px-3">
                                                 <i class="material-icons">person</i>
@@ -306,7 +306,7 @@ function get($query_string)
                                                 Edit
                                             </a>
                                             <form action="<?= $url_page_member . '?id=' . $order_body['person_id'] ?>" method="POST" class="d-inline">
-                                                <?php $from = $url_page_order_search . '?order_search_keyword=' . get('order_search_keyword') . '&order_search_filter_time=' . get('order_search_filter_time') . '$order_search_filter_status=' . get('order_search_filter_status');  ?>
+                                                <?php $from = $url_page_order_search . '?keyword=' . get('keyword') . '&filter_time=' . get('filter_time') . '$filter_status=' . get('filter_status');  ?>
                                                 <input type="text" name="from" value="<?= $from ?>" class="d-none">
                                                 <button type="submit" rel="tooltip" class="btn btn-round btn-success px-3">
                                                     <i class="material-icons">person</i>
@@ -339,7 +339,7 @@ function get($query_string)
 
     <script>
         // order search keyword 
-        var input = document.querySelector("#order_search_keyword");
+        var input = document.querySelector("#s_keyword");
 
         input.addEventListener('keyup', function(event) {
             // number 13 is the 'enter' key on the keyboard
@@ -347,7 +347,7 @@ function get($query_string)
                 // cancel the default action, if needed
                 event.preventDefault();
                 // trigger the button element to submit form
-                document.querySelector('#order_search_submit').click();
+                document.querySelector('#s_submit').click();
             }
         });
         // order search filter
@@ -356,7 +356,7 @@ function get($query_string)
         filters.forEach(function(element) {
             element.addEventListener('change', function(event) {
                 event.preventDefault();
-                document.querySelector('#order_search_submit').click();
+                document.querySelector('#s_submit').click();
             })
         });
     </script>
