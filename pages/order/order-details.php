@@ -20,10 +20,15 @@ $sql = "SELECT orders_detail.*,
                products.price AS p_price,
                member.name AS m_name,
                member.email AS m_email,
-               member.phone AS m_phone
+               member.phone AS m_phone,
+               orders.status AS o_status,
+               orders.payment_id AS o_payment,
+               payment.description AS o_payment
             FROM orders_detail
             JOIN products ON orders_detail.products_id = products.id
             JOIN member ON orders_detail.member_id = member.id
+            JOIN orders ON orders_detail.orders_id = orders.oid
+            JOIN payment ON orders_detail.o_payment = payment.id
         WHERE orders_id = :orders_id";
 
 
@@ -139,12 +144,6 @@ try {
 
 <!-- body 2 > main 2 : 右側主內容頁 -->
 
-<?php foreach ($rows as $row) : ?>
-    <div>
-        <?php var_dump($row); ?>
-    </div>
-    <br>
-<?php endforeach; ?>
 
 
 <div class="container">
@@ -157,16 +156,16 @@ try {
         <div class="col-10">
         </div>
         <div class="col-2">
-            <a href="./order.php" class="demo">回列表</a>
+            <a href="./order-search.php" class="demo">回列表</a>
         </div>
     </div>
     <div class="row">
         <div class="col-9">
-            <?php
-            foreach ($rowsOrder as $value) :
-            ?>
-                <p>訂單編號 : <?= $value["order_num"] ?></p>
-                <p>訂購日期 : <?= $value["date"] ?></p>
+            <?php foreach ($rows as $value) :?>
+        
+                
+                <p>訂單編號 : <?= $value["orders_id"] ?></p>
+                <p>訂購日期 : <?= $value["created_at"] ?></p>
         </div>
     </div>
     <div class="row">
@@ -180,26 +179,26 @@ try {
             </thead>
             <tbody>
                 <tr>
-                    <td><?= $value["product_id"] ?></td>
+                    <td><?= $value["p_name"] ?></td>
                     <td></td>
-                    <td>NT &#36 <?= $value["sum"] ?></td>
+                    <td>NT &#36 <?= $value["p_price"] ?></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td class="text-right">商品小計</td>
-                    <td>NT &#36 <?= $value["sum"] ?></td>
+                    <td>NT &#36 <?= $value["p_price"] ?></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td class="text-right">折扣小計</td>
-                    <td>NT &#36 <?= $value["discount"] ?></td>
+                    <td>NT &#36 3</td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <td></td>
                     <td class="text-right">訂單總金額</td>
-                    <td>NT &#36 <?= $value["sum"] ?></td>
+                    <td>NT &#36 <?= $value["p_price"] ?></td>
                 </tr>
             </tfoot>
         </table>
@@ -210,8 +209,8 @@ try {
                 <div class="card-body">
                     <h5 class="card-title">付款</h5>
                     <hr>
-                    <p class="card-text">付款方式 : <?= $value["payment_method"] ?></p>
-                    <p class="card-text">付款狀態 : <?= $value["payment_status"] ?></p>
+                    <p class="card-text">付款方式 : <?= $value["o_payment"] ?></p>
+                    <p class="card-text">付款狀態 : <?= $value["o_status"] ?></p>
 
                 </div>
             </div>
@@ -221,9 +220,9 @@ try {
                 <div class="card-body">
                     <h5 class="card-title">訂購人資訊</h5>
                     <hr>
-                    <p class="card-text">顧客姓名 : <?= $value["name"] ?></p>
-                    <p class="card-text">電話號碼 : <?= $value["phone"] ?></p>
-                    <p class="card-text">電子郵件 : <?= $value["email"] ?></p>
+                    <p class="card-text">顧客姓名 : <?= $value["m_name"] ?></p>
+                    <p class="card-text">電話號碼 : <?= $value["m_phone"] ?></p>
+                    <p class="card-text">電子郵件 : <?= $value["m_email"] ?></p>
                 </div>
             </div>
         </div>
@@ -235,8 +234,8 @@ try {
                 <div class="card-body">
                     <h5 class="card-title">備註</h5>
                     <hr>
-                    <p class="card-text">顧客備註 : <?= $value["remark"] ?></p>
-                    <p class="card-text">商家備註 : <?= $value["remark"] ?></p>
+                    <p class="card-text">顧客備註 : <?= $value["message"] ?></p>
+                    <p class="card-text">商家備註 : <?= $value["message"] ?></p>
                 </div>
             </div>
         </div>
@@ -255,7 +254,7 @@ try {
             <div class="card-body">
                 <h5 class="card-title">訂單操作紀錄</h5>
                 <hr>
-                <p class="card-text text-danger"> <?= $value["record"] ?>
+                <p class="card-text text-danger"> <?= $value["modified_at"] ?>
                 </p>
             </div>
         </div>
