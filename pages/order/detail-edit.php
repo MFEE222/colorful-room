@@ -34,6 +34,9 @@ try {
     echo $e->getMessage();
 }
 
+
+// var_dump($rowsOrder);
+
 ?>
 
 <!doctype html>
@@ -157,6 +160,7 @@ try {
                 <p class="font-bold">使用者不存在</p>
             <?php else : ?>
                 <?php foreach ($rowsOrder as $value) : ?>
+                    <input type="text" name="order_id" value=<?= $value['id'] ?> class="d-none">
                     <div class="row">
                         <div class="col-9">
                             <p>訂單編號 : <?= $value["order_num"] ?></p>
@@ -205,11 +209,11 @@ try {
                                     <hr>
                                     <label for="payment_status" class="card-text form-label d-block">
                                         付款方式 :
-                                        <input type="text" class="form-control border border-secondary" id="payment_status" name="payment_status" value="<?= $value["payment_status"] ?>" required>
+                                        <input type="text" class="form-control border border-secondary" id="payment_status" name="payment_method" value="<?= $value["payment_status"] ?>" required>
                                     </label>
                                     <label for="payment_method" class="card-text form-label d-block">
                                         付款狀態 :
-                                        <input type="text" class="form-control border border-secondary" id="payment_method" name="payment_method" value="<?= $value["payment_method"] ?>" required placeholder="請輸入付款狀態">
+                                        <input type="text" class="form-control border border-secondary" id="payment_method" name="payment_status" value="<?= $value["payment_method"] ?>" required placeholder="請輸入付款狀態">
                                     </label>
                                 </div>
                             </div>

@@ -72,4 +72,4 @@ $sql = "SELECT order.* member.* customer.*
             OR order.order_created_at LIKE ...
             OR order.order_status = $status";
 
-// redirect($url_page_order_search . "?order_search_keyword=" . post('order_search_keyword') . "&order_search_filter_time=" . post('order_search_filter_time') . "&order_search_filter_status=" . post('order_search_filter_status'));
+redirect($url_page_order_search . "?order_search_keyword=" . post('order_search_keyword') . "&order_search_filter_time=" . post('order_search_filter_time') . "&order_search_filter_status=" . post('order_search_filter_status'));
