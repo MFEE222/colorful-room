@@ -4,6 +4,14 @@ include_once('../var.php');
 include_once('../signin/do-authorize.php');
 
 // ============================================================================
+//  Test
+// ============================================================================
+// redirect($url_page_order_search
+//     . '?keyword=' . post('keyword')
+//     . '&filter_time=' . post('filter_time')
+//     . '&filter_status=' . post('filter_status'));
+
+// ============================================================================
 //  Reminder
 // ============================================================================
 //  1. customer and member table 要合併，並新增 registered 欄位
@@ -20,7 +28,7 @@ include_once('../signin/do-authorize.php');
 $url_back = NULL;
 $sql = [
     'prepare' => NULL,
-    'execute' => NULL,
+    'execute' => [],
     'is_keyword' => false,
     'is_filter_time' => false,
     'is_filter_status' => false,
@@ -42,7 +50,7 @@ function redirect($url)
 
 function post($name)
 {
-    if (isset($_POST[$name]) && !empty($_POST[$name]))
+    if (isset($_POST[$name]))
         return $_POST[$name];
     return $_POST[$name] = NULL;
 }
@@ -55,10 +63,15 @@ function like($condition, $fix = '%')
 function where(&$sql, $condition, $operator = 'AND')
 {
     if (str_contains($sql, 'WHERE')) {
-        $sql .= " " . $operator . "(" . $condition . ")";
+        $sql .= " " . $operator . " " . "(" . $condition . ")";
     } else {
-        $sql .= " " . 'WHERE' . " " . "(" . $condition . ")";
+        $sql .= " " . "WHERE" . " " . "(" . $condition . ")";
     }
+}
+
+function ecbo($l)
+{
+    echo 'BreakPoint: ' . $l . '<br>';
 }
 // ============================================================================
 //  Initialize
@@ -89,43 +102,59 @@ if (!post('keyword') && !post('filter_time') && !post('filter_status')) {
 // ============================================================================
 //  Main
 // ============================================================================
-$sql['prepare'] = "SELECT orders.*
-                          member.name
+// $sql['prepare'] = "SELECT orders.*,
+//                           member.name,
+//                           member.phone,
+//                           orders_status.description AS status_desc
+//                         FROM orders
+//                         JOIN member ON orders.member_id = member.id
+//                         JOIN orders_status ON orders.status_id = orders_status.id";
+
+$sql['prepare'] = "SELECT orders.*,
+                          member.name,
                           member.phone
                         FROM orders
                         JOIN member ON orders.member_id = member.id";
+
 if ($sql['is_keyword']) {
     where($sql['prepare'], "orders.oid = :orders_id OR member.name LIKE :member_name OR member.phone LIKE :member_phone");
+    $sql['execute'] += [
+        ':orders_id' => $sql['keyword'],
+        ':member_name' => $sql['keyword'],
+        ':member_phone' => $sql['keyword']
+    ];
 }
+
 if ($sql['is_filter_time']) {
 }
 if ($sql['is_filter_status']) {
-    where($sql['prepare'], "orders.status = :orders_status");
+    where($sql['prepare'], "orders.status_id = :orders_status_id");
+    $sql['execute'] += [
+        ':orders_status_id' => $sql['filter_status']
+    ];
 }
 if ($sql['is_limit']) {
-    $sql .= " LIMIT " . $sql['limit'];
+    $sql['prepare'] .= " LIMIT " . $sql['limit'];
 }
 
-try {
-    $pdo = $db_host->prepare($sql);
-    if ($limit != NULL)
-        $pdo->execute();
-    else
-        $pdo->execute([
-            ':orders_id' => post('keyword'),
-            ':member_name' => like(post('keyword')),
-            ':member_phone' => like(post('keyword'))
-        ]);
 
+try {
+    $pdo = $db_host->prepare($sql['prepare']);
+    $pdo->execute($sql['execute']);
+
+    var_dump($pdo->rowCount());
     if ($pdo->rowCount() > 0) {
-        $rows = $pdo->fetchAll(PDO::FETCH_ASSOC);
-        // var_dump($rows);
+        // $rows = $pdo->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $pdo->fetchAll();
         // meta data 
         $_SESSION['orders_head'] = [
             'total' => $pdo->rowCount()
         ];
         // data
         $_SESSION['orders_body'] = $rows;
+        // var_dump($_SESSION['orders_head']);
+        // echo '<br><br>';
+        // var_dump($_SESSION['orders_body']);
         redirect($url_back);
     }
 } catch (PDOException $e) {

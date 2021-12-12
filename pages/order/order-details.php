@@ -9,10 +9,10 @@ require_once("../../components/pdo-connect.php");
 
 
 // 檢查GET
-if (isset($_GET["oid"])) {
-    $oid = $_GET["oid"];
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
 } else {
-    $oid = 0;
+    $id = 0;
 }
 
 $sql = "SELECT orders_detail.*,
@@ -28,7 +28,7 @@ $sql = "SELECT orders_detail.*,
             FROM orders_detail
             JOIN products ON orders_detail.products_id = products.id
             JOIN member ON orders_detail.member_id = member.id
-            JOIN orders ON orders_detail.orders_id = orders.oid
+            JOIN orders ON orders_detail.orders_id = orders.id
             JOIN payment ON orders.payment_id = payment.id
             JOIN orders_status ON orders.status_id = orders_status.id
         WHERE orders_id = :orders_id";
@@ -37,12 +37,12 @@ $sql = "SELECT orders_detail.*,
 $pdo = $db_host->prepare($sql);
 try {
     $pdo->execute([
-        'orders_id' => $oid
+        'orders_id' => $id
     ]);
     // var_dump($pdo->rowCount());
     if ($pdo->rowCount() > 0) {
         $rows = $pdo->fetchAll(PDO::FETCH_ASSOC);
-        echo $pdo->rowCount();
+        // echo $pdo->rowCount();
         // var_dump($rows);
     } else {
         $rows = '暫時抓不到資料';

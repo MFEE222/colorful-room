@@ -60,7 +60,7 @@ if ($_SESSION['orders_body'] != NULL)
 
 function get($query_string)
 {
-    if (isset($_GET[$query_string]) && !empty($_GET[$query_string]))
+    if (isset($_GET[$query_string]))
         return $_GET[$query_string];
     return '';
 }
@@ -104,10 +104,10 @@ function get($query_string)
                         <div>
                             <div class="form-check form-check-inline m-0 ps-3">
                                 <label for="ft_none" class="form-check-label text-dark ms-0">
-                                    <?php if (get('filter_time') === '1') : ?>
-                                        <input type="radio" class=" form-check-input" id="ft_none" name="filter_time" value="1" checked>
+                                    <?php if (get('filter_time') === '0') : ?>
+                                        <input type="radio" class=" form-check-input" id="ft_none" name="filter_time" value="0" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="ft_none" name="filter_time" value="1">
+                                        <input type="radio" class=" form-check-input" id="ft_none" name="filter_time" value="0">
                                     <?php endif; ?>
                                     <!-- none -->
                                     無
@@ -115,10 +115,10 @@ function get($query_string)
                             </div>
                             <div class="form-check form-check-inline m-0">
                                 <label for="ft_today" class="form-check-label text-dark ms-0">
-                                    <?php if (get('filter_time') === '2') : ?>
-                                        <input type="radio" class=" form-check-input" id="ft_today" name="filter_time" value="2" checked>
+                                    <?php if (get('filter_time') === '1') : ?>
+                                        <input type="radio" class=" form-check-input" id="ft_today" name="filter_time" value="1" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="ft_today" name="filter_time" value="2">
+                                        <input type="radio" class=" form-check-input" id="ft_today" name="filter_time" value="1">
                                     <?php endif; ?>
                                     <!-- today -->
                                     當日
@@ -126,10 +126,10 @@ function get($query_string)
                             </div>
                             <div class="form-check form-check-inline m-0">
                                 <label for="ft_week" class="form-check-label text-dark ms-0">
-                                    <?php if (get('filter_time') === '3') : ?>
-                                        <input type="radio" class=" form-check-input" id="ft_week" name="filter_time" value="3" checked>
+                                    <?php if (get('filter_time') === '2') : ?>
+                                        <input type="radio" class=" form-check-input" id="ft_week" name="filter_time" value="2" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="ft_week" name="filter_time" value="3">
+                                        <input type="radio" class=" form-check-input" id="ft_week" name="filter_time" value="2">
                                     <?php endif; ?>
                                     <!-- this week -->
                                     當週
@@ -137,10 +137,10 @@ function get($query_string)
                             </div>
                             <div class="form-check form-check-inline m-0">
                                 <label for="ft_month" class="form-check-label text-dark ms-0">
-                                    <?php if (get('filter_time') === '4') : ?>
-                                        <input type="radio" class=" form-check-input" id="ft_month" name="filter_time" value="4" checked>
+                                    <?php if (get('filter_time') === '3') : ?>
+                                        <input type="radio" class=" form-check-input" id="ft_month" name="filter_time" value="3" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="ft_month" name="filter_time" value="4">
+                                        <input type="radio" class=" form-check-input" id="ft_month" name="filter_time" value="3">
                                     <?php endif; ?>
                                     <!-- this month -->
                                     當月
@@ -148,10 +148,10 @@ function get($query_string)
                             </div>
                             <div class="form-check form-check-inline m-0">
                                 <label for="ft_season" class="form-check-label text-dark ms-0">
-                                    <?php if (get('filter_time') === '5') : ?>
-                                        <input type="radio" class=" form-check-input" id="ft_season" name="filter_time" value="5" checked>
+                                    <?php if (get('filter_time') === '4') : ?>
+                                        <input type="radio" class=" form-check-input" id="ft_season" name="filter_time" value="4" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="ft_season" name="filter_time" value="5">
+                                        <input type="radio" class=" form-check-input" id="ft_season" name="filter_time" value="4">
                                     <?php endif; ?>
                                     <!-- this season -->
                                     當季
@@ -159,10 +159,10 @@ function get($query_string)
                             </div>
                             <div class="form-check form-check-inline m-0">
                                 <label for="ft_year" class="form-check-label text-dark ms-0">
-                                    <?php if (get('filter_time') === '6') : ?>
-                                        <input type="radio" class=" form-check-input" id="ft_year" name="filter_time" value="6" checked>
+                                    <?php if (get('filter_time') === '5') : ?>
+                                        <input type="radio" class=" form-check-input" id="ft_year" name="filter_time" value="5" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="ft_year" name="filter_time" value="6">
+                                        <input type="radio" class=" form-check-input" id="ft_year" name="filter_time" value="5">
                                     <?php endif; ?>
                                     <!-- this year -->
                                     當年度
@@ -174,10 +174,10 @@ function get($query_string)
                         <div>
                             <div class="form-check form-check-inline m-0 ps-3">
                                 <label for="fs_none" class="form-check-label text-dark ms-0">
-                                    <?php if (get('filter_status') === '1') : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_none" name="filter_status" value="1" checked>
+                                    <?php if (get('filter_status') === '0') : ?>
+                                        <input type="radio" class=" form-check-input" id="fs_none" name="filter_status" value="0" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_none" name="filter_status" value="1">
+                                        <input type="radio" class=" form-check-input" id="fs_none" name="filter_status" value="0">
                                     <?php endif; ?>
                                     <!-- none -->
                                     無
@@ -185,10 +185,10 @@ function get($query_string)
                             </div>
                             <div class="form-check form-check-inline m-0">
                                 <label for="fs_non_payment" class="form-check-label text-dark ms-0">
-                                    <?php if (get('filter_status') === '2') : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_non_payment" name="filter_status" value="2" checked>
+                                    <?php if (get('filter_status') === '1') : ?>
+                                        <input type="radio" class=" form-check-input" id="fs_non_payment" name="filter_status" value="1" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_non_payment" name="filter_status" value="2">
+                                        <input type="radio" class=" form-check-input" id="fs_non_payment" name="filter_status" value="1">
                                     <?php endif; ?>
                                     <!-- non-payment -->
                                     未付款
@@ -196,10 +196,10 @@ function get($query_string)
                             </div>
                             <div class="form-check form-check-inline m-0">
                                 <label for="fs_paid" class="form-check-label text-dark ms-0">
-                                    <?php if (get('filter_status') === '3') : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_paid" name="filter_status" value="3" checked>
+                                    <?php if (get('filter_status') === '2') : ?>
+                                        <input type="radio" class=" form-check-input" id="fs_paid" name="filter_status" value="2" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_paid" name="filter_status" value="3">
+                                        <input type="radio" class=" form-check-input" id="fs_paid" name="filter_status" value="2">
                                     <?php endif; ?>
                                     <!-- paid -->
                                     已付款
@@ -207,10 +207,10 @@ function get($query_string)
                             </div>
                             <div class="form-check form-check-inline m-0">
                                 <label for="fs_cancelled" class="form-check-label text-dark ms-0">
-                                    <?php if (get('filter_status') === '4') : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_cancelled" name="filter_status" value="4" checked>
+                                    <?php if (get('filter_status') === '3') : ?>
+                                        <input type="radio" class=" form-check-input" id="fs_cancelled" name="filter_status" value="3" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_cancelled" name="filter_status" value="4">
+                                        <input type="radio" class=" form-check-input" id="fs_cancelled" name="filter_status" value="3">
                                     <?php endif; ?>
                                     <!-- cancelled -->
                                     已取消
@@ -218,10 +218,10 @@ function get($query_string)
                             </div>
                             <div class="form-check form-check-inline m-0">
                                 <label for="fs_returning" class="form-check-label text-dark ms-0">
-                                    <?php if (get('filter_status') === '5') : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_returning" name="filter_status" value="5" checked>
+                                    <?php if (get('filter_status') === '4') : ?>
+                                        <input type="radio" class=" form-check-input" id="fs_returning" name="filter_status" value="4" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_returning" name="filter_status" value="5">
+                                        <input type="radio" class=" form-check-input" id="fs_returning" name="filter_status" value="4">
                                     <?php endif; ?>
                                     <!-- returning -->
                                     退貨中
@@ -229,10 +229,10 @@ function get($query_string)
                             </div>
                             <div class="form-check form-check-inline m-0">
                                 <label for="fs_returned" class="form-check-label text-dark ms-0">
-                                    <?php if (get('filter_status') === '6') : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_returned" name="filter_status" value="6" checked>
+                                    <?php if (get('filter_status') === '5') : ?>
+                                        <input type="radio" class=" form-check-input" id="fs_returned" name="filter_status" value="5" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_returned" name="filter_status" value="6">
+                                        <input type="radio" class=" form-check-input" id="fs_returned" name="filter_status" value="5">
                                     <?php endif; ?>
                                     <!-- returned -->
                                     已退貨
@@ -272,11 +272,11 @@ function get($query_string)
                                 <!-- <td class="p-0 text-center text-dark">400</td> -->
                                 <td class="p-0 text-center text-dark">
                                     <div class="mt-3">
-                                        <a href="<?= $url_page_order_detail . '?oid=443' ?>" rel="tooltip" class="btn btn-round btn-info px-3">
+                                        <a href="<?= $url_page_order_detail . '?id=443' ?>" rel="tooltip" class="btn btn-round btn-info px-3">
                                             <i class="material-icons">edit</i>
                                             Edit
                                         </a>
-                                        <form action="<?= $url_page_member . '?mid=1' ?>" method="POST" class="d-inline">
+                                        <form action="<?= $url_page_member . '?id=1' ?>" method="POST" class="d-inline">
                                             <?php $from = $url_page_order_search . '?keyword=' . get('keyword') . '&filter_time=' . get('filter_time') . '$filter_status=' . get('filter_status');  ?>
                                             <input type="text" name="from" value="<?= $from ?>" class="d-none">
                                             <button type="submit" rel="tooltip" class="btn btn-round btn-success px-3">
@@ -284,7 +284,7 @@ function get($query_string)
                                                 Member
                                             </button>
                                         </form>
-                                        <a href="<?= $url_page_order_detail . '?oid=12'  ?>" rel="tooltip" class="btn btn-round btn-danger px-3">
+                                        <a href="<?= $url_page_order_detail . '?id=12'  ?>" rel="tooltip" class="btn btn-round btn-danger px-3">
                                             <i class="material-icons">receipt</i>
                                             Detail
                                         </a>
@@ -293,15 +293,15 @@ function get($query_string)
                             </tr>
                             <?php foreach ($orders_body as $order) : ?>
                                 <tr>
-                                    <td class="p-0 text-center text-dark"><?= $order['oid'] ?></td>
+                                    <td class="p-0 text-center text-dark"><?= $order['id'] ?></td>
                                     <td class="p-0 text-center text-dark"><?= $order['name'] ?></td>
                                     <td class="p-0 text-center text-dark"><?= $order['phone'] ?></td>
                                     <td class="p-0 text-center text-dark"><?= $order['created_at'] ?></td>
-                                    <td class="p-0 text-center text-dark"><?= $order['status'] ?></td>
+                                    <td class="p-0 text-center text-dark"><?= $order['status_id'] ?></td>
                                     <!-- <td class="p-0 text-center text-dark"><?= $order['price'] ?></td> -->
                                     <td class="p-0 text-center text-dark">
                                         <div class="mt-3">
-                                            <a href="<?= $url_page_order_detail . '?oid=' . $order['oid'] ?>" rel="tooltip" class="btn btn-round btn-info px-3">
+                                            <a href="<?= $url_page_order_detail . '?id=' . $order['id'] ?>" rel="tooltip" class="btn btn-round btn-info px-3">
                                                 <i class="material-icons">edit</i>
                                                 Edit
                                             </a>
@@ -313,7 +313,7 @@ function get($query_string)
                                                     Member
                                                 </button>
                                             </form>
-                                            <a href="<?= $url_page_order_detail . '?oid=' . $order['oid'] ?>" rel="tooltip" class="btn btn-round btn-danger px-3">
+                                            <a href="<?= $url_page_order_detail . '?id=' . $order['id'] ?>" rel="tooltip" class="btn btn-round btn-danger px-3">
                                                 <i class="material-icons">receipt</i>
                                                 Detail
                                             </a>
