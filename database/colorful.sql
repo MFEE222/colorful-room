@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 12, 2021 at 12:13 PM
+-- Generation Time: Dec 12, 2021 at 12:48 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -4234,23 +4234,25 @@ INSERT INTO `orders_detail` (`id`, `transaction_id`, `product_id`, `subcribe_id`
 DROP TABLE IF EXISTS `order_tracking`;
 CREATE TABLE `order_tracking` (
   `id` int(6) NOT NULL,
-  `order-num` int(6) NOT NULL,
-  `user-id` varchar(20) NOT NULL,
+  `order_num` int(6) NOT NULL,
+  `user_id` varchar(20) NOT NULL,
   `date` datetime NOT NULL,
-  `payment-status` varchar(10) NOT NULL,
-  `payment-method` varchar(10) NOT NULL,
-  `order-status` varchar(20) NOT NULL,
-  `sum` varchar(10) NOT NULL
+  `payment_status` varchar(10) NOT NULL,
+  `payment_method` varchar(10) NOT NULL,
+  `order_status` varchar(20) NOT NULL,
+  `sum` varchar(10) NOT NULL,
+  `remark` varchar(10) NOT NULL,
+  `record` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `order_tracking`
 --
 
-INSERT INTO `order_tracking` (`id`, `order-num`, `user-id`, `date`, `payment-status`, `payment-method`, `order-status`, `sum`) VALUES
-(1, 202101, '多多', '2021-12-07 07:59:51', 'Paid', 'Swipe', '處理中待付款已完成不成立退貨/退款已取消', '400'),
-(2, 202102, '花花花', '2021-12-08 10:45:02', 'Paid', 'Swipe', '處理中待付款已完成不成立退貨/退款已取消', '600'),
-(3, 202103, '毛毛', '2021-12-08 15:23:50', 'Paid', 'Swipe', '處理中待付款已完成不成立退貨/退款已取消', '200');
+INSERT INTO `order_tracking` (`id`, `order_num`, `user_id`, `date`, `payment_status`, `payment_method`, `order_status`, `sum`, `remark`, `record`) VALUES
+(1, 202101, '1', '2021-12-07 07:59:51', 'Paid', 'Swipe', '處理中待付款已完成不成立退貨/退款已取消', '400', '', ''),
+(2, 202102, '455', '2021-12-08 10:45:02', 'Paid', 'Swipe', '處理中待付款已完成不成立退貨/退款已取消', '600', '', ''),
+(3, 202103, '33', '2021-12-08 15:23:50', 'Paid', 'Swipe', '處理中待付款已完成不成立退貨/退款已取消', '200', '', '');
 
 -- --------------------------------------------------------
 
