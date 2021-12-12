@@ -152,10 +152,11 @@ try {
         </div>
     </div>
     <div class="row justify-content-end">
-        <div class="col-10">
+        <div class="col-9">
         </div>
-        <div class="col-2">
+        <div class="col-3">
             <a href="./order-search.php" class="demo">回列表</a>
+            <a href="./detail-edit.php" class="demo">修改</a>
         </div>
     </div>
     <div class="row">
