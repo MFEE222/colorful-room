@@ -43,7 +43,7 @@ class OrderSearch
     public $form_action = './do-order-search.php';
     public $page_header = '訂單管理';
     public $search_header = '搜尋訂單';
-    public $search_keyword_hint = '訂單號碼 or 會員名稱 or 會員電話';
+    public $search_keyword_hint = '訂單編號 or 會員名稱 or 會員電話';
 }
 $os = new OrderSearch();
 
@@ -53,9 +53,9 @@ $os = new OrderSearch();
 //  - filter_status
 
 // Session (array)
-if (!empty($_SESSION['orders_head']))
+if ($_SESSION['orders_head'] != NULL)
     $orders_head = $_SESSION['orders_head'];
-if (!empty($_SESSION['orders_body']))
+if ($_SESSION['orders_body'] != NULL)
     $orders = $_SESSION['orders_body'];
 
 function get($query_string)
@@ -263,7 +263,7 @@ function get($query_string)
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="p-0 text-center text-dark">測試用｜202101
+                                <td class="p-0 text-center text-dark">測試用｜443
                                 </td>
                                 <td class="p-0 text-center text-dark">多多</td>
                                 <td class="p-0 text-center text-dark">123456789</td>
@@ -272,11 +272,11 @@ function get($query_string)
                                 <td class="p-0 text-center text-dark">400</td>
                                 <td class="p-0 text-center text-dark">
                                     <div class="mt-3">
-                                        <a href="<?= $url_page_order_detail . '?id=1' ?>" rel="tooltip" class="btn btn-round btn-info px-3">
+                                        <a href="<?= $url_page_order_detail . '?oid=443' ?>" rel="tooltip" class="btn btn-round btn-info px-3">
                                             <i class="material-icons">edit</i>
                                             Edit
                                         </a>
-                                        <form action="<?= $url_page_member . '?id=1' ?>" method="POST" class="d-inline">
+                                        <form action="<?= $url_page_member . '?mid=1' ?>" method="POST" class="d-inline">
                                             <?php $from = $url_page_order_search . '?keyword=' . get('keyword') . '&filter_time=' . get('filter_time') . '$filter_status=' . get('filter_status');  ?>
                                             <input type="text" name="from" value="<?= $from ?>" class="d-none">
                                             <button type="submit" rel="tooltip" class="btn btn-round btn-success px-3">
@@ -284,7 +284,7 @@ function get($query_string)
                                                 Member
                                             </button>
                                         </form>
-                                        <a href="<?= $url_page_order_detail . '?id=1'  ?>" rel="tooltip" class="btn btn-round btn-danger px-3">
+                                        <a href="<?= $url_page_order_detail . '?oid=12'  ?>" rel="tooltip" class="btn btn-round btn-danger px-3">
                                             <i class="material-icons">receipt</i>
                                             Detail
                                         </a>

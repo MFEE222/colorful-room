@@ -1,31 +1,48 @@
 <?php
 include_once('../var.php');
-// include('../signin/do-authorize.php');
-
-if (isset($_GET["id"])) {
-    $id = $_GET["id"];
-} else {
-    $id = 0;
-}
+include('../signin/do-authorize.php');
 require_once("../../components/pdo-connect.php");
-
-// $sqlorder = "SELECT * FROM order_tracking WHERE id = $id";
-$sqlorder = "SELECT *
-                FROM order_tracking
-                JOIN member ON order_tracking.user_id = member.id
-             WHERE order_tracking.oid = ?";
-// "SELECT order_detail. *,tag.name AS tag_name FROM order_detail
-// JOIN tag ON order_detail.tag_id = tag.id
-// WHERE  order_detail.id=? AND order_detail.valid=1";
-
-$stmt = $db_host->prepare($sqlorder);
+// 
+// 1 筆訂單 -> 多 個明細
+// 1 筆明細 -> 1 個商品
+// 1 筆明細 -> 1 個會員 or 顧客
 
 
+// 檢查GET
+if (isset($_GET["oid"])) {
+    $oid = $_GET["oid"];
+} else {
+    $oid = 0;
+}
+
+$sql = "SELECT orders_detail.*,
+               products.name AS p_name,
+               products.price AS p_price,
+               member.name AS m_name,
+               member.email AS m_email,
+               member.phone AS m_phone
+            FROM orders_detail
+            JOIN products ON orders_detail.products_id = products.id
+            JOIN member ON orders_detail.member_id = member.id
+        WHERE orders_id = :orders_id";
+
+
+// $sql = "SELECT orders_detail.*
+//             FROM orders_detail
+//         WHERE orders_id = :orders_id";
+
+$pdo = $db_host->prepare($sql);
 try {
-    $stmt->execute([$id]);
-    $rowsOrder = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //    $rowsCountMember=$stmt->rowCount();
-    //    var_dump($rowsOrder);
+    $pdo->execute([
+        'orders_id' => $oid
+    ]);
+    if ($pdo->rowCount() > 0) {
+        $rows = $pdo->fetchAll(PDO::FETCH_ASSOC);
+        echo $pdo->rowCount();
+        // var_dump($rows);
+    } else {
+        $rows = '暫時抓不到資料';
+    }
 } catch (PDOException $e) {
     echo $e->getMessage();
 }
@@ -121,6 +138,15 @@ try {
 <?php include "../../template/body-main-header.php" ?>
 
 <!-- body 2 > main 2 : 右側主內容頁 -->
+
+<?php foreach ($rows as $row) : ?>
+    <div>
+        <?php var_dump($row); ?>
+    </div>
+    <br>
+<?php endforeach; ?>
+
+
 <div class="container">
     <div class="row">
         <div class="col">
