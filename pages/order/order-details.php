@@ -197,7 +197,7 @@ try {
                 <tr>
                     <td></td>
                     <td class="text-right">訂單總金額</td>
-                    <td>NT &#36 <?= $value["p_price"] ?></td>
+                    <td>NT &#36 <?= $value["p_price"] - 3 ?></td>
                 </tr>
             </tfoot>
         </table>

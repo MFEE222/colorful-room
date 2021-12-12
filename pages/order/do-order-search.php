@@ -80,18 +80,20 @@ $url_back = $url_page_order_search
     . '?keyword=' . post('keyword')
     . '&filter_time=' . post('filter_time')
     . '&filter_status=' . post('filter_status');
-$_SESSION['orders_head'] = NULL;
+$_SESSION['orders_head'] = [
+    'total' => 0
+];
 $_SESSION['orders_body'] = NULL;
 // 處理空格？多關鍵字？
 if (post('keyword') != NULL) {
     $sql['is_keyword'] = true;
     $sql['keyword'] = '%' . post('keyword') . '%';
 }
-if (post('filter_time') != NULL) {
+if (post('filter_time') != NULL && post('filter_time') != 0) {
     $sql['is_filter_time'] = true;
     $sql['filter_time'] = post('filter_time');
 }
-if (post('filter_status') != NULL) {
+if (post('filter_status') != NULL && post('filter_status') != 0) {
     $sql['is_filter_status'] = true;
     $sql['filter_status'] = post('filter_status');
 }
@@ -111,17 +113,19 @@ if (!post('keyword') && !post('filter_time') && !post('filter_status')) {
 //                         JOIN orders_status ON orders.status_id = orders_status.id";
 
 $sql['prepare'] = "SELECT orders.*,
-                          member.name,
-                          member.phone
+                          member.name AS member_name,
+                          member.phone AS member_phone
                         FROM orders
                         JOIN member ON orders.member_id = member.id";
 
 if ($sql['is_keyword']) {
-    where($sql['prepare'], "orders.oid = :orders_id OR member.name LIKE :member_name OR member.phone LIKE :member_phone");
+    where($sql['prepare'], "orders.id = :orders_id OR member.name LIKE :member_name OR member.phone LIKE :member_phone");
     $sql['execute'] += [
-        ':orders_id' => $sql['keyword'],
+        // ':orders_id' => $sql['keyword'],
+        ':orders_id' => post('keyword'),
         ':member_name' => $sql['keyword'],
         ':member_phone' => $sql['keyword']
+        // ':member_phone' => '%' . $sql['keyword'] . '%'
     ];
 }
 
@@ -146,17 +150,18 @@ try {
     if ($pdo->rowCount() > 0) {
         // $rows = $pdo->fetchAll(PDO::FETCH_ASSOC);
         $rows = $pdo->fetchAll();
-        // meta data 
+
         $_SESSION['orders_head'] = [
             'total' => $pdo->rowCount()
         ];
-        // data
         $_SESSION['orders_body'] = $rows;
         // var_dump($_SESSION['orders_head']);
         // echo '<br><br>';
         // var_dump($_SESSION['orders_body']);
-        redirect($url_back);
+        // redirect($url_back);
     }
+
+    redirect($url_back);
 } catch (PDOException $e) {
     echo $e->getMessage();
 }

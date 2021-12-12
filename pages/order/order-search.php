@@ -65,6 +65,22 @@ function get($query_string)
     return '';
 }
 
+function status_desc($sts_id)
+{
+    switch ($sts_id) {
+        case 1:
+            return '未付款';
+        case 2:
+            return '已付款';
+        case 3:
+            return '已取消';
+        case 4:
+            return '退貨中';
+        case 5:
+            return '已退貨';
+    }
+}
+
 ?>
 <!-- html head 標籤 -->
 <!-- !!! include 中路徑記得自己改 !!! -->
@@ -101,6 +117,7 @@ function get($query_string)
                             </div>
                         </div>
                         <!-- 篩選器：時間 -->
+                        <!-- 
                         <div>
                             <div class="form-check form-check-inline m-0 ps-3">
                                 <label for="ft_none" class="form-check-label text-dark ms-0">
@@ -109,7 +126,6 @@ function get($query_string)
                                     <?php else : ?>
                                         <input type="radio" class=" form-check-input" id="ft_none" name="filter_time" value="0">
                                     <?php endif; ?>
-                                    <!-- none -->
                                     無
                                 </label>
                             </div>
@@ -120,7 +136,6 @@ function get($query_string)
                                     <?php else : ?>
                                         <input type="radio" class=" form-check-input" id="ft_today" name="filter_time" value="1">
                                     <?php endif; ?>
-                                    <!-- today -->
                                     當日
                                 </label>
                             </div>
@@ -131,7 +146,6 @@ function get($query_string)
                                     <?php else : ?>
                                         <input type="radio" class=" form-check-input" id="ft_week" name="filter_time" value="2">
                                     <?php endif; ?>
-                                    <!-- this week -->
                                     當週
                                 </label>
                             </div>
@@ -142,7 +156,6 @@ function get($query_string)
                                     <?php else : ?>
                                         <input type="radio" class=" form-check-input" id="ft_month" name="filter_time" value="3">
                                     <?php endif; ?>
-                                    <!-- this month -->
                                     當月
                                 </label>
                             </div>
@@ -153,7 +166,6 @@ function get($query_string)
                                     <?php else : ?>
                                         <input type="radio" class=" form-check-input" id="ft_season" name="filter_time" value="4">
                                     <?php endif; ?>
-                                    <!-- this season -->
                                     當季
                                 </label>
                             </div>
@@ -164,12 +176,12 @@ function get($query_string)
                                     <?php else : ?>
                                         <input type="radio" class=" form-check-input" id="ft_year" name="filter_time" value="5">
                                     <?php endif; ?>
-                                    <!-- this year -->
                                     當年度
                                 </label>
                             </div>
 
-                        </div>
+                        </div> -->
+
                         <!-- 篩選器：訂單狀態 -->
                         <div>
                             <div class="form-check form-check-inline m-0 ps-3">
@@ -246,9 +258,18 @@ function get($query_string)
                         </div>
                     </form>
                 </div>
+                <!-- row head info -->
+                <div>
+                    <p class="h6 p-3 me-3 float-end">
+                        共
+                        <?= $orders_head['total'] ?>
+                        筆
+                    </p>
+                </div>
                 <hr class="dark horizontal my-0">
                 <!-- card 3 body -->
                 <div class="card-body p-3">
+
                     <table class="table align-items-center">
                         <thead>
                             <tr>
@@ -257,11 +278,11 @@ function get($query_string)
                                 <th class="px-3 align-middle text-center text-dark">顧客電話</th>
                                 <th class="px-3 align-middle text-center text-dark">建立時間</th>
                                 <th class="px-3 align-middle text-center text-dark">訂單狀態</th>
-                                <!-- <th class="px-3 align-middle text-center text-dark">金額</th> -->
                                 <th class="px-3 align-middle text-center text-dark">操作</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- 
                             <tr>
                                 <td class="p-0 text-center text-dark">測試用｜443
                                 </td>
@@ -269,10 +290,9 @@ function get($query_string)
                                 <td class="p-0 text-center text-dark">123456789</td>
                                 <td class="p-0 text-center text-dark">2021-12-07 07:59:51</td>
                                 <td class="p-0 text-center text-dark">Paid</td>
-                                <!-- <td class="p-0 text-center text-dark">400</td> -->
                                 <td class="p-0 text-center text-dark">
                                     <div class="mt-3">
-                                        <a href="<?= $url_page_order_detail . '?id=443' ?>" rel="tooltip" class="btn btn-round btn-info px-3">
+                                        <a href="<?= $url_page_order_detail . '?id=12' ?>" rel="tooltip" class="btn btn-round btn-info px-3">
                                             <i class="material-icons">edit</i>
                                             Edit
                                         </a>
@@ -291,14 +311,14 @@ function get($query_string)
                                     </div>
                                 </td>
                             </tr>
+                            -->
                             <?php foreach ($orders_body as $order) : ?>
                                 <tr>
                                     <td class="p-0 text-center text-dark"><?= $order['id'] ?></td>
-                                    <td class="p-0 text-center text-dark"><?= $order['name'] ?></td>
-                                    <td class="p-0 text-center text-dark"><?= $order['phone'] ?></td>
+                                    <td class="p-0 text-center text-dark"><?= $order['member_name'] ?></td>
+                                    <td class="p-0 text-center text-dark"><?= $order['member_phone'] ?></td>
                                     <td class="p-0 text-center text-dark"><?= $order['created_at'] ?></td>
-                                    <td class="p-0 text-center text-dark"><?= $order['status_id'] ?></td>
-                                    <!-- <td class="p-0 text-center text-dark"><?= $order['price'] ?></td> -->
+                                    <td class="p-0 text-center text-dark"><?= status_desc($order['status_id']) ?></td>
                                     <td class="p-0 text-center text-dark">
                                         <div class="mt-3">
                                             <a href="<?= $url_page_order_detail . '?id=' . $order['id'] ?>" rel="tooltip" class="btn btn-round btn-info px-3">
