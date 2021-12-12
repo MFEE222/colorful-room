@@ -3,6 +3,8 @@ require_once("../../components/pdo-connect.php");
 include_once("../var.php");
 include_once("../signin/do-authorize.php");
 
+
+
 //group by
 //$sql="SELECT  COUNT(valid) FROM products GROUP BY valid ";
 //$stmt = $db_host->prepare($sql);
@@ -82,14 +84,14 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
         echo $e->getMessage();
     }
 } else if (isset($_GET["sold_min"]) && $_GET["sold_min"] != " " && isset($_GET["sold_max"]) && $_GET["sold_max"] != " " && $_GET["s"] == "" && $_GET["cate"] == "請選擇類別") {
-//    echo "sold";
+    //    echo "sold";
     $sold_min = $_GET['sold_min'];
     $sold_max = $_GET['sold_max'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
   WHERE  products.sold_total >=? AND  products.sold_total <=? ORDER BY products.sold_total ASC";
     $stmt = $db_host->prepare($sql);
-//    echo "sold 2";
+    //    echo "sold 2";
     try {
         $stmt->execute([$sold_min, $sold_max]);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -207,11 +209,12 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
 
 <!-- body 2 > main 2 : 右側主內容頁 -->
 <div class="container">
+    <!-- <img src="../../assets/img/products/before/" alt=""> -->
     <form action="product.php" method="get">
         <div class="row mt-3 justify-content-evenly">
             <div class="col-lg-3 d-flex align-items-center ">
                 <label class="my-0 me-3 form-label text-nowrap" id="search">商品名稱</label>
-                <input type="search" class="form-control border border-secondary "id="search" name="s" value="<?php if (isset($search))echo $search; ?>" placeholder="請輸入...">
+                <input type="search" class="form-control border border-secondary " id="search" name="s" value="<?php if (isset($search)) echo $search; ?>" placeholder="請輸入...">
             </div>
 
             <div class="col-lg-3 d-flex align-items-center ">
@@ -219,10 +222,10 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                 <select name="cate" id="cate" class="form-control border border-secondary">
                     <option selected>請選擇類別</option>
                     <!--                selected="--><?php //if (isset($value["category_id"])) echo "selected";
-                    ?>
+                                                        ?>
                     <?php foreach ($row as $value) : ?>
-                        <option value="<?=$value["category_id"] ?>" <?php if (isset($_GET["cate"]) && $_GET["cate"]==$value["category_id"]) echo "selected";
-                        ?>> <?= $value["category_name"] ?> </option>
+                        <option value="<?= $value["category_id"] ?>" <?php if (isset($_GET["cate"]) && $_GET["cate"] == $value["category_id"]) echo "selected";
+                                                                        ?>> <?= $value["category_name"] ?> </option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -239,15 +242,15 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                 <a type="reset" class="btn btn-primary m-0 text-nowrap m-3" role="button" href="product.php">重設</a>
             </div>
     </form>
-    
+
     <div class="col-lg-12 d-flex justify-content-start ">
-        <a class="btn btn-lg btn-success my-4"  role="button"  href="product-add.php">商品上架</a>
+        <a class="btn btn-lg btn-success my-4" role="button" href="product-add.php">商品上架</a>
     </div>
 
     <div class="d-flex mt-2">
         <ul class="nav nav-pills category-list mb-2">
             <li class="nav-item <?php if (isset($view)) echo "active"; ?>">
-                <a class="nav-link " aria-current="page" href="product.php?view">全部<span class="badge text-dark"><?php echo $rowAll[0]["COUNT(valid)"];?></span></a>
+                <a class="nav-link " aria-current="page" href="product.php?view">全部<span class="badge text-dark"><?php echo $rowAll[0]["COUNT(valid)"]; ?></span></a>
             </li>
             <li class="nav-item <?php if (isset($valid) && $valid === "1") echo "active"; ?>">
                 <a class="nav-link " href="product.php?valid=1">架上商品<span class="badge text-dark"><?php echo $row1[0]["COUNT(valid)"]; ?></span></span></a>
@@ -283,16 +286,16 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                         <tr>
                             <td class="ps-1"><?= $value["name"] ?></td>
                             <td class="ps-1"><?php switch ($value["valid"]):
-                                    case "0":
-                                        echo "已下架";
-                                        break;
-                                    case "1":
-                                        echo "架上商品";
-                                        break;
-                                    case "2":
-                                        echo "未上架";
-                                        break;
-                                ?>
+                                                    case "0":
+                                                        echo "已下架";
+                                                        break;
+                                                    case "1":
+                                                        echo "架上商品";
+                                                        break;
+                                                    case "2":
+                                                        echo "未上架";
+                                                        break;
+                                                ?>
                                 <?php endswitch; ?>
                             </td>
                             <td class="ps-1"><?= $value["category_name"] ?></td>
