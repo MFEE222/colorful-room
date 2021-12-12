@@ -278,15 +278,15 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                         <th class="active">
                             <input type="checkbox" class="select-all checkbox" name="select-all" />
                         </th>
-                        <th class="align-middle ps-1" scope="col" data-field="name">商品名稱</th>
-                        <th class="align-middle ps-1" scope="col" data-field="status">商品狀態</th>
+                        <th class="align-middle ps-1" scope="col">商品名稱</th>
+                        <th class="align-middle ps-1" scope="col">商品狀態</th>
                         <th class="align-middle ps-1" scope="col">類別</th>
                         <th class="align-middle ps-1" scope="col">價格</th>
-                        <th class="align-middle ps-1" scope="col">描述</th>
-                        <th class="align-middle ps-1" scope="col">修圖前</th>
-                        <th class="align-middle ps-1" scope="col">修圖後</th>
+                        <th class="align-middle ps-1" style="max-width: 150px;" scope="col">描述</th>
+                        <th class="align-middle ps-1" style="max-width: 100px;" scope="col">修圖前</th>
+                        <th class="align-middle ps-1" style="max-width: 100px;" scope="col">修圖後</th>
                         <th class="align-middle ps-1" scope="col">已售出</th>
-                        <th class="align-middle ps-1" scope="col">檔案</th>
+                        <th class="align-middle ps-1" style="max-width: 100px;" scope="col">檔案</th>
                         <th class="align-middle ps-1" scope="col">操作</th>
                     </tr>
                 </thead>
@@ -312,11 +312,11 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                             </td>
                             <td class="ps-1"><?= $value["category_name"] ?></td>
                             <td class="ps-1"><?= $value["price"] ?></td>
-                            <td class="ps-1 text-wrap"><?= $value["descriptions"] ?></td>
-                            <td class="ps-1"><?= $value["image_before"] ?></td>
-                            <td class="ps-1"><?= $value["image_after"] ?></td>
+                            <td class="ps-1 col-2 text-truncate" style="max-width: 150px;"><?= $value["descriptions"] ?></td>
+                            <td class="ps-1 col-2 text-truncate" style="max-width: 100px;"><?= $value["image_before"] ?></td>
+                            <td class="ps-1 col-2 text-truncate" style="max-width: 100px;"><?= $value["image_after"] ?></td>
                             <td class="ps-1"><?= $value["sold_total"] ?></td>
-                            <td class="ps-1"><?= $value["dng_pkg"] ?></td>
+                            <td class="ps-1 col-2 text-truncate" style="max-width: 100px;"><?= $value["dng_pkg"] ?></td>
                             <td class="ps-1"><a class="btn btn-primary" role="button" href="#">編輯</a> <a class="btn btn-primary" role="button" href="#">更多</a></td>
                         </tr>
                     </tbody>
