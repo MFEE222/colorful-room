@@ -159,109 +159,148 @@ try {
 
 
     <?php foreach ($rows as $value) : ?>
-        <div class="row">
-            <div class="col-9 me-auto">
-                <p>訂單編號 : <?= $value["orders_id"] ?></p>
-                <p>訂單明細 : <?= $value['id'] ?></p>
-                <p>訂購日期 : <?= $value["created_at"] ?></p>
-            </div>
-            <div class="col-auto">
-                <a href="<?= $url_page_order_edit . '?id=' . $value['id'] ?>" class="demo">修改</a>
-            </div>
-        </div>
-        <div class="row">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>商品品項</th>
-                        <th></th>
-                        <th>價格</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><?= $value["p_name"] ?></td>
-                        <td></td>
-                        <td>NT &#36 <?= $value["p_price"] ?></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td class="text-right">商品小計</td>
-                        <td>NT &#36 <?= $value["p_price"] ?></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td class="text-right">折扣小計</td>
-                        <td>NT &#36 <?= $value["o_discount_amount"] ?></td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td></td>
-                        <td class="text-right">訂單總金額</td>
-                        <td>NT &#36 <?= $value["p_price"] - $value["o_discount_amount"] ?></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">付款</h5>
-                        <hr>
-                        <p class="card-text">付款方式 : <?= $value["o_payment_desc"] ?></p>
-                        <p class="card-text">訂單狀態 : <?= $value["o_status_desc"] ?></p>
 
-                    </div>
+        <form action="do-order-detail-edit.php?id= <?= $value['id'] ?>" method="POST">
+            <div class="row">
+                <div class="col-9 me-auto">
+                    <p>訂單編號 : <?= $value["orders_id"] ?></p>
+                    <p>訂單明細 : <?= $value['id'] ?></p>
+                    <p>訂購日期 : <?= $value["created_at"] ?></p>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">訂購人資訊</h5>
-                        <hr>
-                        <p class="card-text">顧客姓名 : <?= $value["m_name"] ?></p>
-                        <p class="card-text">電話號碼 : <?= $value["m_phone"] ?></p>
-                        <p class="card-text">電子郵件 : <?= $value["m_email"] ?></p>
-                    </div>
-                </div>
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>商品品項</th>
+                            <th></th>
+                            <th>價格</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><?= $value["p_name"] ?></td>
+                            <td></td>
+                            <td>NT &#36 <?= $value["p_price"] ?></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="text-right">商品小計</td>
+                            <td>NT &#36 <?= $value["p_price"] ?></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="text-right">折扣小計</td>
+                            <td>NT &#36 <?= $value["o_discount_amount"] ?></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td class="text-right">訂單總金額</td>
+                            <td>NT &#36 <?= $value["p_price"] - $value["o_discount_amount"] ?></td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body position-relative">
+                            <h5 class="card-title">付款</h5>
+                            <hr>
+                            <label for="payment_method" class="card-text d-block">
+                                付款方式：
+                                <input type="text" id="payment_method" class="card-text border-0 rounded-2 text-muted bg-light p-2" name="payment_method" value="<?= $value['o_payment_desc'] ?>">
+                            </label>
+                            <label for="order_status">
+                                訂單狀態：
+                                <input type="text" id="order_status" class="card-text border-0 rounded-2 text-muted bg-light p-2" name="order_status" value="<?= $value['o_status_desc'] ?>">
+                            </label>
+                            <div class="position-absolute bottom-10 end-5">
+                                <button type="submit" class="btn btn-info align-middle mb-0">修改</button>
+                            </div>
 
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">備註</h5>
-                        <hr>
-                        <p class="card-text">顧客備註 : <?= $value["message"] ?></p>
-                        <p class="card-text">商家備註 : <?= $value["message"] ?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">訂購人資訊</h5>
+                            <hr>
+                            <p class="card-text">顧客姓名 : <?= $value["m_name"] ?></p>
+                            <p class="card-text">電話號碼 : <?= $value["m_phone"] ?></p>
+                            <p class="card-text">電子郵件 : <?= $value["m_email"] ?></p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">發票</h5>
-                        <hr>
-                        <p class="card-text">電子發票</p>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body position-relative">
+                            <h5 class="card-title">備註</h5>
+                            <hr>
+                            <label for="message" class="card-text d-block">
+                                商家備註：
+                                <input type="text" id="message" class="card-text border-0 rounded-2 text-muted bg-light p-2" name="message" value="<?= $value['message'] ?>">
+                            </label>
+                            <div class="position-absolute bottom-10 end-5">
+                                <button type="submit" class="btn btn-info align-middle mb-0">修改</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">發票</h5>
+                            <hr>
+                            <p class="card-text">電子發票</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card1">
-                <div class="card-body">
-                    <h5 class="card-title">最後修改時間</h5>
-                    <hr>
-                    <p class="card-text text-danger"> <?= $value["modified_at"] ?>
-                    </p>
+            <div class="col">
+                <div class="card1">
+                    <div class="card-body">
+                        <h5 class="card-title">最後修改時間</h5>
+                        <hr>
+                        <p class="card-text text-danger"> <?= $value["modified_at"] ?>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     <?php endforeach; ?>
 </div>
+
+<script>
+    let form = document.getElementById("form"),
+        Btn = document.querySelector("#Btn"),
+        payment_status = document.querySelector("#payment_status"),
+        payment_method = document.querySelector("#payment_method"),
+        payment_statusError = document.querySelector("#payment_statusError"),
+        payment_methodError = document.querySelector("#payment_methodError");
+
+    btn.addEventListener("click", function(e) {
+        e.preventDefault();
+        let payment_statusExist = true;
+        if (payment_status.value === "") {
+            payment_statusError.innerText = "狀態不能為空";
+            // alert("帳號不能為空")
+        }
+        if (payment_method.value === "") {
+            // alert("密碼不能為空")
+            payment_methodError.innerText = "方式不能為空";
+        }
+
+
+
+    });
+</script>
 
 <!-- body 2 > main 3 : 右側主內容下方頁尾 -->
 <?php include "../../template/body-main-footer.php" ?>

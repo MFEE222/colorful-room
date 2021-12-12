@@ -167,168 +167,139 @@ try {
                 <!-- <button class="demo" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">儲存</button> -->
             </div>
         </div>
-        <?php if ($rowsOrder == 0) : ?>
-            <p class="font-bold">使用者不存在</p>
-        <?php else : ?>
-            <?php foreach ($rowsOrder as $value) : ?>
-                <input type="text" name="order_id" value=<?= $value['id'] ?> class="d-none">
-                <div class="row">
-                    <div class="col-9">
-                        <p>訂單編號 : <?= $value["orders_id"] ?></p>
-                        <p>訂購日期 : <?= $value["created_at"] ?></p>
-                    </div>
-                </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>商品品項</th>
-                            <th></th>
-                            <th>價格</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><?= $value["p_name"] ?></td>
-                            <td></td>
-                            <td>NT &#36 <?= $value["p_price"] ?></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td class="text-right">商品小計</td>
-                            <td>NT &#36 <?= $value["p_price"] ?></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td class="text-right">折扣小計</td>
-                            <td>NT &#36 3</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td></td>
-                            <td class="text-right">訂單總金額</td>
-                            <td>NT &#36 <?= $value["p_price"] - 3 ?></td>
-                        </tr>
-                    </tfoot>
-                </table>
+        <input type="text" name="order_id" value=<?= $value['id'] ?> class="d-none">
+        <div class="row">
+            <div class="col-9">
+                <p>訂單編號 : <?= $value["orders_id"] ?></p>
+                <p>訂購日期 : <?= $value["created_at"] ?></p>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>商品品項</th>
+                    <th></th>
+                    <th>價格</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><?= $value["p_name"] ?></td>
+                    <td></td>
+                    <td>NT &#36 <?= $value["p_price"] ?></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="text-right">商品小計</td>
+                    <td>NT &#36 <?= $value["p_price"] ?></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="text-right">折扣小計</td>
+                    <td>NT &#36 3</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td class="text-right">訂單總金額</td>
+                    <td>NT &#36 <?= $value["p_price"] - 3 ?></td>
+                </tr>
+            </tfoot>
+        </table>
 
-                <div class="row input-group-sm">
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">付款</h5>
-                                <hr>
-                                <label for="o_payment_desc" class="card-text form-label d-block">
-                                    付款方式 :
-                                    <input type="text" class="form-control border border-secondary" id="o_payment_desc" name="o_payment_desc" value="<?= $value["o_payment_desc"] ?>" required>
-                                </label>
-                                <label for="o_status_desc" class="card-text form-label d-block">
-                                    付款狀態 :
-                                    <input type="text" class="form-control border border-secondary" id="o_status_desc" name="o_status_desc" value="<?= $value["o_status_desc"] ?>" required>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">訂購人資訊</h5>
-                                <hr>
-                                <p class="card-text">顧客姓名 : <?= $value["m_name"] ?></p>
-                                <p class="card-text">電話號碼 : <?= $value["m_phone"] ?></p>
-                                <p class="card-text">電子郵件 : <?= $value["m_email"] ?></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">備註</h5>
-                                <hr>
-                                <p class="card-text">顧客備註 : <?= $value["message"] ?></p>
-                                <label for="message" class="card-text form-label">商家備註<input type="text" class="form-control border border-secondary card-text" id="message" name="message" value="<?= $value["message"] ?>" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">發票</h5>
-                                <hr>
-                                <p class="card-text">電子發票</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">訂單操作紀錄</h5>
-                            <hr>
-                            <p class="card-text text-danger"> <?= $value["modified_at"] ?></p>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-
-
-            <!-- Button trigger modal -->
-
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">確定修改訂單嗎?</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            檢查一下再送出唷
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                            <button type="submit" class="btn btn-primary" href="do-detail-update.php">確定</button>
-                        </div>
+        <div class="row input-group-sm">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">付款</h5>
+                        <hr>
+                        <label for="o_payment_desc" class="card-text form-label d-block">
+                            付款方式 :
+                            <input type="text" class="form-control border border-secondary" id="o_payment_desc" name="o_payment_desc" value="<?= $value["o_payment_desc"] ?>" required>
+                        </label>
+                        <label for="o_status_desc" class="card-text form-label d-block">
+                            付款狀態 :
+                            <input type="text" class="form-control border border-secondary" id="o_status_desc" name="o_status_desc" value="<?= $value["o_status_desc"] ?>" required>
+                        </label>
                     </div>
                 </div>
             </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">訂購人資訊</h5>
+                        <hr>
+                        <p class="card-text">顧客姓名 : <?= $value["m_name"] ?></p>
+                        <p class="card-text">電話號碼 : <?= $value["m_phone"] ?></p>
+                        <p class="card-text">電子郵件 : <?= $value["m_email"] ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">備註</h5>
+                        <hr>
+                        <p class="card-text">顧客備註 : <?= $value["message"] ?></p>
+                        <label for="message" class="card-text form-label">商家備註<input type="text" class="form-control border border-secondary card-text" id="message" name="message" value="<?= $value["message"] ?>" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">發票</h5>
+                        <hr>
+                        <p class="card-text">電子發票</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">訂單操作紀錄</h5>
+                    <hr>
+                    <p class="card-text text-danger"> <?= $value["modified_at"] ?></p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Button trigger modal -->
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">確定修改訂單嗎?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        檢查一下再送出唷
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary" href="do-detail-update.php">確定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
-<?php endif; ?>
 
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script>
-    let form = document.getElementById("form"),
-        Btn = document.querySelector("#Btn"),
-        payment_status = document.querySelector("#payment_status"),
-        payment_method = document.querySelector("#payment_method"),
-        payment_statusError = document.querySelector("#payment_statusError"),
-        payment_methodError = document.querySelector("#payment_methodError");
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
-    btn.addEventListener("click", function(e) {
-        e.preventDefault();
-        let payment_statusExist = true;
-        if (payment_status.value === "") {
-            payment_statusError.innerText = "狀態不能為空";
-            // alert("帳號不能為空")
-        }
-        if (payment_method.value === "") {
-            // alert("密碼不能為空")
-            payment_methodError.innerText = "方式不能為空";
-        }
+    <!-- body 2 > main 3 : 右側主內容下方頁尾 -->
+    <?php include "../../template/body-main-footer.php" ?>
 
-
-
-    });
-</script>
-<!-- body 2 > main 3 : 右側主內容下方頁尾 -->
-<?php include "../../template/body-main-footer.php" ?>
-
-<!-- body 3 : 右下頁面設定按鈕  -->
-<?php include "../../template/body-corner.php" ?>
+    <!-- body 3 : 右下頁面設定按鈕  -->
+    <?php include "../../template/body-corner.php" ?>
