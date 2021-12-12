@@ -1,3 +1,9 @@
+<head>
+    <link href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css" rel="stylesheet">
+</head>
+
+
+
 <?php
 require_once("../../components/pdo-connect.php");
 include_once("../var.php");
@@ -243,7 +249,7 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
             </div>
     </form>
 
-    <div class="col-lg-12 d-flex justify-content-start ">
+    <div class="col-lg-4 d-flex justify-content-center">
         <a class="btn btn-lg btn-success my-4" role="button" href="product-add.php">商品上架</a>
     </div>
 
@@ -264,13 +270,16 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
         </ul>
     </div>
 
-    <div class="row product-list">
+    <div class="row product-list table-responsive">
         <div class="col-lg-12 mb-3">
             <table class="table table-hover align-items-center mt-3">
                 <thead>
                     <tr class="table-secondary">
-                        <th class="align-middle ps-1" scope="col">商品名稱</th>
-                        <th class="align-middle ps-1" scope="col">商品狀態</th>
+                        <th class="active">
+                            <input type="checkbox" class="select-all checkbox" name="select-all" />
+                        </th>
+                        <th class="align-middle ps-1" scope="col" data-field="name">商品名稱</th>
+                        <th class="align-middle ps-1" scope="col" data-field="status">商品狀態</th>
                         <th class="align-middle ps-1" scope="col">類別</th>
                         <th class="align-middle ps-1" scope="col">價格</th>
                         <th class="align-middle ps-1" scope="col">描述</th>
@@ -284,6 +293,9 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                 <?php foreach ($rows as $value) : ?>
                     <tbody>
                         <tr>
+                            <td class="active">
+                                <input type="checkbox" class="select-item checkbox" name="select-item"/>
+                            </td>
                             <td class="ps-1"><?= $value["name"] ?></td>
                             <td class="ps-1"><?php switch ($value["valid"]):
                                                     case "0":
@@ -300,7 +312,7 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                             </td>
                             <td class="ps-1"><?= $value["category_name"] ?></td>
                             <td class="ps-1"><?= $value["price"] ?></td>
-                            <td class="ps-1"><?= $value["descriptions"] ?></td>
+                            <td class="ps-1 text-wrap"><?= $value["descriptions"] ?></td>
                             <td class="ps-1"><?= $value["image_before"] ?></td>
                             <td class="ps-1"><?= $value["image_after"] ?></td>
                             <td class="ps-1"><?= $value["sold_total"] ?></td>
@@ -405,3 +417,76 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
 
     <!-- body 3 : 右下頁面設定按鈕  -->
     <?php include "../../template/body-corner.php" ?>
+
+
+    <!-- Checkbox  -->
+    <button id="select-all" class="btn button-default">SelectAll/Cancel</button>
+<button id="select-invert" class="btn button-default">Invert</button>
+<button id="selected" class="btn button-default">GetSelected</button>
+</body>
+<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script>
+    $(function(){
+
+        //button select all or cancel
+        $("#select-all").click(function () {
+            var all = $("input.select-all")[0];
+            all.checked = !all.checked
+            var checked = all.checked;
+            $("input.select-item").each(function (index,item) {
+                item.checked = checked;
+            });
+        });
+
+        //button select invert
+        $("#select-invert").click(function () {
+            $("input.select-item").each(function (index,item) {
+                item.checked = !item.checked;
+            });
+            checkSelected();
+        });
+
+        //button get selected info
+        $("#selected").click(function () {
+            var items=[];
+            $("input.select-item:checked:checked").each(function (index,item) {
+                items[index] = item.value;
+            });
+            if (items.length < 1) {
+                alert("no selected items!!!");
+            }else {
+                var values = items.join(',');
+                console.log(values);
+                var html = $("<div></div>");
+                html.html("selected:"+values);
+                html.appendTo("body");
+            }
+        });
+
+        //column checkbox select all or cancel
+        $("input.select-all").click(function () {
+            var checked = this.checked;
+            $("input.select-item").each(function (index,item) {
+                item.checked = checked;
+            });
+        });
+
+        //check selected items
+        $("input.select-item").click(function () {
+            var checked = this.checked;
+            console.log(checked);
+            checkSelected();
+        });
+
+        //check is all selected
+        function checkSelected() {
+            var all = $("input.select-all")[0];
+            var total = $("input.select-item").length;
+            var len = $("input.select-item:checked:checked").length;
+            console.log("total:"+total);
+            console.log("len:"+len);
+            all.checked = len===total;
+        }
+    });
+</script>
