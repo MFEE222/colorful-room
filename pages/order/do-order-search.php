@@ -4,12 +4,19 @@ include_once('../var.php');
 include_once('../signin/do-authorize.php');
 
 // ============================================================================
+//  Reminder
+// ============================================================================
+//  1. customer and member table 要合併，並新增 registered 欄位
+//  2. 暫時先只抓 member table
+// ============================================================================
 //  Global Variable / Function
 // ============================================================================
 $url_back = NULL;
+$limit = NULL;
 $sql = NULL;
 $pdo = NULL;
 $row = NULL;
+
 
 
 function redirect($url)
@@ -24,6 +31,11 @@ function post($name)
         return $_POST[$name];
     return $_POST[$name] = NULL;
 }
+
+function like($condition, $fix = '%')
+{
+    return $fix . $condition . $fix;
+}
 // ============================================================================
 //  Initialize
 // ============================================================================
@@ -34,32 +46,51 @@ $url_back = $url_page_order_search
 $_SESSION['orders_head'] = NULL;
 $_SESSION['orders_body'] = NULL;
 // ============================================================================
+//  Verify
+// ============================================================================
+if (post('keyword') == NULL && post('filter_time') == NULL && post('filter_status') == NULL) {
+    $limit = 50;
+}
+
+// ============================================================================
 //  Main
 // ============================================================================
-$sql = "SELECT orders.*, member.*, customer.*
-            FROM orders
-            JOIN member ON orders.member_id = member.id
-            JOIN customer ON orders.customer_id = customer.id
-        WHERE orders.oid = :order_id
-            OR member.name LIKE :member_name
-            OR member.phone LIKE :member_phone
-            OR customer.name LIKE :customer_name
-            OR customer.phone LIKE :customer_phone";
+if ($limit != NULL) {
+    $sql = "SELECT orders.*,
+                   member.name,
+                   member.phone
+                FROM orders
+                JOIN member ON orders.member_id = member.id
+            LIMIT 50";
+} else {
+    $sql = "SELECT orders.*,
+                   member.name,
+                   member.phone
+                FROM orders
+                JOIN member ON orders.member_id = member.id
+            WHERE orders.oid = :orders_id
+                OR member.name LIKE :member_name
+                OR member.phone LIKE :member_phone";
+}
 try {
     $pdo = $db_host->prepare($sql);
-    $pdo->execute([
-        ':order_id' => post('keyword'),
-        ':member_name' => post('keyword'),
-        ':member_phone' => post('keyword'),
-        ':customer_name' => post('keyword'),
-        ':customer_phone' => post('keyword')
-    ]);
+    if ($limit != NULL)
+        $pdo->execute();
+    else
+        $pdo->execute([
+            ':orders_id' => post('keyword'),
+            ':member_name' => like(post('keyword')),
+            ':member_phone' => like(post('keyword'))
+        ]);
+
     if ($pdo->rowCount() > 0) {
-        // 此處可嘗試改成 fecth 過濾掉一些資料再存入 Session 減少記憶體空間 
         $rows = $pdo->fetchAll(PDO::FETCH_ASSOC);
+        // var_dump($rows);
+        // meta data 
         $_SESSION['orders_head'] = [
-            'total' => $pdo->rowCount(),
+            'total' => $pdo->rowCount()
         ];
+        // data
         $_SESSION['orders_body'] = $rows;
         redirect($url_back);
     }

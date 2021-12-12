@@ -56,7 +56,7 @@ $os = new OrderSearch();
 if ($_SESSION['orders_head'] != NULL)
     $orders_head = $_SESSION['orders_head'];
 if ($_SESSION['orders_body'] != NULL)
-    $orders = $_SESSION['orders_body'];
+    $orders_body = $_SESSION['orders_body'];
 
 function get($query_string)
 {
@@ -257,7 +257,7 @@ function get($query_string)
                                 <th class="px-3 align-middle text-center text-dark">顧客電話</th>
                                 <th class="px-3 align-middle text-center text-dark">建立時間</th>
                                 <th class="px-3 align-middle text-center text-dark">訂單狀態</th>
-                                <th class="px-3 align-middle text-center text-dark">金額</th>
+                                <!-- <th class="px-3 align-middle text-center text-dark">金額</th> -->
                                 <th class="px-3 align-middle text-center text-dark">操作</th>
                             </tr>
                         </thead>
@@ -269,7 +269,7 @@ function get($query_string)
                                 <td class="p-0 text-center text-dark">123456789</td>
                                 <td class="p-0 text-center text-dark">2021-12-07 07:59:51</td>
                                 <td class="p-0 text-center text-dark">Paid</td>
-                                <td class="p-0 text-center text-dark">400</td>
+                                <!-- <td class="p-0 text-center text-dark">400</td> -->
                                 <td class="p-0 text-center text-dark">
                                     <div class="mt-3">
                                         <a href="<?= $url_page_order_detail . '?oid=443' ?>" rel="tooltip" class="btn btn-round btn-info px-3">
@@ -291,21 +291,21 @@ function get($query_string)
                                     </div>
                                 </td>
                             </tr>
-                            <?php foreach ($order_body as $order) : ?>
+                            <?php foreach ($orders_body as $order) : ?>
                                 <tr>
-                                    <td class="p-0 text-center text-dark"><?= $order_body['number'] ?></td>
-                                    <td class="p-0 text-center text-dark"><?= $order_body['person_name'] ?></td>
-                                    <td class="p-0 text-center text-dark"><?= $order_body['person_phone'] ?></td>
-                                    <td class="p-0 text-center text-dark"><?= $order_body['create_time'] ?></td>
-                                    <td class="p-0 text-center text-dark"><?= $order_body['status'] ?></td>
-                                    <td class="p-0 text-center text-dark"><?= $order_body['price'] ?></td>
+                                    <td class="p-0 text-center text-dark"><?= $order['oid'] ?></td>
+                                    <td class="p-0 text-center text-dark"><?= $order['name'] ?></td>
+                                    <td class="p-0 text-center text-dark"><?= $order['phone'] ?></td>
+                                    <td class="p-0 text-center text-dark"><?= $order['created_at'] ?></td>
+                                    <td class="p-0 text-center text-dark"><?= $order['status'] ?></td>
+                                    <!-- <td class="p-0 text-center text-dark"><?= $order['price'] ?></td> -->
                                     <td class="p-0 text-center text-dark">
                                         <div class="mt-3">
-                                            <a href="<?= $url_page_order_detail . '?id=' . $order_body['number'] ?>" rel="tooltip" class="btn btn-round btn-info px-3">
+                                            <a href="<?= $url_page_order_detail . '?oid=' . $order['oid'] ?>" rel="tooltip" class="btn btn-round btn-info px-3">
                                                 <i class="material-icons">edit</i>
                                                 Edit
                                             </a>
-                                            <form action="<?= $url_page_member . '?id=' . $order_body['person_id'] ?>" method="POST" class="d-inline">
+                                            <form action="<?= $url_page_member . '?id=' . $order['member_id'] ?>" method="POST" class="d-inline">
                                                 <?php $from = $url_page_order_search . '?keyword=' . get('keyword') . '&filter_time=' . get('filter_time') . '$filter_status=' . get('filter_status');  ?>
                                                 <input type="text" name="from" value="<?= $from ?>" class="d-none">
                                                 <button type="submit" rel="tooltip" class="btn btn-round btn-success px-3">
@@ -313,7 +313,7 @@ function get($query_string)
                                                     Member
                                                 </button>
                                             </form>
-                                            <a href="<?= $url_page_order_detail . '?id=' . $order_body['number'] ?>" rel="tooltip" class="btn btn-round btn-danger px-3">
+                                            <a href="<?= $url_page_order_detail . '?oid=' . $order['oid'] ?>" rel="tooltip" class="btn btn-round btn-danger px-3">
                                                 <i class="material-icons">receipt</i>
                                                 Detail
                                             </a>
