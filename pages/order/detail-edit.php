@@ -1,42 +1,54 @@
 <?php
 include_once('../var.php');
-// include('../signin/do-authorize.php');
-
-
-if (isset($_GET["id"])) {
-    $id = $_GET["id"];
-} else {
-    $id = 0;
-}
+include('../signin/do-authorize.php');
 require_once("../../components/pdo-connect.php");
-
-// $sqlorder = "SELECT * FROM order_tracking WHERE id = $id";
-
-$sqlorder = "SELECT *
-                FROM order_tracking
-                JOIN member ON order_tracking.user_id = member.id
-             WHERE order_tracking.oid = ?";
+// 
+// 1 筆訂單 -> 多 個明細
+// 1 筆明細 -> 1 個商品
+// 1 筆明細 -> 1 個會員 or 顧客
 
 
+// 檢查GET
+if (isset($_GET["oid"])) {
+    $oid = $_GET["oid"];
+} else {
+    $oid = 0;
+}
 
-// "SELECT order_detail. *,tag.name AS tag_name FROM order_detail
-// JOIN tag ON order_detail.tag_id = tag.id
-// WHERE  order_detail.id=? AND order_detail.valid=1";
+$sql = "SELECT orders_detail.*,
+               products.name AS p_name,
+               products.price AS p_price,
+               member.name AS m_name,
+               member.email AS m_email,
+               member.phone AS m_phone,
+               orders.status_id AS o_status,
+               orders.payment_id AS o_payment,
+               payment.description AS o_payment_desc,
+               orders_status.description AS o_status_desc 
+            FROM orders_detail
+            JOIN products ON orders_detail.products_id = products.id
+            JOIN member ON orders_detail.member_id = member.id
+            JOIN orders ON orders_detail.orders_id = orders.id
+            JOIN payment ON orders.payment_id = payment.id
+            JOIN orders_status ON orders.status_id = orders_status.id
+        WHERE orders_id = :orders_id";
+// echo 'breakpoint' . __LINE__ . '<br>';
 
-$stmt = $db_host->prepare($sqlorder);
-
+$pdo = $db_host->prepare($sql);
 try {
-    // $stmt->execute();
-    $stmt->execute([$id]);
-    $rowsOrder = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //    $rowsCountMember=$stmt->rowCount();
-    //    var_dump($rowsOrder);
+    $pdo->execute([$oid]);
+    // var_dump($pdo->rowCount());
+    if ($pdo->rowCount() > 0) {
+        $rowsOrder = $pdo->fetchAll(PDO::FETCH_ASSOC);
+        // echo $pdo->rowCount();
+        // var_dump($rows);
+    } else {
+        $rowsOrder = '暫時抓不到資料';
+    }
 } catch (PDOException $e) {
     echo $e->getMessage();
+    
 }
-
-
-// var_dump($rowsOrder);
 
 ?>
 
@@ -158,11 +170,11 @@ try {
             <p class="font-bold">使用者不存在</p>
         <?php else : ?>
             <?php foreach ($rowsOrder as $value) : ?>
-                <input type="text" name="order_id" value=<?= $value['oid'] ?> class="d-none">
+                <input type="text" name="order_id" value=<?= $value['id'] ?> class="d-none">
                 <div class="row">
                     <div class="col-9">
-                        <p>訂單編號 : <?= $value["order_num"] ?></p>
-                        <p>訂購日期 : <?= $value["date"] ?></p>
+                        <p>訂單編號 : <?= $value["orders_id"] ?></p>
+                        <p>訂購日期 : <?= $value["created_at"] ?></p>
                     </div>
                 </div>
                 <table class="table">
@@ -175,26 +187,26 @@ try {
                     </thead>
                     <tbody>
                         <tr>
-                            <td><?= $value["product_id"] ?></td>
+                            <td><?= $value["p_name"] ?></td>
                             <td></td>
-                            <td>NT &#36 <?= $value["sum"] ?></td>
+                            <td>NT &#36 <?= $value["p_price"] ?></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td class="text-right">商品小計</td>
-                            <td>NT &#36 <?= $value["sum"] ?></td>
+                            <td>NT &#36 <?= $value["p_price"] ?></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td class="text-right">折扣小計</td>
-                            <td>NT &#36 <?= $value["discount"] ?></td>
+                            <td>NT &#36 3</td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
                             <td></td>
                             <td class="text-right">訂單總金額</td>
-                            <td>NT &#36 <?= $value["sum"] ?></td>
+                            <td>NT &#36 <?= $value["p_price"] - 3 ?></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -205,13 +217,13 @@ try {
                             <div class="card-body">
                                 <h5 class="card-title">付款</h5>
                                 <hr>
-                                <label for="payment_status" class="card-text form-label d-block">
+                                <label for="o_payment_desc" class="card-text form-label d-block">
                                     付款方式 :
-                                    <input type="text" class="form-control border border-secondary" id="payment_status" name="payment_method" value="<?= $value["payment_status"] ?>" required>
+                                    <input type="text" class="form-control border border-secondary" id="o_payment_desc" name="o_payment_desc" value="<?= $value["o_payment_desc"] ?>" required>
                                 </label>
-                                <label for="payment_method" class="card-text form-label d-block">
+                                <label for="o_status_desc" class="card-text form-label d-block">
                                     付款狀態 :
-                                    <input type="text" class="form-control border border-secondary" id="payment_method" name="payment_status" value="<?= $value["payment_method"] ?>" required placeholder="請輸入付款狀態">
+                                    <input type="text" class="form-control border border-secondary" id="o_status_desc" name="o_status_desc" value="<?= $value["o_status_desc"] ?>" required>
                                 </label>
                             </div>
                         </div>
@@ -221,9 +233,9 @@ try {
                             <div class="card-body">
                                 <h5 class="card-title">訂購人資訊</h5>
                                 <hr>
-                                <p class="card-text">顧客姓名 : <?= $value["name"] ?></p>
-                                <p class="card-text">電話號碼 : <?= $value["phone"] ?></p>
-                                <p class="card-text">電子郵件 : <?= $value["email"] ?></p>
+                                <p class="card-text">顧客姓名 : <?= $value["m_name"] ?></p>
+                                <p class="card-text">電話號碼 : <?= $value["m_phone"] ?></p>
+                                <p class="card-text">電子郵件 : <?= $value["m_email"] ?></p>
                             </div>
                         </div>
                     </div>
@@ -235,8 +247,8 @@ try {
                             <div class="card-body">
                                 <h5 class="card-title">備註</h5>
                                 <hr>
-                                <p class="card-text">顧客備註 : <?= $value["remark"] ?></p>
-                                <label for="remark" class="card-text form-label">商家備註<input type="text" class="form-control border border-secondary card-text" id="remark" name="remark" value="<?= $value["remark"] ?>" required placeholder="請輸入備註">
+                                <p class="card-text">顧客備註 : <?= $value["message"] ?></p>
+                                <label for="message" class="card-text form-label">商家備註<input type="text" class="form-control border border-secondary card-text" id="message" name="message" value="<?= $value["message"] ?>" required>
                             </div>
                         </div>
                     </div>
@@ -255,7 +267,7 @@ try {
                         <div class="card-body">
                             <h5 class="card-title">訂單操作紀錄</h5>
                             <hr>
-                            <p class="card-text text-danger"> <?= $value["record"] ?></p>
+                            <p class="card-text text-danger"> <?= $value["modified_at"] ?></p>
                         </div>
                     </div>
                 </div>
