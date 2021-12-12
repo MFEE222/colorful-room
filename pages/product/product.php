@@ -300,7 +300,7 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                             </td>
                             <td class="ps-1"><?= $value["category_name"] ?></td>
                             <td class="ps-1"><?= $value["price"] ?></td>
-                            <td class="ps-1"><?= $value["descriptions"] ?></td>
+                            <td class="ps-1 ellipsis"><?= $value["descriptions"] ?></td>
                             <td class="ps-1"><?= $value["image_before"] ?></td>
                             <td class="ps-1"><?= $value["image_after"] ?></td>
                             <td class="ps-1"><?= $value["sold_total"] ?></td>
