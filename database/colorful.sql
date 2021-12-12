@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 12, 2021 at 07:23 PM
+-- Generation Time: Dec 12, 2021 at 10:49 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -2166,7 +2166,7 @@ CREATE TABLE `orders` (
   `member_id` int(11) DEFAULT NULL,
   `payment_id` int(11) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
+  `status_id` int(11) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   `modified_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -2175,7 +2175,7 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`oid`, `customer_id`, `member_id`, `payment_id`, `phone`, `status`, `created_at`, `modified_at`) VALUES
+INSERT INTO `orders` (`oid`, `customer_id`, `member_id`, `payment_id`, `phone`, `status_id`, `created_at`, `modified_at`) VALUES
 (1, 222, 347, 5, '689-299-4917', 3, '2021-07-01', '2021-06-06'),
 (2, 476, 986, 3, '290-660-5120', 0, '2021-10-19', '2021-09-07'),
 (3, 584, 175, 3, '831-922-2630', 3, '2021-11-17', '2021-06-10'),
@@ -2187,7 +2187,7 @@ INSERT INTO `orders` (`oid`, `customer_id`, `member_id`, `payment_id`, `phone`, 
 (9, 599, 788, 4, '977-333-4246', 4, '2021-01-16', '2021-11-06'),
 (10, 39, 638, 4, '715-831-7482', 3, '2021-01-06', '2021-07-24'),
 (11, 423, 2, 4, '804-607-1293', 1, '2021-01-03', '2021-10-19'),
-(12, 656, 585, 6, '128-550-8576', 0, '2021-08-27', '2021-05-03'),
+(12, 656, 585, 3, '128-550-8576', 2, '2021-08-27', '2021-05-03'),
 (13, 156, 432, 5, '584-183-1281', 3, '2021-03-14', '2021-04-25'),
 (14, 158, 942, 5, '229-552-2977', 3, '2021-03-25', '2021-08-12'),
 (15, 695, 316, 6, '973-732-5739', 4, '2021-07-11', '2021-02-13'),
@@ -2947,7 +2947,7 @@ INSERT INTO `orders` (`oid`, `customer_id`, `member_id`, `payment_id`, `phone`, 
 (769, 851, 805, 1, '250-950-5520', 0, '2021-08-03', '2021-04-25'),
 (770, 593, 673, 6, '443-737-5276', 2, '2021-10-25', '2020-12-27'),
 (771, 831, 642, 5, '600-698-5201', 5, '2021-05-29', '2021-10-23');
-INSERT INTO `orders` (`oid`, `customer_id`, `member_id`, `payment_id`, `phone`, `status`, `created_at`, `modified_at`) VALUES
+INSERT INTO `orders` (`oid`, `customer_id`, `member_id`, `payment_id`, `phone`, `status_id`, `created_at`, `modified_at`) VALUES
 (772, 620, 370, 2, '602-757-8769', 0, '2021-05-24', '2021-01-01'),
 (773, 867, 197, 6, '275-870-5188', 3, '2021-11-11', '2021-11-22'),
 (774, 98, 557, 2, '246-339-9554', 1, '2021-05-22', '2021-01-02'),
@@ -4208,6 +4208,29 @@ INSERT INTO `orders_detail` (`odid`, `orders_id`, `member_id`, `products_id`, `s
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orders_status`
+--
+
+DROP TABLE IF EXISTS `orders_status`;
+CREATE TABLE `orders_status` (
+  `id` int(11) NOT NULL,
+  `description` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders_status`
+--
+
+INSERT INTO `orders_status` (`id`, `description`) VALUES
+(1, '未付款'),
+(2, '已付款'),
+(3, '已取消'),
+(4, '退貨中'),
+(5, '已退貨');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `payment`
 --
 
@@ -5358,6 +5381,12 @@ ALTER TABLE `orders_detail`
   ADD PRIMARY KEY (`odid`);
 
 --
+-- Indexes for table `orders_status`
+--
+ALTER TABLE `orders_status`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `payment`
 --
 ALTER TABLE `payment`
@@ -5426,6 +5455,12 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `orders_detail`
   MODIFY `odid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1001;
+
+--
+-- AUTO_INCREMENT for table `orders_status`
+--
+ALTER TABLE `orders_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `payment`
