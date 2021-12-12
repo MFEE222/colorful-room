@@ -239,7 +239,7 @@ if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate
                 <a type="reset" class="btn btn-primary m-0 text-nowrap m-3" role="button" href="product.php">重設</a>
             </div>
     </form>
-    
+
     <div class="col-lg-12 d-flex justify-content-start ">
         <a class="btn btn-lg btn-success my-4"  role="button"  href="product-add.php">商品上架</a>
     </div>
