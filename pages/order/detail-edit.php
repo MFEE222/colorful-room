@@ -15,8 +15,8 @@ require_once("../../components/pdo-connect.php");
 $sqlorder = "SELECT *
                 FROM order_tracking
                 JOIN member ON order_tracking.user_id = member.id
-             WHERE order_tracking.id = ?";
-             
+             WHERE order_tracking.oid = ?";
+
 
 
 // "SELECT order_detail. *,tag.name AS tag_name FROM order_detail
@@ -138,7 +138,7 @@ try {
             <h3>訂單明細</h3>
         </div>
     </div>
-    <form action="detail-update.php" method="post">
+    <form action="do-detail-update.php" method="post">
         <div class="row justify-content-end">
             <div class="col-10">
             </div>
@@ -158,7 +158,7 @@ try {
             <p class="font-bold">使用者不存在</p>
         <?php else : ?>
             <?php foreach ($rowsOrder as $value) : ?>
-                <input type="text" name="order_id" value=<?= $value['id'] ?> class="d-none">
+                <input type="text" name="order_id" value=<?= $value['oid'] ?> class="d-none">
                 <div class="row">
                     <div class="col-9">
                         <p>訂單編號 : <?= $value["order_num"] ?></p>
@@ -278,7 +278,7 @@ try {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                            <button type="submit" class="btn btn-primary" href="detail-update.php">確定</button>
+                            <button type="submit" class="btn btn-primary" href="do-detail-update.php">確定</button>
                         </div>
                     </div>
                 </div>

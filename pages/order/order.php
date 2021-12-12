@@ -16,7 +16,6 @@ try {
 }
 
 
-// bug...
 $sqlMember = "SELECT *,tag.name AS tag_name FROM member
 JOIN tag ON member.tag_id = tag.id
 WHERE member.valid=1";
@@ -143,7 +142,7 @@ try {
                             //     }
                             //  }
 
-                            
+
                             // $rowsuser[$value["user-id"]] 
                             $value["user_id"] ?></td>
                         <td><?= $value["date"] ?></td>
@@ -154,10 +153,10 @@ try {
                         <td></td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                <a href="./order-details.php?id=<?= $value["id"] ?>" class="btn btn-danger">明細</a>
+                                <a href="./order-details.php?id=<?= $value["oid"] ?>" class="btn btn-danger">明細</a>
                             </div>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                <a href="./detail-edit.php?id=<?= $value["id"] ?>" class="btn btn-danger">修改</a>
+                                <a href="./detail-edit.php?id=<?= $value["oid"] ?>" class="btn btn-danger">修改</a>
                             </div>
                         </td>
                     </tr>

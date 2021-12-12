@@ -4,14 +4,9 @@
 //     exit();
 // }
 include_once("../var.php");
-// include_once("../signin/do-authorize.php");
+// colorful    abc123
+include_once("../signin/do-authorize.php");
 require_once("../../components/pdo-connect.php");
-
-// $id=$_POST["id"];
-// $payment_status=$_POST["payment_status"];
-// $payment_method=$_POST["payment_method"];
-// $remark=$_POST["remark"];
-// $order_id=$_POST["order_id"];
 
 // function post($query)
 // {
@@ -20,25 +15,28 @@ require_once("../../components/pdo-connect.php");
 // post('order_id');
 // post('payment_method');
 // post('payment_status');
-
 // post('remark');
-
 $sql = "UPDATE order_tracking
             SET payment_method = ?,
                 payment_status = ?,
                 remark = ?
-        WHERE id = ?";
-
-$stmt = $db_host->prepare($sql);
+        WHERE oid = ?";
 
 try {
-    $stmt->execute(
-        $_POST['payment_method'],
-        $_POST['payment_status'],
-        $_POST['remark'],
-        // $_POST[],
+    $pdo = $db_host->prepare($sql);
+
+    $pdo->execute(
+        [
+            $_POST['payment_method'],
+            $_POST['payment_status'],
+            $_POST['remark'],
+            $_POST['order_id']
+        ]
     );
-    header("location:order.php");
+
+    // var_dump($pdo->rowCount());
+    if ($pdo->rowCount() > 0)
+        header("location:order.php");
 } catch (PDOException $e) {
     echo $e->getMessage();
 }

@@ -13,7 +13,7 @@ require_once("../../components/pdo-connect.php");
 $sqlorder = "SELECT *
                 FROM order_tracking
                 JOIN member ON order_tracking.user_id = member.id
-             WHERE order_tracking.id = ?";
+             WHERE order_tracking.oid = ?";
 // "SELECT order_detail. *,tag.name AS tag_name FROM order_detail
 // JOIN tag ON order_detail.tag_id = tag.id
 // WHERE  order_detail.id=? AND order_detail.valid=1";
