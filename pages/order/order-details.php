@@ -24,13 +24,15 @@ $sql = "SELECT orders_detail.*,
                orders.status_id AS o_status,
                orders.payment_id AS o_payment,
                payment.description AS o_payment_desc,
-               orders_status.description AS o_status_desc 
+               orders_status.description AS o_status_desc,
+               discount.amount AS o_discount_amount
             FROM orders_detail
             JOIN products ON orders_detail.products_id = products.id
             JOIN member ON orders_detail.member_id = member.id
             JOIN orders ON orders_detail.orders_id = orders.id
             JOIN payment ON orders.payment_id = payment.id
             JOIN orders_status ON orders.status_id = orders_status.id
+            JOIN discount ON orders_detail.discount_id = discount.id
         WHERE orders_id = :orders_id";
 // echo 'breakpoint' . __LINE__ . '<br>';
 
@@ -146,120 +148,119 @@ try {
 
 
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-between">
         <div class="col">
             <h3>訂單明細</h3>
         </div>
-    </div>
-    <div class="row justify-content-end">
-        <div class="col-9">
-        </div>
-        <div class="col-3">
-            <a href="./order-search.php" class="demo">回列表</a>
-            <a href="./detail-edit.php" class="demo">修改</a>
+        <div class="col-auto">
+            <a href="<?= $url_page_order_search ?>" class="demo">回列表</a>
         </div>
     </div>
-    <div class="row">
-        <div class="col-9">
-            <?php foreach ($rows as $value) : ?>
 
 
+    <?php foreach ($rows as $value) : ?>
+        <div class="row">
+            <div class="col-9 me-auto">
                 <p>訂單編號 : <?= $value["orders_id"] ?></p>
+                <p>訂單明細 : <?= $value['id'] ?></p>
                 <p>訂購日期 : <?= $value["created_at"] ?></p>
+            </div>
+            <div class="col-auto">
+                <a href="<?= $url_page_order_edit . '?id=' . $value['id'] ?>" class="demo">修改</a>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>商品品項</th>
-                    <th></th>
-                    <th>價格</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><?= $value["p_name"] ?></td>
-                    <td></td>
-                    <td>NT &#36 <?= $value["p_price"] ?></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td class="text-right">商品小計</td>
-                    <td>NT &#36 <?= $value["p_price"] ?></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td class="text-right">折扣小計</td>
-                    <td>NT &#36 3</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td></td>
-                    <td class="text-right">訂單總金額</td>
-                    <td>NT &#36 <?= $value["p_price"] - 3 ?></td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">付款</h5>
-                    <hr>
-                    <p class="card-text">付款方式 : <?= $value["o_payment_desc"] ?></p>
-                    <p class="card-text">付款狀態 : <?= $value["o_status_desc"] ?></p>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>商品品項</th>
+                        <th></th>
+                        <th>價格</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><?= $value["p_name"] ?></td>
+                        <td></td>
+                        <td>NT &#36 <?= $value["p_price"] ?></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="text-right">商品小計</td>
+                        <td>NT &#36 <?= $value["p_price"] ?></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="text-right">折扣小計</td>
+                        <td>NT &#36 <?= $value["o_discount_amount"] ?></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td class="text-right">訂單總金額</td>
+                        <td>NT &#36 <?= $value["p_price"] - $value["o_discount_amount"] ?></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">付款</h5>
+                        <hr>
+                        <p class="card-text">付款方式 : <?= $value["o_payment_desc"] ?></p>
+                        <p class="card-text">訂單狀態 : <?= $value["o_status_desc"] ?></p>
 
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">訂購人資訊</h5>
+                        <hr>
+                        <p class="card-text">顧客姓名 : <?= $value["m_name"] ?></p>
+                        <p class="card-text">電話號碼 : <?= $value["m_phone"] ?></p>
+                        <p class="card-text">電子郵件 : <?= $value["m_email"] ?></p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">訂購人資訊</h5>
-                    <hr>
-                    <p class="card-text">顧客姓名 : <?= $value["m_name"] ?></p>
-                    <p class="card-text">電話號碼 : <?= $value["m_phone"] ?></p>
-                    <p class="card-text">電子郵件 : <?= $value["m_email"] ?></p>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">備註</h5>
-                    <hr>
-                    <p class="card-text">顧客備註 : <?= $value["message"] ?></p>
-                    <p class="card-text">商家備註 : <?= $value["message"] ?></p>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">備註</h5>
+                        <hr>
+                        <p class="card-text">顧客備註 : <?= $value["message"] ?></p>
+                        <p class="card-text">商家備註 : <?= $value["message"] ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">發票</h5>
+                        <hr>
+                        <p class="card-text">電子發票</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="card">
+        <div class="col">
+            <div class="card1">
                 <div class="card-body">
-                    <h5 class="card-title">發票</h5>
+                    <h5 class="card-title">最後修改時間</h5>
                     <hr>
-                    <p class="card-text">電子發票</p>
+                    <p class="card-text text-danger"> <?= $value["modified_at"] ?>
+                    </p>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col">
-        <div class="card1">
-            <div class="card-body">
-                <h5 class="card-title">訂單操作紀錄</h5>
-                <hr>
-                <p class="card-text text-danger"> <?= $value["modified_at"] ?>
-                </p>
-            </div>
-        </div>
-    </div>
-<?php endforeach; ?>
+    <?php endforeach; ?>
 </div>
 
 <!-- body 2 > main 3 : 右側主內容下方頁尾 -->

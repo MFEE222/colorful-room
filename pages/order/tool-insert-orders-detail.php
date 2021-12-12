@@ -53,24 +53,26 @@ $pdo = $db_host->prepare($sql);
 //     ecbo($e->getMessage());
 // }
 
-for ($i = 0; $i < 1000; $i++) {
-    try {
-        $pdo->execute(
-            [
-                ':orders_id' => $i + 1,
-                ':member_id' => random_int(1, 1000),
-                ':products_id' => random_int(1, 1000),
-                ':subscribe_id' => random_int(1, 4),
-                ':discount_id' => random_int(1, 3),
-                ':created_at' => date('Y-m-d', random_int($time_start, $time_end)),
-                ':modified_at' => date('Y-m-d', random_int($time_start, $time_end))
-            ]
-        );
-        if ($pdo->rowCount() > 0)
-            usleep(250000);
-    } catch (PDOException $e) {
-    }
-}
+
+
+// for ($i = 0; $i < 1000; $i++) {
+//     try {
+//         $pdo->execute(
+//             [
+//                 ':orders_id' => $i + 1,
+//                 ':member_id' => random_int(1, 1000),
+//                 ':products_id' => random_int(1, 1000),
+//                 ':subscribe_id' => random_int(1, 4),
+//                 ':discount_id' => random_int(1, 3),
+//                 ':created_at' => date('Y-m-d', random_int($time_start, $time_end)),
+//                 ':modified_at' => date('Y-m-d', random_int($time_start, $time_end))
+//             ]
+//         );
+//         if ($pdo->rowCount() > 0)
+//             usleep(250000);
+//     } catch (PDOException $e) {
+//     }
+// }
 
 
 function ecbo($t)

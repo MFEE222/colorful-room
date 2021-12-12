@@ -292,10 +292,6 @@ function status_desc($sts_id)
                                 <td class="p-0 text-center text-dark">Paid</td>
                                 <td class="p-0 text-center text-dark">
                                     <div class="mt-3">
-                                        <a href="<?= $url_page_order_detail . '?id=12' ?>" rel="tooltip" class="btn btn-round btn-info px-3">
-                                            <i class="material-icons">edit</i>
-                                            Edit
-                                        </a>
                                         <form action="<?= $url_page_member . '?id=1' ?>" method="POST" class="d-inline">
                                             <?php $from = $url_page_order_search . '?keyword=' . get('keyword') . '&filter_time=' . get('filter_time') . '$filter_status=' . get('filter_status');  ?>
                                             <input type="text" name="from" value="<?= $from ?>" class="d-none">
@@ -321,14 +317,10 @@ function status_desc($sts_id)
                                     <td class="p-0 text-center text-dark"><?= status_desc($order['status_id']) ?></td>
                                     <td class="p-0 text-center text-dark">
                                         <div class="mt-3">
-                                            <a href="<?= $url_page_order_detail . '?id=' . $order['id'] ?>" rel="tooltip" class="btn btn-round btn-info px-3">
-                                                <i class="material-icons">edit</i>
-                                                Edit
-                                            </a>
                                             <form action="<?= $url_page_member . '?id=' . $order['member_id'] ?>" method="POST" class="d-inline">
                                                 <?php $from = $url_page_order_search . '?keyword=' . get('keyword') . '&filter_time=' . get('filter_time') . '$filter_status=' . get('filter_status');  ?>
                                                 <input type="text" name="from" value="<?= $from ?>" class="d-none">
-                                                <button type="submit" rel="tooltip" class="btn btn-round btn-success px-3">
+                                                <button type="submit" rel="tooltip" class="btn btn-round btn-info px-3">
                                                     <i class="material-icons">person</i>
                                                     Member
                                                 </button>

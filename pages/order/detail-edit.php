@@ -9,11 +9,13 @@ require_once("../../components/pdo-connect.php");
 
 
 // 檢查GET
-if (isset($_GET["oid"])) {
-    $oid = $_GET["oid"];
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
 } else {
-    $oid = 0;
+    $id = 0;
 }
+
+$url_back = $url_page_order_detail . $_GET['from'];
 
 $sql = "SELECT orders_detail.*,
                products.name AS p_name,
@@ -36,8 +38,8 @@ $sql = "SELECT orders_detail.*,
 
 $pdo = $db_host->prepare($sql);
 try {
-    $pdo->execute([$oid]);
-    // var_dump($pdo->rowCount());
+    $pdo->execute([$id]);
+    var_dump($pdo->rowCount());
     if ($pdo->rowCount() > 0) {
         $rowsOrder = $pdo->fetchAll(PDO::FETCH_ASSOC);
         // echo $pdo->rowCount();
@@ -47,7 +49,6 @@ try {
     }
 } catch (PDOException $e) {
     echo $e->getMessage();
-    
 }
 
 ?>
@@ -155,7 +156,7 @@ try {
             <div class="col-10">
             </div>
             <div class="col-2">
-                <a href="./order.php" class="demo">回列表</a>
+                <a href="<?= $url_page_order_search ?>" class="demo">回列表</a>
                 <!-- <button class="demo" id="demo">Demo</button> -->
                 <a type="submit" class="demo" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     送出</a>
