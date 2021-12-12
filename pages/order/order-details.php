@@ -21,26 +21,25 @@ $sql = "SELECT orders_detail.*,
                member.name AS m_name,
                member.email AS m_email,
                member.phone AS m_phone,
-               orders.status AS o_status,
+               orders.status_id AS o_status,
                orders.payment_id AS o_payment,
-               payment.description AS o_payment
+               payment.description AS o_payment_desc,
+               orders_status.description AS o_status_desc 
             FROM orders_detail
             JOIN products ON orders_detail.products_id = products.id
             JOIN member ON orders_detail.member_id = member.id
             JOIN orders ON orders_detail.orders_id = orders.oid
-            JOIN payment ON orders_detail.o_payment = payment.id
+            JOIN payment ON orders.payment_id = payment.id
+            JOIN orders_status ON orders.status_id = orders_status.id
         WHERE orders_id = :orders_id";
-
-
-// $sql = "SELECT orders_detail.*
-//             FROM orders_detail
-//         WHERE orders_id = :orders_id";
+// echo 'breakpoint' . __LINE__ . '<br>';
 
 $pdo = $db_host->prepare($sql);
 try {
     $pdo->execute([
         'orders_id' => $oid
     ]);
+    // var_dump($pdo->rowCount());
     if ($pdo->rowCount() > 0) {
         $rows = $pdo->fetchAll(PDO::FETCH_ASSOC);
         echo $pdo->rowCount();
@@ -161,9 +160,9 @@ try {
     </div>
     <div class="row">
         <div class="col-9">
-            <?php foreach ($rows as $value) :?>
-        
-                
+            <?php foreach ($rows as $value) : ?>
+
+
                 <p>訂單編號 : <?= $value["orders_id"] ?></p>
                 <p>訂購日期 : <?= $value["created_at"] ?></p>
         </div>
@@ -209,8 +208,8 @@ try {
                 <div class="card-body">
                     <h5 class="card-title">付款</h5>
                     <hr>
-                    <p class="card-text">付款方式 : <?= $value["o_payment"] ?></p>
-                    <p class="card-text">付款狀態 : <?= $value["o_status"] ?></p>
+                    <p class="card-text">付款方式 : <?= $value["o_payment_desc"] ?></p>
+                    <p class="card-text">付款狀態 : <?= $value["o_status_desc"] ?></p>
 
                 </div>
             </div>

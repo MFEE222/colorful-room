@@ -9,14 +9,29 @@ include_once('../signin/do-authorize.php');
 //  1. customer and member table 要合併，並新增 registered 欄位
 //  2. 暫時先只抓 member table
 // ============================================================================
+//  Test
+// ============================================================================
+// if (!NULL) {
+//     echo 'rrr';
+// }
+// ============================================================================
 //  Global Variable / Function
 // ============================================================================
 $url_back = NULL;
-$limit = NULL;
-$sql = NULL;
+$sql = [
+    'prepare' => NULL,
+    'execute' => NULL,
+    'is_keyword' => false,
+    'is_filter_time' => false,
+    'is_filter_status' => false,
+    'is_limit' => false,
+    'keyword' => NULL,
+    'filter_time' => NULL,
+    'filter_status' => NULL,
+    'limit' => NULL
+];
 $pdo = NULL;
 $row = NULL;
-
 
 
 function redirect($url)
@@ -36,6 +51,15 @@ function like($condition, $fix = '%')
 {
     return $fix . $condition . $fix;
 }
+
+function where(&$sql, $condition, $operator = 'AND')
+{
+    if (str_contains($sql, 'WHERE')) {
+        $sql .= " " . $operator . "(" . $condition . ")";
+    } else {
+        $sql .= " " . 'WHERE' . " " . "(" . $condition . ")";
+    }
+}
 // ============================================================================
 //  Initialize
 // ============================================================================
@@ -45,33 +69,43 @@ $url_back = $url_page_order_search
     . '&filter_status=' . post('filter_status');
 $_SESSION['orders_head'] = NULL;
 $_SESSION['orders_body'] = NULL;
-// ============================================================================
-//  Verify
-// ============================================================================
-if (post('keyword') == NULL && post('filter_time') == NULL && post('filter_status') == NULL) {
-    $limit = 50;
+// 處理空格？多關鍵字？
+if (post('keyword') != NULL) {
+    $sql['is_keyword'] = true;
+    $sql['keyword'] = '%' . post('keyword') . '%';
 }
-
+if (post('filter_time') != NULL) {
+    $sql['is_filter_time'] = true;
+    $sql['filter_time'] = post('filter_time');
+}
+if (post('filter_status') != NULL) {
+    $sql['is_filter_status'] = true;
+    $sql['filter_status'] = post('filter_status');
+}
+if (!post('keyword') && !post('filter_time') && !post('filter_status')) {
+    $sql['is_limit'] = true;
+    $sql['limit'] = 50;
+}
 // ============================================================================
 //  Main
 // ============================================================================
-if ($limit != NULL) {
-    $sql = "SELECT orders.*,
-                   member.name,
-                   member.phone
-                FROM orders
-                JOIN member ON orders.member_id = member.id
-            LIMIT 50";
-} else {
-    $sql = "SELECT orders.*,
-                   member.name,
-                   member.phone
-                FROM orders
-                JOIN member ON orders.member_id = member.id
-            WHERE orders.oid = :orders_id
-                OR member.name LIKE :member_name
-                OR member.phone LIKE :member_phone";
+$sql['prepare'] = "SELECT orders.*
+                          member.name
+                          member.phone
+                        FROM orders
+                        JOIN member ON orders.member_id = member.id";
+if ($sql['is_keyword']) {
+    where($sql['prepare'], "orders.oid = :orders_id OR member.name LIKE :member_name OR member.phone LIKE :member_phone");
 }
+if ($sql['is_filter_time']) {
+}
+if ($sql['is_filter_status']) {
+    where($sql['prepare'], "orders.status = :orders_status");
+}
+if ($sql['is_limit']) {
+    $sql .= " LIMIT " . $sql['limit'];
+}
+
 try {
     $pdo = $db_host->prepare($sql);
     if ($limit != NULL)
