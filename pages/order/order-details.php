@@ -187,7 +187,6 @@ try {
 <?php include "../../template/body-main-header.php" ?>
 
 <!-- body 2 > main 2 : 右側主內容頁 -->
-
 <div class="container">
     <div class="row justify-content-between">
         <div class="col">
@@ -320,16 +319,6 @@ try {
                     </div>
                 </div>
             </div>
-            <!-- <div class="col">
-                <div class="card1">
-                    <div class="card-body">
-                        <h5 class="card-title">最後修改時間</h5>
-                        <hr>
-                        <p class="card-text text-danger"> <?= $value["modified_at"] ?>
-                        </p>
-                    </div>
-                </div>
-            </div> -->
 
             <!-- modal -->
             <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
@@ -355,6 +344,7 @@ try {
     <?php endforeach; ?>
 
 </div>
+
 
 <script>
     let form = document.getElementById("form"),
