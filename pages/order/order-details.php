@@ -161,7 +161,7 @@ try {
             <div class="row">
                 <div class="col-9 me-auto">
                     <p>訂單編號 : <?= $value["orders_id"] ?></p>
-                    <p>訂單明細 : <?= $value['id'] ?></p>
+                    <p>明細編號 : <?= $value['id'] ?></p>
                     <p>訂購日期 : <?= $value["created_at"] ?></p>
                     <input type="text" name="order_id" value="<?= $value['order_id'] ?>" class="d-none">
                     <input type="text" name="order_detail_id" value="<?= $value['id'] ?>" class="d-none">
@@ -208,35 +208,29 @@ try {
                         <div class="card-body position-relative">
                             <h5 class="card-title">付款</h5>
                             <hr>
-                            <label for="payment_method" class="card-text d-block">
+                            <label for="payment_id" class="card-text d-block">
                                 付款方式：
-                                <!-- <input type="text" id="payment_method" class="card-text border-0 rounded-2 text-muted bg-light p-2" name="payment_method" value="<?= $value['o_payment_desc'] ?>"> -->
-                                <!-- <input type="text" id="payment_method" class="card-text border-0 rounded-2 text-muted bg-light p-2 d-none" name="payment_id" value="<?= $value['o_payment'] ?>"> -->
-
-                                <select class="card-text border-0 rounded-2 text-dark bg-light p-2 ms-2" name="payment_id" id="payment_method" value="<?= $value['o_payment'] ?>">
-                                    <option value="1">信用卡</option>
-                                    <option value="2">超商代碼</option>
-                                    <option value="3">Line Pay</option>
-                                    <option value="4">Apple Pay</option>
-                                    <option value="5">Google Pay</option>
-                                    <option value="6">Paypal</option>
+                                <select class="card-text border-0 rounded-2 text-dark bg-light p-2 ms-2" name="payment_id" id="payment_method">
+                                    <option value="1" <?php if ($value['o_payment'] == 1) echo 'selected'; ?>>信用卡</option>
+                                    <option value="2" <?php if ($value['o_payment'] == 2) echo 'selected'; ?>>超商代碼</option>
+                                    <option value="3" <?php if ($value['o_payment'] == 3) echo 'selected'; ?>>Line Pay</option>
+                                    <option value="4" <?php if ($value['o_payment'] == 4) echo 'selected'; ?>>Apple Pay</option>
+                                    <option value="5" <?php if ($value['o_payment'] == 5) echo 'selected'; ?>>Google Pay</option>
+                                    <option value="6" <?php if ($value['o_payment'] == 6) echo 'selected'; ?>>Paypal</option>
                                 </select>
 
                             </label>
-                            <label for="order_status">
+                            <label for="status_id">
                                 訂單狀態：
-                                <!-- <input type="text" id="order_status" class="card-text border-0 rounded-2 text-muted bg-light p-2" name="order_status" value="<?= $value['o_status_desc'] ?>">
-                                <input type="text" id="order_status" class="card-text border-0 rounded-2 text-muted bg-light p-2 d-none" name="status_id" value="<?= $value['o_status'] ?>"> -->
-                                <select class="card-text border-0 rounded-2 text-dark bg-light p-2 ms-2" name="status_id" id="status_id" value="<?= $value['o_status'] ?>">
-                                    <option value="1">未付款</option>
-                                    <option value="2">已付款</option>
-                                    <option value="3">已取消</option>
-                                    <option value="4">退貨中</option>
-                                    <option value="5">已退貨</option>
+                                <select class="card-text border-0 rounded-2 text-dark bg-light p-2 ms-2" name="status_id" id="status_id">
+                                    <option value="1" <?php if ($value['o_status'] == 1) echo 'selected'; ?>>未付款</option>
+                                    <option value="2" <?php if ($value['o_status'] == 2) echo 'selected'; ?>>已付款</option>
+                                    <option value="3" <?php if ($value['o_status'] == 3) echo 'selected'; ?>>已取消</option>
+                                    <option value="4" <?php if ($value['o_status'] == 4) echo 'selected'; ?>>退貨中</option>
+                                    <option value="5" <?php if ($value['o_status'] == 5) echo 'selected'; ?>>已退貨</option>
                                 </select>
                             </label>
                             <div class="position-absolute bottom-10 end-5">
-                                <!-- <a class="demo btn btn-info align-middle mb-0" data-bs-toggle="modal" data-bs-target="#exampleModal">修改</a> -->
                                 <a class="demo btn btn-info align-middle mb-0" data-bs-toggle="modal" data-bs-target="<?= "#exampleModal" . $value['id'] ?>">修改</a>
                             </div>
 
