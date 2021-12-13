@@ -24,7 +24,7 @@ include_once("../signin/do-authorize.php");
   </div>
 </nav>
 
-<form action="./do-product-add.php" method="POST">
+<form action="./do-product-add.php" method="POST" enctype="multipart/form-data">
     <div class="m-5">
     <label class="mb-5" for="fname">名稱：</label>
     <input type="text" name="product_name">
@@ -45,10 +45,7 @@ include_once("../signin/do-authorize.php");
     <label class="mb-5" for="img">修圖後：</label>
     <input type="file" id="img" name="image_after" accept="image/*">
     <label class="mb-5" for="img">DNG檔案：</label>
-    <input type="file" id="img" name="dng_pkg" accept="image/*"><br>
-
-    
-
+    <input type="file" id="img" name="dng_pkg" accept=".dng"><br>
     <button type="submit" class="btn btn-lg btn-primary text-center">Submit</button>
     <a type="button" class="btn btn-lg btn-success" href="product.php">返回</a>
     </div>
