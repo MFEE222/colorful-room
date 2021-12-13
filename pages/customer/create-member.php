@@ -29,7 +29,7 @@ include_once("../signin/do-authorize.php");
 <div class="row justify-content-start ">
         <form class="col-lg-3" action="doinsert.php" method="post" >
             <!---->
-            <div class="input-group input-group-outline my-3">
+            <div class="input-group input-group-outline my-4">
                 <label for="name" class="form-label">姓名</label>
                 <input id="name" type="text" name="name" required class="form-control">
             </div>
@@ -39,13 +39,13 @@ include_once("../signin/do-authorize.php");
 <!--                <br>-->
 <!--                <input class="form-control border border-secondary" id="name" type="text" name="name" required>-->
 <!--            </div>-->
-            <div class="input-group input-group-outline my-3">
+            <div class="input-group input-group-outline mt-4">
                 <label for="account" class="form-label">帳號</label>
-                <input id="account" type="account" name="account" class="form-control" required>
-                <?php if (isset($_SESSION["user"]["account"])) : ?>
-                    <p class="fs-6 text-danger"><?= ($_SESSION["user"]["account"]) ?>帳號已存在</p>
-                <?php endif; ?>
+                <input id="account" type="text" name="account" class="form-control" required>
             </div>
+            <?php if (isset($_SESSION["user"]["account"])) : ?>
+                <span class="fs-6 text-danger"><?= ($_SESSION["user"]["account"]) ?>帳號已存在</span>
+            <?php endif; ?>
 
 <!--            <div class="mb-2 input-group-sm">-->
 <!--                <label for="account">帳號</label>-->
@@ -55,7 +55,7 @@ include_once("../signin/do-authorize.php");
 <!--                    <p class="fs-6 text-danger">--><?//= ($_SESSION["user"]["account"]) ?><!--帳號已存在</p>-->
 <!--                --><?php //endif; ?>
 <!--            </div>-->
-            <div class="input-group input-group-outline my-3">
+            <div class="input-group input-group-outline my-4">
                 <label for="password" class="form-label">密碼</label>
                 <input id="password" type=" password" name="password" class="form-control" required>
             </div>
@@ -65,13 +65,13 @@ include_once("../signin/do-authorize.php");
 <!--                <br>-->
 <!--                <input  class="form-control border border-secondary" id="password" type=" password" name="password" class="form-control" required>-->
 <!--            </div>-->
-            <div class="input-group input-group-outline my-3">
+            <div class="input-group input-group-outline mt-4">
                 <label for="email" class="form-label">Email</label>
                 <input id="email" type="email" name="email" class="form-control" required>
-                <?php if (isset($_SESSION["user"]["email"])) : ?>
-                    <p class="fs-6 text-danger"><?= ($_SESSION["user"]["email"]) ?>信箱已註冊過</p>
-                <?php endif; ?>
             </div>
+            <?php if (isset($_SESSION["user"]["email"])) : ?>
+                <span class="fs-6 text-danger"><?= ($_SESSION["user"]["email"]) ?>信箱已註冊過</span>
+            <?php endif; ?>
 
 <!--            <div class="mb-2 input-group-sm">-->
 <!--                <label for="email">Email</label>-->
@@ -83,7 +83,7 @@ include_once("../signin/do-authorize.php");
 <!--            </div>-->
 
 
-            <div class="input-group input-group-outline mb-1">
+            <div class="input-group input-group-outline my-4">
                 <label for="phone" class="form-label">電話</label>
                 <input id="phone" type="tel" name="phone" class="form-control" required>
             </div>
