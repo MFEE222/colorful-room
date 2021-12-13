@@ -3,12 +3,12 @@ include_once("../var.php");
 include_once("../signin/do-authorize.php");
 require_once("../../components/pdo-connect.php");
 
-echo $_POST['payment_id'] . "<br>";
-echo $_POST['status_id'] . "<br>";
-echo $_POST['order_id'] . "<br>";
-echo $_POST['order_detail_id'] . "<br>";
-echo $_POST['message'] . "<br>";
-die();
+// echo $_POST['payment_id'] . "<br>";
+// echo $_POST['status_id'] . "<br>";
+// echo $_POST['order_id'] . "<br>";
+// echo $_POST['order_detail_id'] . "<br>";
+// echo $_POST['message'] . "<br>";
+// die();
 
 
 function post($name)
