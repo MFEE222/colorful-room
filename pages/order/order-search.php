@@ -53,9 +53,9 @@ $os = new OrderSearch();
 //  - filter_status
 
 // Session (array)
-if ($_SESSION['orders_head'] != NULL)
+if (isset($_SESSION['orders_head']))
     $orders_head = $_SESSION['orders_head'];
-if ($_SESSION['orders_body'] != NULL)
+if (isset($_SESSION['orders_body']))
     $orders_body = $_SESSION['orders_body'];
 
 function get($query_string)
