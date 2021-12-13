@@ -15,6 +15,29 @@ if (isset($_GET["id"])) {
     $id = 0;
 }
 
+// echo $id;
+
+// $sql = "SELECT orders_detail.*,
+//                products.name AS p_name,
+//                products.price AS p_price,
+//                member.name AS m_name,
+//                member.email AS m_email,
+//                member.phone AS m_phone,
+//                orders.id AS order_id,
+//                orders.status_id AS o_status,
+//                orders.payment_id AS o_payment,
+//                payment.description AS o_payment_desc,
+//                orders_status.description AS o_status_desc,
+//                discount.amount AS o_discount_amount
+//             FROM orders_detail
+//             JOIN products ON orders_detail.products_id = products.id
+//             JOIN member ON orders_detail.member_id = member.id
+//             JOIN orders ON orders_detail.orders_id = orders.id
+//             JOIN payment ON orders.payment_id = payment.id
+//             JOIN orders_status ON orders.status_id = orders_status.id
+//             JOIN discount ON orders_detail.discount_id = discount.id
+//         WHERE orders_id = :orders_id";
+
 $sql = "SELECT orders_detail.*,
                products.name AS p_name,
                products.price AS p_price,
@@ -29,9 +52,9 @@ $sql = "SELECT orders_detail.*,
                discount.amount AS o_discount_amount
             FROM orders_detail
             JOIN products ON orders_detail.products_id = products.id
-            JOIN member ON orders_detail.member_id = member.id
             JOIN orders ON orders_detail.orders_id = orders.id
             JOIN payment ON orders.payment_id = payment.id
+            JOIN member ON orders.member_id = member.id
             JOIN orders_status ON orders.status_id = orders_status.id
             JOIN discount ON orders_detail.discount_id = discount.id
         WHERE orders_id = :orders_id";
@@ -133,7 +156,8 @@ try {
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
     }
-    .btn{
+
+    .btn {
         margin: 5px;
         padding: 5px 20px;
         font-size: 18px;
@@ -142,6 +166,7 @@ try {
         border: none;
         border-radius: 5px;
     }
+
     .btn:hover {
         cursor: pointer;
         transition: .5s;
