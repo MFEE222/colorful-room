@@ -72,21 +72,21 @@ try {
 }
 
 // 搜尋
-if(isset($_GET["order"])){
-    $order=$_GET["order"];
-    if($order==="nameDesc"){
-    $sql=" SELECT products. *,category. * FROM products
+// 名稱排序 名稱遞減、名稱遞增、價格遞增、價格遞減
+if (isset($_GET["order"])) {
+    echo "Line: ", __LINE__ . "<br>";
+    $order = $_GET["order"];
+    if ($order === "nameDesc") {
+        $sql = " SELECT products. *,category. * FROM products
   JOIN category ON products.category_id = category.category_id ORDER BY name DESC LIMIT 50";
-    }else if($order==="nameAsc"){
-    $sql=" SELECT products. *,category. * FROM products
+    } else if ($order === "nameAsc") {
+        $sql = " SELECT products. *,category. * FROM products
   JOIN category ON products.category_id = category.category_id ORDER BY name ASC LIMIT 50";
-    }
-    else if($order==="priceAsc"){
-    $sql=" SELECT products. *,category. * FROM products
+    } else if ($order === "priceAsc") {
+        $sql = " SELECT products. *,category. * FROM products
   JOIN category ON products.category_id = category.category_id ORDER BY price ASC LIMIT 50";
-    }
-    else if($order==="priceDesc"){
-    $sql=" SELECT products. *,category. * FROM products
+    } else if ($order === "priceDesc") {
+        $sql = " SELECT products. *,category. * FROM products
   JOIN category ON products.category_id = category.category_id ORDER BY price DESC LIMIT 50";
     }
     $stmt = $db_host->prepare($sql);
@@ -97,7 +97,11 @@ if(isset($_GET["order"])){
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-}else if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate"] != "請選擇類別") {
+}
+// 名稱 ＋ 類別搜尋
+else if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate"] != "請選擇類別") {
+
+    echo "Line: ", __LINE__ . "<br>";
     $search = $_GET["s"];
     $cate = $_GET["cate"];
     $sql = "SELECT products. *, category. * FROM products
@@ -114,7 +118,10 @@ if(isset($_GET["order"])){
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-} else if (isset($_GET["sold_min"]) && $_GET["sold_min"] != " " && isset($_GET["sold_max"]) && $_GET["sold_max"] != " " && $_GET["s"] == "" && $_GET["cate"] == "請選擇類別") {
+}
+// 已售出 數量搜尋
+else if (isset($_GET["sold_min"]) && $_GET["sold_min"] != " " && isset($_GET["sold_max"]) && $_GET["sold_max"] != " " && $_GET["s"] == "" && $_GET["cate"] == "請選擇類別") {
+    echo "Line: ", __LINE__ . "<br>";
     //    echo "sold";
     $sold_min = $_GET['sold_min'];
     $sold_max = $_GET['sold_max'];
@@ -129,24 +136,32 @@ if(isset($_GET["order"])){
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-} else if (isset($_GET["s"]) && $_GET["s"] != "") {
+}
+// 單純名字搜尋
+else if (isset($_GET["s"]) && $_GET["s"] != "") {
+    echo "Line: ", __LINE__ . "<br>";
     $search = $_GET["s"];
     //        $search = '%'.$search.'%';
-    $sql = "SELECT products. *, category. * FROM products
-  JOIN category ON products.category_id = category.category_id
-  WHERE  products.name LIKE :SEARCH  ";
+    $sql = "SELECT products.*,
+                   category.*
+                FROM products
+                JOIN category ON products.category_id = category.category_id
+            WHERE  products.name LIKE :SEARCH";
     //    products.valid=1 AND
     $stmt = $db_host->prepare($sql);
     try {
         $stmt->execute([
-            'SEARCH' => '%' . $search . '%'
+            ':SEARCH' => '%' . $search . '%'
         ]);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         //  echo "search";
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-} else if (isset($_GET["cate"]) && $_GET["cate"] != "") {
+}
+// 單純類別搜尋
+else if (isset($_GET["cate"]) && $_GET["cate"] != "") {
+    echo "Line: ", __LINE__ . "<br>";
     $cate = $_GET["cate"];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
@@ -161,7 +176,10 @@ if(isset($_GET["order"])){
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-} else if (isset($_GET["view"])) {
+}
+// 全部商品
+else if (isset($_GET["view"])) {
+    echo "Line: ", __LINE__ . "<br>";
     $view = $_GET['view'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id ";
@@ -172,7 +190,10 @@ if(isset($_GET["order"])){
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-} else if (isset($_GET["valid"]) && $_GET["valid"] == "1") {
+}
+// 架上商品
+else if (isset($_GET["valid"]) && $_GET["valid"] == "1") {
+    echo "Line: ", __LINE__ . "<br>";
     $valid = $_GET['valid'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
@@ -184,7 +205,10 @@ if(isset($_GET["order"])){
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-} else if (isset($_GET["valid"]) && $_GET["valid"] == "2") {
+}
+// 未上架商品
+else if (isset($_GET["valid"]) && $_GET["valid"] == "2") {
+    echo "Line: ", __LINE__ . "<br>";
     $valid = $_GET['valid'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
@@ -196,7 +220,10 @@ if(isset($_GET["order"])){
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-} else if (isset($_GET["valid"]) && $_GET["valid"] == "0") {
+}
+// 已下架商品
+else if (isset($_GET["valid"]) && $_GET["valid"] == "0") {
+    echo "Line: ", __LINE__ . "<br>";
     $valid = $_GET['valid'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
@@ -208,7 +235,10 @@ if(isset($_GET["order"])){
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-} else {
+}
+// 預設情況
+else {
+    echo "Line: ", __LINE__ . "<br>";
     //    $sql = "SELECT * FROM products WHERE valid=1";
     $sql = "SELECT products. *,category. * FROM products
   JOIN category ON products.category_id = category.category_id 
@@ -295,10 +325,10 @@ if(isset($_GET["order"])){
         </ul>
         <div class="py-2 d-flex justify-content-end order-block">
             <div>排序
-                <a class="<?php if(isset($order) && $order==="nameDesc")echo "active"?> font-weight-bold" href="product.php?order=nameDesc">名稱 ↓</a>
-                <a class="<?php if(isset($order) && $order==="nameAsc")echo "active" ?> font-weight-bold" href="product.php?order=nameAsc">名稱 ↑</a>
-                <a class="<?php if(isset($order) && $order==="priceDesc")echo "active" ?> font-weight-bold" href="product.php?order=priceDesc">價錢 ↓</a>
-                <a class="<?php if(isset($order) && $order==="priceAsc")echo "active" ?> font-weight-bold" href="product.php?order=priceAsc">價錢 ↑</a>
+                <a class="<?php if (isset($order) && $order === "nameDesc") echo "active" ?> font-weight-bold" href="product.php?order=nameDesc">名稱 ↓</a>
+                <a class="<?php if (isset($order) && $order === "nameAsc") echo "active" ?> font-weight-bold" href="product.php?order=nameAsc">名稱 ↑</a>
+                <a class="<?php if (isset($order) && $order === "priceDesc") echo "active" ?> font-weight-bold" href="product.php?order=priceDesc">價錢 ↓</a>
+                <a class="<?php if (isset($order) && $order === "priceAsc") echo "active" ?> font-weight-bold" href="product.php?order=priceAsc">價錢 ↑</a>
             </div>
         </div>
     </div>
@@ -324,24 +354,24 @@ if(isset($_GET["order"])){
                 </thead>
                 <?php foreach ($rows as $value) : ?>
                     <tbody>
-                        <tr >
+                        <tr>
                             <td class="active p-3">
-                                <input type="checkbox" class="select-item checkbox" name="select-item"/>
+                                <input type="checkbox" class="select-item checkbox" name="select-item" />
                             </td>
                             <td class="ps-1 p-3"><?= $value["name"] ?></td>
                             <td class="ps-1 p-3"><?php switch ($value["valid"]):
-                                                    case "0":
-                                                        echo "已下架";
-                                                        break;
-                                                    case "1":
-                                                        echo "架上商品";
-                                                        break;
-                                                    case "2":
-                                                        echo "未上架";
-                                                        break;
-                                                ?>
+                                                        case "0":
+                                                            echo "已下架";
+                                                            break;
+                                                        case "1":
+                                                            echo "架上商品";
+                                                            break;
+                                                        case "2":
+                                                            echo "未上架";
+                                                            break;
+                                                    ?>
                                 <?php endswitch; ?>
-                        </td>
+                            </td>
                             <td class="ps-1 p-3"><?= $value["category_name"] ?></td>
                             <td class="ps-1p-3"><?= $value["price"] ?></td>
                             <td class="ps-1 col-2 text-truncate p-3" style="max-width: 150px;"><?= $value["descriptions"] ?></td>
@@ -366,59 +396,59 @@ if(isset($_GET["order"])){
 
     <!-- Checkbox  -->
     <button id="select-all" class="btn button-default">SelectAll/Cancel</button>
-<button id="select-invert" class="btn button-default">Invert</button>
-<button id="selected" class="btn button-default">GetSelected</button>
+    <button id="select-invert" class="btn button-default">Invert</button>
+    <button id="selected" class="btn button-default">GetSelected</button>
 </div>
 <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script>
-    $(function(){
+    $(function() {
 
         //button select all or cancel
-        $("#select-all").click(function () {
+        $("#select-all").click(function() {
             var all = $("input.select-all")[0];
             all.checked = !all.checked
             var checked = all.checked;
-            $("input.select-item").each(function (index,item) {
+            $("input.select-item").each(function(index, item) {
                 item.checked = checked;
             });
         });
 
         //button select invert
-        $("#select-invert").click(function () {
-            $("input.select-item").each(function (index,item) {
+        $("#select-invert").click(function() {
+            $("input.select-item").each(function(index, item) {
                 item.checked = !item.checked;
             });
             checkSelected();
         });
 
         //button get selected info
-        $("#selected").click(function () {
-            var items=[];
-            $("input.select-item:checked:checked").each(function (index,item) {
+        $("#selected").click(function() {
+            var items = [];
+            $("input.select-item:checked:checked").each(function(index, item) {
                 items[index] = item.value;
             });
             if (items.length < 1) {
                 alert("no selected items!!!");
-            }else {
+            } else {
                 var values = items.join(',');
                 console.log(values);
                 var html = $("<div></div>");
-                html.html("selected:"+values);
+                html.html("selected:" + values);
                 html.appendTo("body");
             }
         });
 
         //column checkbox select all or cancel
-        $("input.select-all").click(function () {
+        $("input.select-all").click(function() {
             var checked = this.checked;
-            $("input.select-item").each(function (index,item) {
+            $("input.select-item").each(function(index, item) {
                 item.checked = checked;
             });
         });
 
         //check selected items
-        $("input.select-item").click(function () {
+        $("input.select-item").click(function() {
             var checked = this.checked;
             console.log(checked);
             checkSelected();
@@ -429,9 +459,9 @@ if(isset($_GET["order"])){
             var all = $("input.select-all")[0];
             var total = $("input.select-item").length;
             var len = $("input.select-item:checked:checked").length;
-            console.log("total:"+total);
-            console.log("len:"+len);
-            all.checked = len===total;
+            console.log("total:" + total);
+            console.log("len:" + len);
+            all.checked = len === total;
         }
     });
 </script>
