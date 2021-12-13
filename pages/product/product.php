@@ -10,7 +10,6 @@ include_once("../var.php");
 include_once("../signin/do-authorize.php");
 
 
-
 //group by
 //$sql="SELECT  COUNT(valid) FROM products GROUP BY valid ";
 //$stmt = $db_host->prepare($sql);
