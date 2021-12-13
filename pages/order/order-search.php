@@ -53,7 +53,7 @@ $os = new OrderSearch();
 //  - filter_status
 
 // Session (array)
-$orders_heade = [];
+$orders_head = ["total"=>0];
 $orders_body = [];
 if (isset($_SESSION['orders_head']))
     $orders_head = $_SESSION['orders_head'];

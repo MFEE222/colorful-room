@@ -17,7 +17,7 @@ if (isset($_GET['keyword'])) {
         $search2 = $_GET["keyword"];
         $sql = "SELECT member. * ,tag.name AS tag_name FROM member
                 jOIN tag ON member.tag_id = tag.id
-                WHERE member.account LIKE :SERCH1 OR member.name LIKE :SERCH2";
+                WHERE member.valid=1 AND member.account LIKE :SERCH1 OR member.name LIKE :SERCH2";
         $stmt = $db_host->prepare($sql);
         //$result=$conn->query($sql);
         //$resultCount=$result->num_rows;
@@ -35,7 +35,7 @@ if (isset($_GET['keyword'])) {
         $search3 = $_GET["keyword"];
         $search4 = $_GET["keyword"];
         $sql = "SELECT customer. * FROM customer
-                WHERE customer.account LIKE :SERCH3 OR customer.name LIKE :SERCH4";
+                WHERE customer.valid=1 AND customer.account LIKE :SERCH3 OR customer.name LIKE :SERCH4";
         $stmt = $db_host->prepare($sql);
         try {
             $stmt->execute([
@@ -51,7 +51,7 @@ if (isset($_GET['keyword'])) {
     //member的資料
     $sqlMember = "SELECT member. *,tag.name AS tag_name FROM member
                     JOIN tag ON member.tag_id = tag.id
-                    WHERE member.valid=1";
+                    WHERE valid=1 LIMIT 50";
 
     //$sqlMember="SELECT * FROM member WHERE valid=1";
     $stmt = $db_host->prepare($sqlMember);
@@ -64,7 +64,7 @@ if (isset($_GET['keyword'])) {
         echo $e->getMessage();
     }
     //customer的資料
-    $sqlCustomer = "SELECT * FROM customer WHERE valid=1";
+    $sqlCustomer = "SELECT * FROM customer WHERE valid=1 LIMIT 50";
     $stmt = $db_host->prepare($sqlCustomer);
     try {
         $stmt->execute();

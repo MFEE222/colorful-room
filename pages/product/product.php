@@ -76,18 +76,18 @@ if(isset($_GET["order"])){
     $order=$_GET["order"];
     if($order==="nameDesc"){
     $sql=" SELECT products. *,category. * FROM products
-  JOIN category ON products.category_id = category.category_id ORDER BY name DESC";
+  JOIN category ON products.category_id = category.category_id ORDER BY name DESC LIMIT 50";
     }else if($order==="nameAsc"){
     $sql=" SELECT products. *,category. * FROM products
-  JOIN category ON products.category_id = category.category_id ORDER BY name ASC";
+  JOIN category ON products.category_id = category.category_id ORDER BY name ASC LIMIT 50";
     }
     else if($order==="priceAsc"){
     $sql=" SELECT products. *,category. * FROM products
-  JOIN category ON products.category_id = category.category_id ORDER BY price ASC";
+  JOIN category ON products.category_id = category.category_id ORDER BY price ASC LIMIT 50";
     }
     else if($order==="priceDesc"){
     $sql=" SELECT products. *,category. * FROM products
-  JOIN category ON products.category_id = category.category_id ORDER BY price DESC";
+  JOIN category ON products.category_id = category.category_id ORDER BY price DESC LIMIT 50";
     }
     $stmt = $db_host->prepare($sql);
     try {
@@ -120,7 +120,7 @@ if(isset($_GET["order"])){
     $sold_max = $_GET['sold_max'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
-  WHERE  products.sold_total >=? AND  products.sold_total <=? ORDER BY products.sold_total DESC";
+  WHERE  products.sold_total >=? AND  products.sold_total <=? ORDER BY products.sold_total DESC ";
     $stmt = $db_host->prepare($sql);
     //    echo "sold 2";
     try {
@@ -164,7 +164,7 @@ if(isset($_GET["order"])){
 } else if (isset($_GET["view"])) {
     $view = $_GET['view'];
     $sql = "SELECT products. *, category. * FROM products
-  JOIN category ON products.category_id = category.category_id";
+  JOIN category ON products.category_id = category.category_id ";
     $stmt = $db_host->prepare($sql);
     try {
         $stmt->execute();
@@ -176,7 +176,7 @@ if(isset($_GET["order"])){
     $valid = $_GET['valid'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
-  WHERE  products.valid=1";
+  WHERE  products.valid=1 ";
     $stmt = $db_host->prepare($sql);
     try {
         $stmt->execute();
@@ -188,7 +188,7 @@ if(isset($_GET["order"])){
     $valid = $_GET['valid'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
-  WHERE  products.valid=2";
+  WHERE  products.valid=2 ";
     $stmt = $db_host->prepare($sql);
     try {
         $stmt->execute();
@@ -211,7 +211,7 @@ if(isset($_GET["order"])){
 } else {
     //    $sql = "SELECT * FROM products WHERE valid=1";
     $sql = "SELECT products. *,category. * FROM products
-  JOIN category ON products.category_id = category.category_id
+  JOIN category ON products.category_id = category.category_id 
   ";
     //WHERE products.valid=1
     $stmt = $db_host->prepare($sql);
@@ -305,7 +305,7 @@ if(isset($_GET["order"])){
 
     <div class="row product-list table-responsive">
         <div class="col-lg-12 mb-3">
-            <table class="table table-hover align-items-center mt-3">
+            <table class="table table-hover table-lg align-items-center mt-3">
                 <thead>
                     <tr class="table-secondary">
                         <th class="active">
@@ -320,17 +320,16 @@ if(isset($_GET["order"])){
                         <th class="align-middle ps-1" style="max-width: 100px;" scope="col">修圖後</th>
                         <th class="align-middle ps-1" scope="col">已售出</th>
                         <th class="align-middle ps-1" style="max-width: 100px;" scope="col">檔案</th>
-                        <th class="align-middle ps-1" scope="col">操作</th>
                     </tr>
                 </thead>
                 <?php foreach ($rows as $value) : ?>
                     <tbody>
-                        <tr>
-                            <td class="active">
+                        <tr >
+                            <td class="active p-3">
                                 <input type="checkbox" class="select-item checkbox" name="select-item"/>
                             </td>
-                            <td class="ps-1"><?= $value["name"] ?></td>
-                            <td class="ps-1"><?php switch ($value["valid"]):
+                            <td class="ps-1 p-3"><?= $value["name"] ?></td>
+                            <td class="ps-1 p-3"><?php switch ($value["valid"]):
                                                     case "0":
                                                         echo "已下架";
                                                         break;
@@ -342,15 +341,14 @@ if(isset($_GET["order"])){
                                                         break;
                                                 ?>
                                 <?php endswitch; ?>
-                            </td>
-                            <td class="ps-1"><?= $value["category_name"] ?></td>
-                            <td class="ps-1"><?= $value["price"] ?></td>
-                            <td class="ps-1 col-2 text-truncate" style="max-width: 150px;"><?= $value["descriptions"] ?></td>
-                            <td class="ps-1 col-2 text-truncate" style="max-width: 100px;"><?= $value["image_before"] ?></td>
-                            <td class="ps-1 col-2 text-truncate" style="max-width: 100px;"><?= $value["image_after"] ?></td>
-                            <td class="ps-1"><?= $value["sold_total"] ?></td>
-                            <td class="ps-1 col-2 text-truncate" style="max-width: 100px;"><?= $value["dng_pkg"] ?></td>
-                            <td class="ps-1"><a class="btn btn-primary" role="button" href="#">編輯</a> <a class="btn btn-primary" role="button" href="#">更多</a></td>
+                        </td>
+                            <td class="ps-1 p-3"><?= $value["category_name"] ?></td>
+                            <td class="ps-1p-3"><?= $value["price"] ?></td>
+                            <td class="ps-1 col-2 text-truncate p-3" style="max-width: 150px;"><?= $value["descriptions"] ?></td>
+                            <td class="ps-1 col-2 text-truncate p-3" style="max-width: 100px;"><?= $value["image_before"] ?></td>
+                            <td class="ps-1 col-2 text-truncate p-3" style="max-width: 100px;"><?= $value["image_after"] ?></td>
+                            <td class="ps-1 p-3"><?= $value["sold_total"] ?></td>
+                            <td class="ps-1 col-2 text-truncate p-3" style="max-width: 100px;"><?= $value["dng_pkg"] ?></td>
                         </tr>
                     </tbody>
 
