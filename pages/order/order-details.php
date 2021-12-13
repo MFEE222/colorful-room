@@ -86,6 +86,8 @@ try {
         cursor: pointer;
         transition: .5s;
         box-shadow: 0 0 5px 1px #fff;
+        background: #007979;
+        color: #fff;
     }
 
 
@@ -130,6 +132,22 @@ try {
         background-color: #d6d6a5;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
+    }
+    .btn{
+        margin: 5px;
+        padding: 5px 20px;
+        font-size: 18px;
+        color: white;
+        background: #C2C287;
+        border: none;
+        border-radius: 5px;
+    }
+    .btn:hover {
+        cursor: pointer;
+        transition: .5s;
+        box-shadow: 0 0 5px 1px #fff;
+        background: #C2C287;
+        color: #fff;
     }
 </style>
 
@@ -231,7 +249,7 @@ try {
                                 </select>
                             </label>
                             <div class="position-absolute bottom-10 end-5">
-                                <a class="demo btn btn-info align-middle mb-0" data-bs-toggle="modal" data-bs-target="<?= "#exampleModal" . $value['id'] ?>">修改</a>
+                                <a class="demo" data-bs-toggle="modal" data-bs-target="<?= "#exampleModal" . $value['id'] ?>">修改</a>
                             </div>
 
                         </div>
@@ -262,7 +280,7 @@ try {
                             </label>
                             <div class="position-absolute bottom-10 end-5">
                                 <!-- <a class="demo btn btn-info align-middle mb-0" data-bs-toggle="modal" data-bs-target="#exampleModal">修改</a> -->
-                                <a class="demo btn btn-info align-middle mb-0" data-bs-toggle="modal" data-bs-target="<?= "#exampleModal" . $value['id'] ?>">修改</a>
+                                <a class="demo" data-bs-toggle="modal" data-bs-target="<?= "#exampleModal" . $value['id'] ?>">修改</a>
                             </div>
                         </div>
                     </div>
@@ -277,7 +295,7 @@ try {
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <!-- <div class="col">
                 <div class="card1">
                     <div class="card-body">
                         <h5 class="card-title">最後修改時間</h5>
@@ -286,7 +304,7 @@ try {
                         </p>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- modal -->
             <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
@@ -302,8 +320,8 @@ try {
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                            <button type="submit" class="btn btn-primary">確定</button>
+                            <button type="button" class="btn bg-#C2C287" data-bs-dismiss="modal">取消</button>
+                            <button type="submit" class="btn">確定</button>
                         </div>
                     </div>
                 </div>
