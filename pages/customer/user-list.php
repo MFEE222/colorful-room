@@ -77,6 +77,12 @@ if (isset($_GET['keyword'])) {
 // var_dump($_SESSION);
 ?>
 
+<style>
+    #member_list {
+        overflow: auto;
+    }
+</style>
+
 <!-- html head 標籤 -->
 <!-- !!! include 中路徑記得自己改 !!! -->
 <?php include "../../template/head.php"; ?>
@@ -100,7 +106,7 @@ if (isset($_GET['keyword'])) {
                 </div>
                 <hr class="dark horizontal my-0">
                 <!-- card 2 body -->
-                <div class="card-body p-3">
+                <div class="card-body p-3" id="member_list">
                     <!-- <div class="container "> -->
                     <div class="row">
                         <p class="h6">搜尋</p>
@@ -141,7 +147,7 @@ if (isset($_GET['keyword'])) {
                     <?php if ($_GET['table'] == 'member') : ?>
                         <div class="tab-content mt-3" id="nav-tabContent">
                             <div class="tab-pane fade show active " id="nav-member" role="tabpanel" aria-labelledby="nav-member-tab">
-                                <table class="table table-hover align-items-center col-lg-10">
+                                <table class="table table-hover align-items-center col-lg-10" id="user-list-table">
                                     <thead class="mt-2">
                                         <tr>
                                             <th class="text-uppercase text-secondary text-center" scope="col">ID</th>
