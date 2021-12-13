@@ -70,7 +70,6 @@ if (isset($_GET['keyword'])) {
         $stmt->execute();
         $rowsCustomer = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $rowsCount = $stmt->rowCount();
-        //    var_dump($rows);
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
