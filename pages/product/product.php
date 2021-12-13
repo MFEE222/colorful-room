@@ -73,7 +73,7 @@ try {
 // 搜尋
 // 名稱排序 名稱遞減、名稱遞增、價格遞增、價格遞減
 if (isset($_GET["order"])) {
-    echo "Line: ", __LINE__ . "<br>";
+//    echo "Line: ", __LINE__ . "<br>";
     $order = $_GET["order"];
     if ($order === "nameDesc") {
         $sql = " SELECT products. *,category. * FROM products
@@ -100,7 +100,7 @@ if (isset($_GET["order"])) {
 // 名稱 ＋ 類別搜尋
 else if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate"] != "請選擇類別") {
 
-    echo "Line: ", __LINE__ . "<br>";
+//    echo "Line: ", __LINE__ . "<br>";
     $search = $_GET["s"];
     $cate = $_GET["cate"];
     $sql = "SELECT products. *, category. * FROM products
@@ -120,7 +120,7 @@ else if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET[
 }
 // 已售出 數量搜尋
 else if (isset($_GET["sold_min"]) && $_GET["sold_min"] != " " && isset($_GET["sold_max"]) && $_GET["sold_max"] != " " && $_GET["s"] == "" && $_GET["cate"] == "請選擇類別") {
-    echo "Line: ", __LINE__ . "<br>";
+//    echo "Line: ", __LINE__ . "<br>";
     //    echo "sold";
     $sold_min = $_GET['sold_min'];
     $sold_max = $_GET['sold_max'];
@@ -138,8 +138,9 @@ else if (isset($_GET["sold_min"]) && $_GET["sold_min"] != " " && isset($_GET["so
 }
 // 單純名字搜尋
 else if (isset($_GET["s"]) && $_GET["s"] != "") {
-    echo "Line: ", __LINE__ . "<br>";
+//    echo "Line: ", __LINE__ . "<br>";
     $search = $_GET["s"];
+    print_r('%' . $search . '%');
     //        $search = '%'.$search.'%';
     $sql = "SELECT products.*,
                    category.*
@@ -152,6 +153,7 @@ else if (isset($_GET["s"]) && $_GET["s"] != "") {
         $stmt->execute([
             ':SEARCH' => '%' . $search . '%'
         ]);
+        var_dump($stmt->rowCount());
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         //  echo "search";
     } catch (PDOException $e) {
@@ -160,7 +162,7 @@ else if (isset($_GET["s"]) && $_GET["s"] != "") {
 }
 // 單純類別搜尋
 else if (isset($_GET["cate"]) && $_GET["cate"] != "") {
-    echo "Line: ", __LINE__ . "<br>";
+//    echo "Line: ", __LINE__ . "<br>";
     $cate = $_GET["cate"];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
@@ -178,10 +180,10 @@ else if (isset($_GET["cate"]) && $_GET["cate"] != "") {
 }
 // 全部商品
 else if (isset($_GET["view"])) {
-    echo "Line: ", __LINE__ . "<br>";
+//    echo "Line: ", __LINE__ . "<br>";
     $view = $_GET['view'];
     $sql = "SELECT products. *, category. * FROM products
-  JOIN category ON products.category_id = category.category_id ";
+  JOIN category ON products.category_id = category.category_id LIMIT 50";
     $stmt = $db_host->prepare($sql);
     try {
         $stmt->execute();
@@ -192,11 +194,11 @@ else if (isset($_GET["view"])) {
 }
 // 架上商品
 else if (isset($_GET["valid"]) && $_GET["valid"] == "1") {
-    echo "Line: ", __LINE__ . "<br>";
+//    echo "Line: ", __LINE__ . "<br>";
     $valid = $_GET['valid'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
-  WHERE  products.valid=1 ";
+  WHERE  products.valid=1 LIMIT 50";
     $stmt = $db_host->prepare($sql);
     try {
         $stmt->execute();
@@ -207,11 +209,11 @@ else if (isset($_GET["valid"]) && $_GET["valid"] == "1") {
 }
 // 未上架商品
 else if (isset($_GET["valid"]) && $_GET["valid"] == "2") {
-    echo "Line: ", __LINE__ . "<br>";
+//    echo "Line: ", __LINE__ . "<br>";
     $valid = $_GET['valid'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
-  WHERE  products.valid=2 ";
+  WHERE  products.valid=2 LIMIT 50";
     $stmt = $db_host->prepare($sql);
     try {
         $stmt->execute();
@@ -222,11 +224,11 @@ else if (isset($_GET["valid"]) && $_GET["valid"] == "2") {
 }
 // 已下架商品
 else if (isset($_GET["valid"]) && $_GET["valid"] == "0") {
-    echo "Line: ", __LINE__ . "<br>";
+//    echo "Line: ", __LINE__ . "<br>";
     $valid = $_GET['valid'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
-  WHERE  products.valid=0";
+  WHERE  products.valid=0 LIMIT 50";
     $stmt = $db_host->prepare($sql);
     try {
         $stmt->execute();
@@ -237,10 +239,10 @@ else if (isset($_GET["valid"]) && $_GET["valid"] == "0") {
 }
 // 預設情況
 else {
-    echo "Line: ", __LINE__ . "<br>";
+//    echo "Line: ", __LINE__ . "<br>";
     //    $sql = "SELECT * FROM products WHERE valid=1";
     $sql = "SELECT products. *,category. * FROM products
-  JOIN category ON products.category_id = category.category_id 
+  JOIN category ON products.category_id = category.category_id LIMIT 50
   ";
     //WHERE products.valid=1
     $stmt = $db_host->prepare($sql);
