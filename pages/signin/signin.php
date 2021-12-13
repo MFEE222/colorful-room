@@ -84,10 +84,10 @@ session_start();
                                         <label class="form-label">Password</label>
                                         <input type="password" class="form-control" name="admin_password">
                                     </div>
-                                    <div class="form-check form-switch d-flex align-items-center mb-3">
+                                    <!-- <div class="form-check form-switch d-flex align-items-center mb-3">
                                         <input class="form-check-input" type="checkbox" id="rememberMe" name="admin_remember_me">
                                         <label class="form-check-label mb-0 ms-2" for="rememberMe">Remember me</label>
-                                    </div>
+                                    </div> -->
                                     <?php if (!empty($_SESSION['error'])) : ?>
                                         <div class="text-center">
                                             <p><?= $_SESSION['error'] ?></p>

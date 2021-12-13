@@ -1,21 +1,16 @@
 <?php
-// if(!isset($_POST["id"])){
-//     echo "您不是從正常程序進入此頁";
-//     exit();
-// }
 include_once("../var.php");
-// colorful    abc123
 include_once("../signin/do-authorize.php");
 require_once("../../components/pdo-connect.php");
 
-// function post($query)
-// {
-//     echo $_POST[$query] . '<br>';
-// }
-// post('order_id');
-// post('payment_method');
-// post('payment_status');
-// post('remark');
+function post($query)
+{
+    echo $_POST[$query] . '<br>';
+}
+post('id');
+post('payment_method');
+post('order_status');
+post('message');
 $sql = "UPDATE order_tracking
             SET payment_method = ?,
                 payment_status = ?,
