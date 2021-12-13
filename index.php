@@ -3,8 +3,6 @@
 require_once("components/pdo-connect.php");
 include_once("pages/var.php");
 include("pages/signin/do-authorize.php");
-
-// unset($_SESSION['status']);
 ?>
 
 <!-- html head 標籤 -->

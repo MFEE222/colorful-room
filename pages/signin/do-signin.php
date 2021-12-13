@@ -47,7 +47,7 @@ $setting = [
     'error_empty_password' => '密碼不能為空<br>',
     'error_rest_times' => '剩餘嘗試次數：',
     'error_reach_limit' => '已達嘗試次數上限，請稍後再試',
-    'reset_attempt_time' => 10
+    'reset_attempt_time' => 5
 ];
 
 // $session = [

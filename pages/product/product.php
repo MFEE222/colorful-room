@@ -73,7 +73,7 @@ try {
 // 搜尋
 // 名稱排序 名稱遞減、名稱遞增、價格遞增、價格遞減
 if (isset($_GET["order"])) {
-//    echo "Line: ", __LINE__ . "<br>";
+    //    echo "Line: ", __LINE__ . "<br>";
     $order = $_GET["order"];
     if ($order === "nameDesc") {
         $sql = " SELECT products. *,category. * FROM products
@@ -100,7 +100,7 @@ if (isset($_GET["order"])) {
 // 名稱 ＋ 類別搜尋
 else if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET["cate"] != "請選擇類別") {
 
-//    echo "Line: ", __LINE__ . "<br>";
+    //    echo "Line: ", __LINE__ . "<br>";
     $search = $_GET["s"];
     $cate = $_GET["cate"];
     $sql = "SELECT products. *, category. * FROM products
@@ -120,7 +120,7 @@ else if (isset($_GET["s"]) && isset($_GET["cate"]) && $_GET["s"] != "" && $_GET[
 }
 // 已售出 數量搜尋
 else if (isset($_GET["sold_min"]) && $_GET["sold_min"] != " " && isset($_GET["sold_max"]) && $_GET["sold_max"] != " " && $_GET["s"] == "" && $_GET["cate"] == "請選擇類別") {
-//    echo "Line: ", __LINE__ . "<br>";
+    //    echo "Line: ", __LINE__ . "<br>";
     //    echo "sold";
     $sold_min = $_GET['sold_min'];
     $sold_max = $_GET['sold_max'];
@@ -138,7 +138,7 @@ else if (isset($_GET["sold_min"]) && $_GET["sold_min"] != " " && isset($_GET["so
 }
 // 單純名字搜尋
 else if (isset($_GET["s"]) && $_GET["s"] != "") {
-//    echo "Line: ", __LINE__ . "<br>";
+    //    echo "Line: ", __LINE__ . "<br>";
     $search = $_GET["s"];
     print_r('%' . $search . '%');
     //        $search = '%'.$search.'%';
@@ -162,7 +162,7 @@ else if (isset($_GET["s"]) && $_GET["s"] != "") {
 }
 // 單純類別搜尋
 else if (isset($_GET["cate"]) && $_GET["cate"] != "") {
-//    echo "Line: ", __LINE__ . "<br>";
+    //    echo "Line: ", __LINE__ . "<br>";
     $cate = $_GET["cate"];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
@@ -180,7 +180,7 @@ else if (isset($_GET["cate"]) && $_GET["cate"] != "") {
 }
 // 全部商品
 else if (isset($_GET["view"])) {
-//    echo "Line: ", __LINE__ . "<br>";
+    //    echo "Line: ", __LINE__ . "<br>";
     $view = $_GET['view'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id LIMIT 50";
@@ -194,7 +194,7 @@ else if (isset($_GET["view"])) {
 }
 // 架上商品
 else if (isset($_GET["valid"]) && $_GET["valid"] == "1") {
-//    echo "Line: ", __LINE__ . "<br>";
+    //    echo "Line: ", __LINE__ . "<br>";
     $valid = $_GET['valid'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
@@ -209,7 +209,7 @@ else if (isset($_GET["valid"]) && $_GET["valid"] == "1") {
 }
 // 未上架商品
 else if (isset($_GET["valid"]) && $_GET["valid"] == "2") {
-//    echo "Line: ", __LINE__ . "<br>";
+    //    echo "Line: ", __LINE__ . "<br>";
     $valid = $_GET['valid'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
@@ -224,7 +224,7 @@ else if (isset($_GET["valid"]) && $_GET["valid"] == "2") {
 }
 // 已下架商品
 else if (isset($_GET["valid"]) && $_GET["valid"] == "0") {
-//    echo "Line: ", __LINE__ . "<br>";
+    //    echo "Line: ", __LINE__ . "<br>";
     $valid = $_GET['valid'];
     $sql = "SELECT products. *, category. * FROM products
   JOIN category ON products.category_id = category.category_id
@@ -239,7 +239,7 @@ else if (isset($_GET["valid"]) && $_GET["valid"] == "0") {
 }
 // 預設情況
 else {
-//    echo "Line: ", __LINE__ . "<br>";
+    //    echo "Line: ", __LINE__ . "<br>";
     //    $sql = "SELECT * FROM products WHERE valid=1";
     $sql = "SELECT products. *,category. * FROM products
   JOIN category ON products.category_id = category.category_id LIMIT 50
@@ -270,136 +270,157 @@ else {
 <?php include "../../template/body-main-header.php" ?>
 
 <!-- body 2 > main 2 : 右側主內容頁 -->
-<div class="container">
-    <!-- <img src="../../assets/img/products/before/" alt=""> -->
-    <form action="product.php" method="get">
-        <div class="row mt-3 justify-content-evenly">
-            <div class="col-lg-3 d-flex align-items-center ">
-                <label class="my-0 me-3 form-label text-nowrap" id="search">商品名稱</label>
-                <input type="search" class="form-control border border-secondary " id="search" name="s" value="<?php if (isset($search)) echo $search; ?>" placeholder="請輸入...">
-            </div>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <!-- card 1 : header -->
+                <div class="card-header d-flex p-3 pt-2">
+                    <div class="d-flex align-items-center align-content-center bg-gradient-success shadow-info text-center border-radius-xl mt-n4">
+                        <p class="h3 text-white px-4 py-3">商品管理</p>
+                    </div>
+                </div>
+                <hr class="dark horizontal my-0">
+                <!-- card 2 body -->
+                <div class="card-body p-3">
+                    <!-- <img src="../../assets/img/products/before/" alt=""> -->
+                    <form action="product.php" method="get">
+                        <div class="row mt-3 justify-content-evenly">
+                            <div class="col-lg-3 d-flex align-items-center ">
+                                <label class="my-0 me-3 form-label text-nowrap" id="search">商品名稱</label>
+                                <input type="search" class="form-control border border-secondary " id="search" name="s" value="<?php if (isset($search)) echo $search; ?>" placeholder="請輸入...">
+                            </div>
 
-            <div class="col-lg-3 d-flex align-items-center ">
-                <label class="my-0 me-3 form-label text-nowrap" id="cate">類別</label>
-                <select name="cate" id="cate" class="form-control border border-secondary">
-                    <option selected>請選擇類別</option>
-                    <!--                selected="--><?php //if (isset($value["category_id"])) echo "selected";
-                                                        ?>
-                    <?php foreach ($row as $value) : ?>
-                        <option value="<?= $value["category_id"] ?>" <?php if (isset($_GET["cate"]) && $_GET["cate"] == $value["category_id"]) echo "selected";
-                                                                        ?>> <?= $value["category_name"] ?> </option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
+                            <div class="col-lg-3 d-flex align-items-center ">
+                                <label class="my-0 me-3 form-label text-nowrap" id="cate">類別</label>
+                                <select name="cate" id="cate" class="form-control border border-secondary">
+                                    <option selected>請選擇類別</option>
+                                    <!--                selected="--><?php //if (isset($value["category_id"])) echo "selected";
+                                                                        ?>
+                                    <?php foreach ($row as $value) : ?>
+                                        <option value="<?= $value["category_id"] ?>" <?php if (isset($_GET["cate"]) && $_GET["cate"] == $value["category_id"]) echo "selected";
+                                                                                        ?>> <?= $value["category_name"] ?> </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
 
-            <div class="col-lg-4 d-flex align-items-center ">
-                <label class="me-3 my-0 text-nowrap" id="sold">已售出</label>
-                <input class="form-control border border-secondary" type="text" id="sold" name="sold_min" value="<?php if (isset($sold_min)) echo $sold_min; ?>">
-                <span class="mx-2">~</span>
-                <input class="form-control border border-secondary" type="text" id="sold" name="sold_max" value="<?php if (isset($sold_max)) echo $sold_max; ?>">
-            </div>
+                            <div class="col-lg-4 d-flex align-items-center ">
+                                <label class="me-3 my-0 text-nowrap" id="sold">已售出</label>
+                                <input class="form-control border border-secondary" type="text" id="sold" name="sold_min" value="<?php if (isset($sold_min)) echo $sold_min; ?>">
+                                <span class="mx-2">~</span>
+                                <input class="form-control border border-secondary" type="text" id="sold" name="sold_max" value="<?php if (isset($sold_max)) echo $sold_max; ?>">
+                            </div>
 
-            <div class="col-lg-2 d-flex align-items-center ">
-                <button type="submit" class="btn btn-primary text-nowrap m-0">搜尋</button>
-                <a type="reset" class="btn btn-primary m-0 text-nowrap m-3" role="button" href="product.php">重設</a>
-            </div>
-    </form>
+                            <div class="col-lg-2 d-flex align-items-center ">
+                                <button type="submit" class="btn btn-primary text-nowrap m-0">搜尋</button>
+                                <a type="reset" class="btn btn-primary m-0 text-nowrap m-3" role="button" href="product.php">重設</a>
+                            </div>
+                        </div>
+                    </form>
 
-    <div class="col-lg-4 d-flex justify-content-center">
-        <a class="btn btn-lg btn-success my-4" role="button" href="product-add.php">商品上架</a>
-    </div>
+                    <div class="col-lg-4 d-flex justify-content-center">
+                        <a class="btn btn-lg btn-success my-4" role="button" href="product-add.php">商品上架</a>
+                    </div>
 
-    <div class="d-flex mt-2 justify-content-between">
-        <ul class="nav nav-pills category-list mb-2">
-            <li class="nav-item <?php if (isset($view)) echo "active"; ?>">
-                <a class="nav-link " aria-current="page" href="product.php?view">全部<span class="badge text-dark"><?php echo $rowAll[0]["COUNT(valid)"]; ?></span></a>
-            </li>
-            <li class="nav-item <?php if (isset($valid) && $valid === "1") echo "active"; ?>">
-                <a class="nav-link " href="product.php?valid=1">架上商品<span class="badge text-dark"><?php echo $row1[0]["COUNT(valid)"]; ?></span></span></a>
-            </li>
-            <li class="nav-item <?php if (isset($valid) && $valid === "2") echo "active"; ?>">
-                <a class="nav-link " href="product.php?valid=2">未上架<span class="badge text-dark"><?php echo $row2[0]["COUNT(valid)"];; ?></span></a>
-            </li>
-            <li class="nav-item <?php if (isset($valid) && $valid === "0") echo "active"; ?>">
-                <a class="nav-link " href="product.php?valid=0">已下架<span class="badge text-dark"><?php echo $row0[0]["COUNT(valid)"];; ?></span></a>
-            </li>
-        </ul>
-        <div class="py-2 d-flex justify-content-end order-block">
-            <div>排序
-                <a class="<?php if (isset($order) && $order === "nameDesc") echo "active" ?> font-weight-bold" href="product.php?order=nameDesc">名稱 ↓</a>
-                <a class="<?php if (isset($order) && $order === "nameAsc") echo "active" ?> font-weight-bold" href="product.php?order=nameAsc">名稱 ↑</a>
-                <a class="<?php if (isset($order) && $order === "priceDesc") echo "active" ?> font-weight-bold" href="product.php?order=priceDesc">價錢 ↓</a>
-                <a class="<?php if (isset($order) && $order === "priceAsc") echo "active" ?> font-weight-bold" href="product.php?order=priceAsc">價錢 ↑</a>
+                    <div class="d-flex mt-2 justify-content-between">
+                        <ul class="nav nav-pills category-list mb-2">
+                            <li class="nav-item <?php if (isset($view)) echo "active"; ?>">
+                                <a class="nav-link " aria-current="page" href="product.php?view">全部<span class="badge text-dark"><?php echo $rowAll[0]["COUNT(valid)"]; ?></span></a>
+                            </li>
+                            <li class="nav-item <?php if (isset($valid) && $valid === "1") echo "active"; ?>">
+                                <a class="nav-link " href="product.php?valid=1">架上商品<span class="badge text-dark"><?php echo $row1[0]["COUNT(valid)"]; ?></span></span></a>
+                            </li>
+                            <li class="nav-item <?php if (isset($valid) && $valid === "2") echo "active"; ?>">
+                                <a class="nav-link " href="product.php?valid=2">未上架<span class="badge text-dark"><?php echo $row2[0]["COUNT(valid)"];; ?></span></a>
+                            </li>
+                            <li class="nav-item <?php if (isset($valid) && $valid === "0") echo "active"; ?>">
+                                <a class="nav-link " href="product.php?valid=0">已下架<span class="badge text-dark"><?php echo $row0[0]["COUNT(valid)"];; ?></span></a>
+                            </li>
+                        </ul>
+                        <div class="py-2 d-flex justify-content-end order-block">
+                            <div>排序
+                                <a class="<?php if (isset($order) && $order === "nameDesc") echo "active" ?> font-weight-bold" href="product.php?order=nameDesc">名稱 ↓</a>
+                                <a class="<?php if (isset($order) && $order === "nameAsc") echo "active" ?> font-weight-bold" href="product.php?order=nameAsc">名稱 ↑</a>
+                                <a class="<?php if (isset($order) && $order === "priceDesc") echo "active" ?> font-weight-bold" href="product.php?order=priceDesc">價錢 ↓</a>
+                                <a class="<?php if (isset($order) && $order === "priceAsc") echo "active" ?> font-weight-bold" href="product.php?order=priceAsc">價錢 ↑</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row product-list table-responsive">
+                        <div class="col-lg-12 mb-3">
+                            <table class="table table-hover table-lg align-items-center mt-3">
+                                <thead>
+                                    <tr class="table-secondary">
+                                        <th class="active">
+                                            <input type="checkbox" class="select-all checkbox" name="select-all" />
+                                        </th>
+                                        <th class="align-middle ps-1" scope="col">商品名稱</th>
+                                        <th class="align-middle ps-1" scope="col">商品狀態</th>
+                                        <th class="align-middle ps-1" scope="col">類別</th>
+                                        <th class="align-middle ps-1" scope="col">價格</th>
+                                        <th class="align-middle ps-1" style="max-width: 150px;" scope="col">描述</th>
+                                        <th class="align-middle ps-1" style="max-width: 100px;" scope="col">修圖前</th>
+                                        <th class="align-middle ps-1" style="max-width: 100px;" scope="col">修圖後</th>
+                                        <th class="align-middle ps-1" scope="col">已售出</th>
+                                        <th class="align-middle ps-1" style="max-width: 100px;" scope="col">檔案</th>
+                                    </tr>
+                                </thead>
+                                <?php foreach ($rows as $value) : ?>
+                                    <tbody>
+                                        <tr>
+                                            <td class="active p-3">
+                                                <input type="checkbox" class="select-item checkbox" name="select-item" />
+                                            </td>
+                                            <td class="ps-1 p-3"><?= $value["name"] ?></td>
+                                            <td class="ps-1 p-3"><?php switch ($value["valid"]):
+                                                                        case "0":
+                                                                            echo "已下架";
+                                                                            break;
+                                                                        case "1":
+                                                                            echo "架上商品";
+                                                                            break;
+                                                                        case "2":
+                                                                            echo "未上架";
+                                                                            break;
+                                                                    ?>
+                                                <?php endswitch; ?>
+                                            </td>
+                                            <td class="ps-1 p-3"><?= $value["category_name"] ?></td>
+                                            <td class="ps-1p-3"><?= $value["price"] ?></td>
+                                            <td class="ps-1 col-2 text-truncate p-3" style="max-width: 150px;"><?= $value["descriptions"] ?></td>
+                                            <td class="ps-1 col-2 text-truncate p-3" style="max-width: 100px;"><?= $value["image_before"] ?></td>
+                                            <td class="ps-1 col-2 text-truncate p-3" style="max-width: 100px;"><?= $value["image_after"] ?></td>
+                                            <td class="ps-1 p-3"><?= $value["sold_total"] ?></td>
+                                            <td class="ps-1 col-2 text-truncate p-3" style="max-width: 100px;"><?= $value["dng_pkg"] ?></td>
+                                        </tr>
+                                    </tbody>
+
+                                <?php endforeach; ?>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Checkbox  -->
+                    <button id="select-all" class="btn button-default">SelectAll/Cancel</button>
+                    <button id="select-invert" class="btn button-default">Invert</button>
+                    <button id="selected" class="btn button-default">GetSelected</button>
+
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="row product-list table-responsive">
-        <div class="col-lg-12 mb-3">
-            <table class="table table-hover table-lg align-items-center mt-3">
-                <thead>
-                    <tr class="table-secondary">
-                        <th class="active">
-                            <input type="checkbox" class="select-all checkbox" name="select-all" />
-                        </th>
-                        <th class="align-middle ps-1" scope="col">商品名稱</th>
-                        <th class="align-middle ps-1" scope="col">商品狀態</th>
-                        <th class="align-middle ps-1" scope="col">類別</th>
-                        <th class="align-middle ps-1" scope="col">價格</th>
-                        <th class="align-middle ps-1" style="max-width: 150px;" scope="col">描述</th>
-                        <th class="align-middle ps-1" style="max-width: 100px;" scope="col">修圖前</th>
-                        <th class="align-middle ps-1" style="max-width: 100px;" scope="col">修圖後</th>
-                        <th class="align-middle ps-1" scope="col">已售出</th>
-                        <th class="align-middle ps-1" style="max-width: 100px;" scope="col">檔案</th>
-                    </tr>
-                </thead>
-                <?php foreach ($rows as $value) : ?>
-                    <tbody>
-                        <tr>
-                            <td class="active p-3">
-                                <input type="checkbox" class="select-item checkbox" name="select-item" />
-                            </td>
-                            <td class="ps-1 p-3"><?= $value["name"] ?></td>
-                            <td class="ps-1 p-3"><?php switch ($value["valid"]):
-                                                        case "0":
-                                                            echo "已下架";
-                                                            break;
-                                                        case "1":
-                                                            echo "架上商品";
-                                                            break;
-                                                        case "2":
-                                                            echo "未上架";
-                                                            break;
-                                                    ?>
-                                <?php endswitch; ?>
-                            </td>
-                            <td class="ps-1 p-3"><?= $value["category_name"] ?></td>
-                            <td class="ps-1p-3"><?= $value["price"] ?></td>
-                            <td class="ps-1 col-2 text-truncate p-3" style="max-width: 150px;"><?= $value["descriptions"] ?></td>
-                            <td class="ps-1 col-2 text-truncate p-3" style="max-width: 100px;"><?= $value["image_before"] ?></td>
-                            <td class="ps-1 col-2 text-truncate p-3" style="max-width: 100px;"><?= $value["image_after"] ?></td>
-                            <td class="ps-1 p-3"><?= $value["sold_total"] ?></td>
-                            <td class="ps-1 col-2 text-truncate p-3" style="max-width: 100px;"><?= $value["dng_pkg"] ?></td>
-                        </tr>
-                    </tbody>
-
-                <?php endforeach; ?>
-            </table>
-        </div>
-    </div>
-
-    <!-- body 2 > main 3 : 右側主內容下方頁尾 -->
-    <?php include "../../template/body-main-footer.php" ?>
-
-    <!-- body 3 : 右下頁面設定按鈕  -->
-    <?php include "../../template/body-corner.php" ?>
-
-
-    <!-- Checkbox  -->
-    <button id="select-all" class="btn button-default">SelectAll/Cancel</button>
-    <button id="select-invert" class="btn button-default">Invert</button>
-    <button id="selected" class="btn button-default">GetSelected</button>
 </div>
+
+
+<!-- body 2 > main 3 : 右側主內容下方頁尾 -->
+<?php include "../../template/body-main-footer.php" ?>
+
+<!-- body 3 : 右下頁面設定按鈕  -->
+<?php include "../../template/body-corner.php" ?>
+
 <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script>

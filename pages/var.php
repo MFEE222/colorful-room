@@ -24,6 +24,7 @@ $url_page_customer_edit = '/colorful-room/pages/customer/customer-edit.php';
 // 登入
 $url_page_signin    = '/colorful-room/pages/signin/signin.php';
 $url_page_signin_do = '/colorful-room/pages/signin/do-signin.php';
+$url_page_signout_do = '/colorful-room/pages/signin/do-signout.php';
 
 // ============================================================================
 //  Session

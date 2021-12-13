@@ -53,7 +53,7 @@ $os = new OrderSearch();
 //  - filter_status
 
 // Session (array)
-$orders_head = ["total"=>0];
+$orders_head = ["total" => 0];
 $orders_body = [];
 if (isset($_SESSION['orders_head']))
     $orders_head = $_SESSION['orders_head'];
@@ -382,3 +382,24 @@ function status_desc($sts_id)
 
 <!-- body 3 : 右下頁面設定按鈕  -->
 <?php include "../../template/body-corner.php" ?>
+
+
+<!-- <div class="container-fluid py-4">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header d-flex p-3 pt-2">
+                    <div class="d-flex align-items-center align-content-center bg-gradient-info shadow-info text-center border-radius-xl mt-n4">
+                        <p class="h3 text-white px-4 py-3"><?= $os->page_header ?></p>
+                    </div>
+                </div>
+                <hr class="dark horizontal my-0">
+                <div class="card-body p-3">
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div> -->
