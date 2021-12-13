@@ -21,6 +21,7 @@ $sql = "SELECT orders_detail.*,
                member.name AS m_name,
                member.email AS m_email,
                member.phone AS m_phone,
+               orders.id AS order_id,
                orders.status_id AS o_status,
                orders.payment_id AS o_payment,
                payment.description AS o_payment_desc,
@@ -34,7 +35,6 @@ $sql = "SELECT orders_detail.*,
             JOIN orders_status ON orders.status_id = orders_status.id
             JOIN discount ON orders_detail.discount_id = discount.id
         WHERE orders_id = :orders_id";
-// echo 'breakpoint' . __LINE__ . '<br>';
 
 $pdo = $db_host->prepare($sql);
 try {
@@ -157,13 +157,14 @@ try {
 
 
     <?php foreach ($rows as $value) : ?>
-
-        <form action="do-order-detail-edit.php?id= <?= $value['id'] ?>" method="POST">
+        <form action="do-order-detail-edit.php" method="POST">
             <div class="row">
                 <div class="col-9 me-auto">
                     <p>訂單編號 : <?= $value["orders_id"] ?></p>
                     <p>訂單明細 : <?= $value['id'] ?></p>
                     <p>訂購日期 : <?= $value["created_at"] ?></p>
+                    <input type="text" name="order_id" value="<?= $value['order_id'] ?>" class="d-none">
+                    <input type="text" name="order_detail_id" value="<?= $value['id'] ?>" class="d-none">
                 </div>
             </div>
             <div class="row">
@@ -209,15 +210,34 @@ try {
                             <hr>
                             <label for="payment_method" class="card-text d-block">
                                 付款方式：
-                                <input type="text" id="payment_method" class="card-text border-0 rounded-2 text-muted bg-light p-2" name="payment_method" value="<?= $value['o_payment_desc'] ?>">
+                                <!-- <input type="text" id="payment_method" class="card-text border-0 rounded-2 text-muted bg-light p-2" name="payment_method" value="<?= $value['o_payment_desc'] ?>"> -->
+                                <!-- <input type="text" id="payment_method" class="card-text border-0 rounded-2 text-muted bg-light p-2 d-none" name="payment_id" value="<?= $value['o_payment'] ?>"> -->
+
+                                <select class="card-text border-0 rounded-2 text-dark bg-light p-2 ms-2" name="payment_id" id="payment_method" value="<?= $value['o_payment'] ?>">
+                                    <option value="1">信用卡</option>
+                                    <option value="2">超商代碼</option>
+                                    <option value="3">Line Pay</option>
+                                    <option value="4">Apple Pay</option>
+                                    <option value="5">Google Pay</option>
+                                    <option value="6">Paypal</option>
+                                </select>
 
                             </label>
                             <label for="order_status">
                                 訂單狀態：
-                                <input type="text" id="order_status" class="card-text border-0 rounded-2 text-muted bg-light p-2" name="order_status" value="<?= $value['o_status_desc'] ?>">
+                                <!-- <input type="text" id="order_status" class="card-text border-0 rounded-2 text-muted bg-light p-2" name="order_status" value="<?= $value['o_status_desc'] ?>">
+                                <input type="text" id="order_status" class="card-text border-0 rounded-2 text-muted bg-light p-2 d-none" name="status_id" value="<?= $value['o_status'] ?>"> -->
+                                <select class="card-text border-0 rounded-2 text-dark bg-light p-2 ms-2" name="status_id" id="status_id" value="<?= $value['o_status'] ?>">
+                                    <option value="1">未付款</option>
+                                    <option value="2">已付款</option>
+                                    <option value="3">已取消</option>
+                                    <option value="4">退貨中</option>
+                                    <option value="5">已退貨</option>
+                                </select>
                             </label>
                             <div class="position-absolute bottom-10 end-5">
-                                <a class="demo btn btn-info align-middle mb-0" data-bs-toggle="modal" data-bs-target="#exampleModal">編輯</a>
+                                <!-- <a class="demo btn btn-info align-middle mb-0" data-bs-toggle="modal" data-bs-target="#exampleModal">修改</a> -->
+                                <a class="demo btn btn-info align-middle mb-0" data-bs-toggle="modal" data-bs-target="<?= "#exampleModal" . $value['id'] ?>">修改</a>
                             </div>
 
                         </div>
@@ -247,7 +267,8 @@ try {
                                 <input type="text" id="message" class="card-text border-0 rounded-2 text-muted bg-light p-2" name="message" value="<?= $value['message'] ?>">
                             </label>
                             <div class="position-absolute bottom-10 end-5">
-                                <button type="submit" class="btn btn-info align-middle mb-0">修改</button>
+                                <!-- <a class="demo btn btn-info align-middle mb-0" data-bs-toggle="modal" data-bs-target="#exampleModal">修改</a> -->
+                                <a class="demo btn btn-info align-middle mb-0" data-bs-toggle="modal" data-bs-target="<?= "#exampleModal" . $value['id'] ?>">修改</a>
                             </div>
                         </div>
                     </div>
@@ -272,28 +293,30 @@ try {
                     </div>
                 </div>
             </div>
+
+            <!-- modal -->
+            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+            <div class="modal fade" id="<?= "exampleModal" . $value['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">確定修改訂單嗎?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            檢查一下再送出唷
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                            <button type="submit" class="btn btn-primary">確定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     <?php endforeach; ?>
 
-    <!-- modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">確定修改訂單嗎?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    檢查一下再送出唷
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                    <button type="submit" class="btn btn-primary" href="do-detail-update.php">確定</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script>
