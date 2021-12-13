@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2021-12-13 04:34:15
+-- 產生時間： 2021-12-13 17:00:14
 -- 伺服器版本： 10.4.21-MariaDB
 -- PHP 版本： 8.0.12
 
@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 --
 -- 資料庫: `colorful`
 --
+DROP DATABASE IF EXISTS `colorful`;
+CREATE DATABASE IF NOT EXISTS `colorful` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `colorful`;
 
 -- --------------------------------------------------------
 
@@ -27,6 +30,7 @@ SET time_zone = "+00:00";
 -- 資料表結構 `admin`
 --
 
+DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `admin_id` int(6) UNSIGNED NOT NULL,
   `admin_account` varchar(30) DEFAULT NULL,
@@ -49,6 +53,7 @@ INSERT INTO `admin` (`admin_id`, `admin_account`, `admin_password`, `admin_name`
 -- 資料表結構 `category`
 --
 
+DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `category_id` int(6) UNSIGNED NOT NULL,
   `category_name` varchar(30) NOT NULL,
@@ -72,6 +77,7 @@ INSERT INTO `category` (`category_id`, `category_name`, `category_description`) 
 -- 資料表結構 `customer`
 --
 
+DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL,
   `account` varchar(50) DEFAULT NULL,
@@ -1098,6 +1104,7 @@ INSERT INTO `customer` (`id`, `account`, `name`, `password`, `email`, `phone`, `
 -- 資料表結構 `discount`
 --
 
+DROP TABLE IF EXISTS `discount`;
 CREATE TABLE `discount` (
   `id` int(11) NOT NULL,
   `code` varchar(30) NOT NULL,
@@ -1120,6 +1127,7 @@ INSERT INTO `discount` (`id`, `code`, `status`, `amount`) VALUES
 -- 資料表結構 `member`
 --
 
+DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
   `id` int(11) NOT NULL,
   `account` varchar(50) DEFAULT NULL,
@@ -2152,6 +2160,7 @@ INSERT INTO `member` (`id`, `account`, `name`, `birthday`, `discount_id`, `gende
 -- 資料表結構 `order-detail`
 --
 
+DROP TABLE IF EXISTS `order-detail`;
 CREATE TABLE `order-detail` (
   `product_id` int(6) UNSIGNED NOT NULL,
   `amount` int(4) UNSIGNED NOT NULL,
@@ -2173,6 +2182,7 @@ INSERT INTO `order-detail` (`product_id`, `amount`, `order_id`, `sum`) VALUES
 -- 資料表結構 `orders`
 --
 
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `oid` int(11) NOT NULL,
   `customer_id` int(11) DEFAULT NULL,
@@ -3197,6 +3207,7 @@ INSERT INTO `orders` (`oid`, `customer_id`, `member_id`, `payment_id`, `phone`, 
 -- 資料表結構 `orders_detail`
 --
 
+DROP TABLE IF EXISTS `orders_detail`;
 CREATE TABLE `orders_detail` (
   `odid` int(11) NOT NULL,
   `orders_id` int(11) DEFAULT NULL,
@@ -4223,6 +4234,7 @@ INSERT INTO `orders_detail` (`odid`, `orders_id`, `member_id`, `products_id`, `s
 -- 資料表結構 `order_tracking`
 --
 
+DROP TABLE IF EXISTS `order_tracking`;
 CREATE TABLE `order_tracking` (
   `id` int(6) NOT NULL,
   `order_num` int(6) NOT NULL,
@@ -4251,6 +4263,7 @@ INSERT INTO `order_tracking` (`id`, `order_num`, `user_id`, `date`, `payment_sta
 -- 資料表結構 `payment`
 --
 
+DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
   `id` int(6) NOT NULL,
   `description` varchar(30) DEFAULT NULL,
@@ -4275,6 +4288,7 @@ INSERT INTO `payment` (`id`, `description`, `valid`) VALUES
 -- 資料表結構 `products`
 --
 
+DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `category_id` int(11) DEFAULT NULL,
@@ -5306,7 +5320,20 @@ INSERT INTO `products` (`id`, `category_id`, `name`, `price`, `descriptions`, `i
 (999, 1, 'Banana Turning', 10, 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.', '../../assets/img/products/before/', '../../assets/img/products/after/', '../../assets/img/products/dng_pkg/', 3086, '2021-04-21', '2021-07-16', '2021-11-04', 1),
 (1000, 2, 'Southern Comfort', 10, 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.', '../../assets/img/products/before/', '../../assets/img/products/after/', '../../assets/img/products/dng_pkg/', 8460, '2021-07-28', '2021-03-14', '2021-08-10', 1),
 (1001, 0, '', 0, '', '', '', '', NULL, '2021-12-13', '0000-00-00', '0000-00-00', 1),
-(1002, 4, '人像色調包', 100, '現代電影Lightroom移動端和桌面預設收集將幫助您改善豐富的色調現代電影調色妳的照片。此系列允許初學者通過添加自定義電影色調快速增強您的攝影師，並只需點擊一下即可制作完美的照片。它適用於任何類型的照片，如肖像攝影，戶外攝影，生活攝影，創意攝影，旅遊攝影，街頭攝影，城市攝影，風景攝影，時尚攝影，夜總會派對，活動攝影師，音樂會和婚禮派對攝影師。', 'B人像_1.jpg', 'A人像_1.jpg', '人像_1.dng', NULL, '2021-12-13', '0000-00-00', '0000-00-00', 1);
+(1002, 4, '人像色調包', 100, '現代電影Lightroom移動端和桌面預設收集將幫助您改善豐富的色調現代電影調色妳的照片。此系列允許初學者通過添加自定義電影色調快速增強您的攝影師，並只需點擊一下即可制作完美的照片。它適用於任何類型的照片，如肖像攝影，戶外攝影，生活攝影，創意攝影，旅遊攝影，街頭攝影，城市攝影，風景攝影，時尚攝影，夜總會派對，活動攝影師，音樂會和婚禮派對攝影師。', 'B人像_1.jpg', 'A人像_1.jpg', '人像_1.dng', NULL, '2021-12-13', '0000-00-00', '0000-00-00', 1),
+(1003, 4, '婚禮1', 100, '婚禮1', 'A人像_3.jpg', 'B人像_3.jpg', '人像_3.dng', NULL, '2021-12-13', '0000-00-00', '0000-00-00', 1),
+(1004, 3, '婚禮3', 100, '婚禮1', 'A人像_3.jpg', 'B人像_3.jpg', '人像_3.dng', NULL, '2021-12-13', '0000-00-00', '0000-00-00', 1),
+(1005, 4, 'Alice', 100, 'awdaw', 'A人像_3.jpg', 'B人像_3.jpg', '人像_3.dng', NULL, '2021-12-13', '0000-00-00', '0000-00-00', 1),
+(1006, 1, '人像100', 100, 'awdaw', 'A人像_3.jpg', 'B人像_3.jpg', '人像_3.dng', NULL, '2021-12-13', '0000-00-00', '0000-00-00', 1),
+(1007, 4, '人像1', 100, 'awdawjfiji3jiojojoijoijoijoijeiji3', 'A人像_3.jpg', 'B人像_3.jpg', '人像_3.dng', NULL, '2021-12-13', '0000-00-00', '0000-00-00', 1),
+(1032, 0, '', 0, '', '../..assets/img/products/before/A人像_3.jpg', '../..assets/img/products/after/B人像_3.jpg', '../..assets/img/products/dng_pkg/人像_3.dng', NULL, '2021-12-13', '0000-00-00', '0000-00-00', 1),
+(1033, 0, 'Alice', 0, '', '../..assets/img/products/before/A人像_3.jpg', '../..assets/img/products/after/B人像_3.jpg', '../..assets/img/products/dng_pkg/人像_3.dng', NULL, '2021-12-13', '0000-00-00', '0000-00-00', 1),
+(1034, 0, '', 0, '', '../..assets/img/products/before/A人像_3.jpg', '../..assets/img/products/after/B人像_3.jpg', '../..assets/img/products/dng_pkg/人像_3.dng', NULL, '2021-12-13', '0000-00-00', '0000-00-00', 1),
+(1035, 0, '', 0, '', '../..assets/img/products/before/', '../..assets/img/products/after/', '../..assets/img/products/dng_pkg/人像_3.dng', NULL, '2021-12-13', '0000-00-00', '0000-00-00', 1),
+(1036, 0, '', 0, '', '../../assets/img/products/before/B人像_3.jpg', '../../assets/img/products/after/', '../../assets/img/products/dng_pkg/人像_3.dng', NULL, '2021-12-13', '0000-00-00', '0000-00-00', 1),
+(1046, 0, 'Alice', 0, '', 'A人像_2.jpg', 'B人像_2.jpg', '人像_2.dng', NULL, '2021-12-13', '0000-00-00', '0000-00-00', 1),
+(1047, 0, 'Alice', 0, '', 'A人像_3.jpg', 'B人像_3.jpg', '人像_3.dng', NULL, '2021-12-13', '0000-00-00', '0000-00-00', 1),
+(1050, 4, 'UploadTest', 100, 'awdaw', 'b-Film_1.jpg', 'a-Film_1.jpg', 'Film_1.dng', NULL, '2021-12-13', '2021-12-01', '2021-12-31', 1);
 
 -- --------------------------------------------------------
 
@@ -5314,6 +5341,7 @@ INSERT INTO `products` (`id`, `category_id`, `name`, `price`, `descriptions`, `i
 -- 資料表結構 `subscribe`
 --
 
+DROP TABLE IF EXISTS `subscribe`;
 CREATE TABLE `subscribe` (
   `id` int(3) UNSIGNED NOT NULL,
   `subscribe_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5336,6 +5364,7 @@ INSERT INTO `subscribe` (`id`, `subscribe_name`, `subscribe_describe`) VALUES
 -- 資料表結構 `tag`
 --
 
+DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag` (
   `id` int(6) UNSIGNED NOT NULL,
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
@@ -5487,7 +5516,7 @@ ALTER TABLE `payment`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1003;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1051;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `subscribe`
@@ -5500,6 +5529,532 @@ ALTER TABLE `subscribe`
 --
 ALTER TABLE `tag`
   MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- 資料庫: `my_db`
+--
+DROP DATABASE IF EXISTS `my_db`;
+CREATE DATABASE IF NOT EXISTS `my_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `my_db`;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(4) UNSIGNED NOT NULL,
+  `account` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `user`
+--
+
+INSERT INTO `user` (`id`, `account`, `name`, `gender`) VALUES
+(1, '', '', 0),
+(2, 'may', 'may', 0),
+(3, 'jay', 'jay', 1);
+
+--
+-- 已傾印資料表的索引
+--
+
+--
+-- 資料表索引 `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+--
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- 資料庫: `phpmyadmin`
+--
+DROP DATABASE IF EXISTS `phpmyadmin`;
+CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `phpmyadmin`;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__bookmark`
+--
+
+DROP TABLE IF EXISTS `pma__bookmark`;
+CREATE TABLE `pma__bookmark` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `dbase` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `user` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `label` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `query` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Bookmarks';
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__central_columns`
+--
+
+DROP TABLE IF EXISTS `pma__central_columns`;
+CREATE TABLE `pma__central_columns` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_type` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_length` text COLLATE utf8_bin DEFAULT NULL,
+  `col_collation` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_isNull` tinyint(1) NOT NULL,
+  `col_extra` varchar(255) COLLATE utf8_bin DEFAULT '',
+  `col_default` text COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Central list of columns';
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__column_info`
+--
+
+DROP TABLE IF EXISTS `pma__column_info`;
+CREATE TABLE `pma__column_info` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `column_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `comment` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `mimetype` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `transformation` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `transformation_options` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `input_transformation` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `input_transformation_options` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Column information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__designer_settings`
+--
+
+DROP TABLE IF EXISTS `pma__designer_settings`;
+CREATE TABLE `pma__designer_settings` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `settings_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__export_templates`
+--
+
+DROP TABLE IF EXISTS `pma__export_templates`;
+CREATE TABLE `pma__export_templates` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `export_type` varchar(10) COLLATE utf8_bin NOT NULL,
+  `template_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `template_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved export templates';
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__favorite`
+--
+
+DROP TABLE IF EXISTS `pma__favorite`;
+CREATE TABLE `pma__favorite` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `tables` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Favorite tables';
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__history`
+--
+
+DROP TABLE IF EXISTS `pma__history`;
+CREATE TABLE `pma__history` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `username` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `db` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp(),
+  `sqlquery` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='SQL history for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__navigationhiding`
+--
+
+DROP TABLE IF EXISTS `pma__navigationhiding`;
+CREATE TABLE `pma__navigationhiding` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `item_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `item_type` varchar(64) COLLATE utf8_bin NOT NULL,
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Hidden items of navigation tree';
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__pdf_pages`
+--
+
+DROP TABLE IF EXISTS `pma__pdf_pages`;
+CREATE TABLE `pma__pdf_pages` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `page_nr` int(10) UNSIGNED NOT NULL,
+  `page_descr` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='PDF relation pages for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__recent`
+--
+
+DROP TABLE IF EXISTS `pma__recent`;
+CREATE TABLE `pma__recent` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `tables` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Recently accessed tables';
+
+--
+-- 傾印資料表的資料 `pma__recent`
+--
+
+INSERT INTO `pma__recent` (`username`, `tables`) VALUES
+('root', '[{\"db\":\"colorful\",\"table\":\"products\"},{\"db\":\"colorful\",\"table\":\"customer\"},{\"db\":\"colorful\",\"table\":\"subscribe\"},{\"db\":\"colorful\",\"table\":\"category\"},{\"db\":\"colorful\",\"table\":\"admin\"},{\"db\":\"colorful\",\"table\":\"member\"},{\"db\":\"my_db\",\"table\":\"user\"},{\"db\":\"colorful\",\"table\":\"tag\"}]');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__relation`
+--
+
+DROP TABLE IF EXISTS `pma__relation`;
+CREATE TABLE `pma__relation` (
+  `master_db` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `master_table` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `master_field` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `foreign_db` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `foreign_table` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `foreign_field` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Relation table';
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__savedsearches`
+--
+
+DROP TABLE IF EXISTS `pma__savedsearches`;
+CREATE TABLE `pma__savedsearches` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `search_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `search_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved searches';
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__table_coords`
+--
+
+DROP TABLE IF EXISTS `pma__table_coords`;
+CREATE TABLE `pma__table_coords` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `pdf_page_number` int(11) NOT NULL DEFAULT 0,
+  `x` float UNSIGNED NOT NULL DEFAULT 0,
+  `y` float UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table coordinates for phpMyAdmin PDF output';
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__table_info`
+--
+
+DROP TABLE IF EXISTS `pma__table_info`;
+CREATE TABLE `pma__table_info` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `display_field` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__table_uiprefs`
+--
+
+DROP TABLE IF EXISTS `pma__table_uiprefs`;
+CREATE TABLE `pma__table_uiprefs` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `prefs` text COLLATE utf8_bin NOT NULL,
+  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
+
+--
+-- 傾印資料表的資料 `pma__table_uiprefs`
+--
+
+INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
+('root', 'colorful', 'products', '{\"sorted_col\":\"`id`  DESC\"}', '2021-12-13 15:46:10');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__tracking`
+--
+
+DROP TABLE IF EXISTS `pma__tracking`;
+CREATE TABLE `pma__tracking` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `version` int(10) UNSIGNED NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_updated` datetime NOT NULL,
+  `schema_snapshot` text COLLATE utf8_bin NOT NULL,
+  `schema_sql` text COLLATE utf8_bin DEFAULT NULL,
+  `data_sql` longtext COLLATE utf8_bin DEFAULT NULL,
+  `tracking` set('UPDATE','REPLACE','INSERT','DELETE','TRUNCATE','CREATE DATABASE','ALTER DATABASE','DROP DATABASE','CREATE TABLE','ALTER TABLE','RENAME TABLE','DROP TABLE','CREATE INDEX','DROP INDEX','CREATE VIEW','ALTER VIEW','DROP VIEW') COLLATE utf8_bin DEFAULT NULL,
+  `tracking_active` int(1) UNSIGNED NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database changes tracking for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__userconfig`
+--
+
+DROP TABLE IF EXISTS `pma__userconfig`;
+CREATE TABLE `pma__userconfig` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `config_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User preferences storage for phpMyAdmin';
+
+--
+-- 傾印資料表的資料 `pma__userconfig`
+--
+
+INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
+('root', '2021-12-13 15:51:31', '{\"Console\\/Mode\":\"collapse\",\"lang\":\"zh_TW\"}');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__usergroups`
+--
+
+DROP TABLE IF EXISTS `pma__usergroups`;
+CREATE TABLE `pma__usergroups` (
+  `usergroup` varchar(64) COLLATE utf8_bin NOT NULL,
+  `tab` varchar(64) COLLATE utf8_bin NOT NULL,
+  `allowed` enum('Y','N') COLLATE utf8_bin NOT NULL DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User groups with configured menu items';
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__users`
+--
+
+DROP TABLE IF EXISTS `pma__users`;
+CREATE TABLE `pma__users` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `usergroup` varchar(64) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and their assignments to user groups';
+
+--
+-- 已傾印資料表的索引
+--
+
+--
+-- 資料表索引 `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `pma__central_columns`
+--
+ALTER TABLE `pma__central_columns`
+  ADD PRIMARY KEY (`db_name`,`col_name`);
+
+--
+-- 資料表索引 `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `db_name` (`db_name`,`table_name`,`column_name`);
+
+--
+-- 資料表索引 `pma__designer_settings`
+--
+ALTER TABLE `pma__designer_settings`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- 資料表索引 `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_user_type_template` (`username`,`export_type`,`template_name`);
+
+--
+-- 資料表索引 `pma__favorite`
+--
+ALTER TABLE `pma__favorite`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- 資料表索引 `pma__history`
+--
+ALTER TABLE `pma__history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`,`db`,`table`,`timevalue`);
+
+--
+-- 資料表索引 `pma__navigationhiding`
+--
+ALTER TABLE `pma__navigationhiding`
+  ADD PRIMARY KEY (`username`,`item_name`,`item_type`,`db_name`,`table_name`);
+
+--
+-- 資料表索引 `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  ADD PRIMARY KEY (`page_nr`),
+  ADD KEY `db_name` (`db_name`);
+
+--
+-- 資料表索引 `pma__recent`
+--
+ALTER TABLE `pma__recent`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- 資料表索引 `pma__relation`
+--
+ALTER TABLE `pma__relation`
+  ADD PRIMARY KEY (`master_db`,`master_table`,`master_field`),
+  ADD KEY `foreign_field` (`foreign_db`,`foreign_table`);
+
+--
+-- 資料表索引 `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_savedsearches_username_dbname` (`username`,`db_name`,`search_name`);
+
+--
+-- 資料表索引 `pma__table_coords`
+--
+ALTER TABLE `pma__table_coords`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`pdf_page_number`);
+
+--
+-- 資料表索引 `pma__table_info`
+--
+ALTER TABLE `pma__table_info`
+  ADD PRIMARY KEY (`db_name`,`table_name`);
+
+--
+-- 資料表索引 `pma__table_uiprefs`
+--
+ALTER TABLE `pma__table_uiprefs`
+  ADD PRIMARY KEY (`username`,`db_name`,`table_name`);
+
+--
+-- 資料表索引 `pma__tracking`
+--
+ALTER TABLE `pma__tracking`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`version`);
+
+--
+-- 資料表索引 `pma__userconfig`
+--
+ALTER TABLE `pma__userconfig`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- 資料表索引 `pma__usergroups`
+--
+ALTER TABLE `pma__usergroups`
+  ADD PRIMARY KEY (`usergroup`,`tab`,`allowed`);
+
+--
+-- 資料表索引 `pma__users`
+--
+ALTER TABLE `pma__users`
+  ADD PRIMARY KEY (`username`,`usergroup`);
+
+--
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+--
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `pma__history`
+--
+ALTER TABLE `pma__history`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  MODIFY `page_nr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- 資料庫: `test`
+--
+DROP DATABASE IF EXISTS `test`;
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `test`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
