@@ -101,7 +101,8 @@ function status_desc($sts_id)
             <div class="card">
                 <!-- card 1 : header -->
                 <div class="card-header d-flex p-3 pt-2">
-                    <div class="d-flex align-items-center align-content-center bg-gradient-info shadow-info text-center border-radius-xl mt-n4">
+                    <div
+                        class="d-flex align-items-center align-content-center bg-gradient-info shadow-info text-center border-radius-xl mt-n4">
                         <p class="h3 text-white px-4 py-3"><?= $os->page_header ?></p>
                     </div>
                 </div>
@@ -112,8 +113,11 @@ function status_desc($sts_id)
                         <!-- 關鍵字搜尋 -->
                         <div class="row px-3 py-2">
                             <div class="col-4 form-group">
-                                <label for="s_keyword" class="form-label m-0 font-weight-bold h5 text-dark"><?= $os->search_header ?></label>
-                                <input type="text" class="form-control border-bottom border-2 rounded-0 py-1" id="s_keyword" placeholder="enter keyword..." name="keyword" value="<?= get('keyword') ?>">
+                                <label for="s_keyword"
+                                    class="form-label m-0 font-weight-bold h5 text-dark"><?= $os->search_header ?></label>
+                                <input type="text" class="form-control border-bottom border-2 rounded-0 py-1"
+                                    id="s_keyword" placeholder="enter keyword..." name="keyword"
+                                    value="<?= get('keyword') ?>">
                                 <small class="form-text text-muted"><?= $os->search_keyword_hint ?></small>
                                 <span class="form-control-feedback"></span>
                             </div>
@@ -189,9 +193,11 @@ function status_desc($sts_id)
                             <div class="form-check form-check-inline m-0 ps-3">
                                 <label for="fs_none" class="form-check-label text-dark ms-0">
                                     <?php if (get('filter_status') === '0') : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_none" name="filter_status" value="0" checked>
+                                    <input type="radio" class=" form-check-input" id="fs_none" name="filter_status"
+                                        value="0" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_none" name="filter_status" value="0">
+                                    <input type="radio" class=" form-check-input" id="fs_none" name="filter_status"
+                                        value="0">
                                     <?php endif; ?>
                                     <!-- none -->
                                     無
@@ -200,9 +206,11 @@ function status_desc($sts_id)
                             <div class="form-check form-check-inline m-0">
                                 <label for="fs_non_payment" class="form-check-label text-dark ms-0">
                                     <?php if (get('filter_status') === '1') : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_non_payment" name="filter_status" value="1" checked>
+                                    <input type="radio" class=" form-check-input" id="fs_non_payment"
+                                        name="filter_status" value="1" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_non_payment" name="filter_status" value="1">
+                                    <input type="radio" class=" form-check-input" id="fs_non_payment"
+                                        name="filter_status" value="1">
                                     <?php endif; ?>
                                     <!-- non-payment -->
                                     未付款
@@ -211,9 +219,11 @@ function status_desc($sts_id)
                             <div class="form-check form-check-inline m-0">
                                 <label for="fs_paid" class="form-check-label text-dark ms-0">
                                     <?php if (get('filter_status') === '2') : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_paid" name="filter_status" value="2" checked>
+                                    <input type="radio" class=" form-check-input" id="fs_paid" name="filter_status"
+                                        value="2" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_paid" name="filter_status" value="2">
+                                    <input type="radio" class=" form-check-input" id="fs_paid" name="filter_status"
+                                        value="2">
                                     <?php endif; ?>
                                     <!-- paid -->
                                     已付款
@@ -222,9 +232,11 @@ function status_desc($sts_id)
                             <div class="form-check form-check-inline m-0">
                                 <label for="fs_cancelled" class="form-check-label text-dark ms-0">
                                     <?php if (get('filter_status') === '3') : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_cancelled" name="filter_status" value="3" checked>
+                                    <input type="radio" class=" form-check-input" id="fs_cancelled" name="filter_status"
+                                        value="3" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_cancelled" name="filter_status" value="3">
+                                    <input type="radio" class=" form-check-input" id="fs_cancelled" name="filter_status"
+                                        value="3">
                                     <?php endif; ?>
                                     <!-- cancelled -->
                                     已取消
@@ -233,9 +245,11 @@ function status_desc($sts_id)
                             <div class="form-check form-check-inline m-0">
                                 <label for="fs_returning" class="form-check-label text-dark ms-0">
                                     <?php if (get('filter_status') === '4') : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_returning" name="filter_status" value="4" checked>
+                                    <input type="radio" class=" form-check-input" id="fs_returning" name="filter_status"
+                                        value="4" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_returning" name="filter_status" value="4">
+                                    <input type="radio" class=" form-check-input" id="fs_returning" name="filter_status"
+                                        value="4">
                                     <?php endif; ?>
                                     <!-- returning -->
                                     退貨中
@@ -244,9 +258,11 @@ function status_desc($sts_id)
                             <div class="form-check form-check-inline m-0">
                                 <label for="fs_returned" class="form-check-label text-dark ms-0">
                                     <?php if (get('filter_status') === '5') : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_returned" name="filter_status" value="5" checked>
+                                    <input type="radio" class=" form-check-input" id="fs_returned" name="filter_status"
+                                        value="5" checked>
                                     <?php else : ?>
-                                        <input type="radio" class=" form-check-input" id="fs_returned" name="filter_status" value="5">
+                                    <input type="radio" class=" form-check-input" id="fs_returned" name="filter_status"
+                                        value="5">
                                     <?php endif; ?>
                                     <!-- returned -->
                                     已退貨
@@ -311,29 +327,31 @@ function status_desc($sts_id)
                             </tr>
                             -->
                             <?php foreach ($orders_body as $order) : ?>
-                                <tr>
-                                    <td class="p-0 text-center text-dark"><?= $order['id'] ?></td>
-                                    <td class="p-0 text-center text-dark"><?= $order['member_name'] ?></td>
-                                    <td class="p-0 text-center text-dark"><?= $order['member_phone'] ?></td>
-                                    <td class="p-0 text-center text-dark"><?= $order['created_at'] ?></td>
-                                    <td class="p-0 text-center text-dark"><?= status_desc($order['status_id']) ?></td>
-                                    <td class="p-0 text-center text-dark">
-                                        <div class="mt-3">
-                                            <form action="<?= $url_page_member . '?id=' . $order['member_id'] ?>" method="POST" class="d-inline">
-                                                <?php $from = $url_page_order_search . '?keyword=' . get('keyword') . '&filter_time=' . get('filter_time') . '$filter_status=' . get('filter_status');  ?>
-                                                <input type="text" name="from" value="<?= $from ?>" class="d-none">
-                                                <button type="submit" rel="tooltip" class="btn btn-round btn-info px-3">
-                                                    <i class="material-icons">person</i>
-                                                    Member
-                                                </button>
-                                            </form>
-                                            <a href="<?= $url_page_order_detail . '?id=' . $order['id'] ?>" rel="tooltip" class="btn btn-round btn-danger px-3">
-                                                <i class="material-icons">receipt</i>
-                                                Detail
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="p-0 text-center text-dark"><?= $order['id'] ?></td>
+                                <td class="p-0 text-center text-dark"><?= $order['member_name'] ?></td>
+                                <td class="p-0 text-center text-dark"><?= $order['member_phone'] ?></td>
+                                <td class="p-0 text-center text-dark"><?= $order['created_at'] ?></td>
+                                <td class="p-0 text-center text-dark"><?= status_desc($order['status_id']) ?></td>
+                                <td class="p-0 text-center text-dark">
+                                    <div class="mt-3">
+                                        <form action="<?= $url_page_member . '?id=' . $order['member_id'] ?>"
+                                            method="POST" class="d-inline">
+                                            <?php $from = $url_page_order_search . '?keyword=' . get('keyword') . '&filter_time=' . get('filter_time') . '$filter_status=' . get('filter_status');  ?>
+                                            <input type="text" name="from" value="<?= $from ?>" class="d-none">
+                                            <button type="submit" rel="tooltip" class="btn btn-round btn-info px-3">
+                                                <i class="material-icons">person</i>
+                                                Member
+                                            </button>
+                                        </form>
+                                        <a href="<?= $url_page_order_detail . '?id=' . $order['id'] ?>" rel="tooltip"
+                                            class="btn btn-round btn-danger px-3">
+                                            <i class="material-icons">receipt</i>
+                                            Detail
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
@@ -352,27 +370,27 @@ function status_desc($sts_id)
     </div>
 
     <script>
-        // order search keyword 
-        var input = document.querySelector("#s_keyword");
+    // order search keyword 
+    var input = document.querySelector("#s_keyword");
 
-        input.addEventListener('keyup', function(event) {
-            // number 13 is the 'enter' key on the keyboard
-            if (event.keyCode === 13) {
-                // cancel the default action, if needed
-                event.preventDefault();
-                // trigger the button element to submit form
-                document.querySelector('#s_submit').click();
-            }
-        });
-        // order search filter
-        var filters = document.querySelectorAll(`form input[type="radio"]`);
+    input.addEventListener('keyup', function(event) {
+        // number 13 is the 'enter' key on the keyboard
+        if (event.keyCode === 13) {
+            // cancel the default action, if needed
+            event.preventDefault();
+            // trigger the button element to submit form
+            document.querySelector('#s_submit').click();
+        }
+    });
+    // order search filter
+    var filters = document.querySelectorAll(`form input[type="radio"]`);
 
-        filters.forEach(function(element) {
-            element.addEventListener('change', function(event) {
-                event.preventDefault();
-                document.querySelector('#s_submit').click();
-            })
-        });
+    filters.forEach(function(element) {
+        element.addEventListener('change', function(event) {
+            event.preventDefault();
+            document.querySelector('#s_submit').click();
+        })
+    });
     </script>
 </div>
 

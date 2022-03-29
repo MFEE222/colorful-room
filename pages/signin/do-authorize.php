@@ -8,6 +8,6 @@ if (str_contains($_SERVER['PHP_SELF'], 'index.php')) {
 
 session_start();
 // 檢查登入狀態
-if ($_SESSION['status'] === NULL || !$_SESSION['status']) {
-    header("Location: $url_page_signin");
-}
+// if ($_SESSION['status'] === NULL || !$_SESSION['status']) {
+//     header("Location: $url_page_signin");
+// }
