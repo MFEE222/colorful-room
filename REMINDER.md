@@ -1,19 +1,25 @@
-- index.php 左側分頁選單按鈕不會因應頁面變換而變換底色
-    > 查找 js 事件處理器？
-    > .active .bg....
-- index.php breadcrumb 不會因應頁面變換而變化
-    > 查找 js 事件處理器？
-- 查詢 PHP Debugger
+待處理
+---
+## 優化訂單關鍵字 Keyword 搜尋功能
+    - 使用空格即可鍵入多組關鍵字
 
-- 如何指定絕對路徑跟目錄 ?  
-- require_once 重複呼叫出問題？
+## 優化訂單篩選器 Filter 功能
+    - 增加日期區間選擇
 
-- header: 可以接受實際路徑
-    > 為什麼 header 不能用相對路徑導向上層資料夾？
-    > header 後面的代碼也會跑
-    > 絕對路徑寫法一定可以 http://localhost/colorful-room/....
-    > 單獨頁面可以跳轉，include 就不行
+## 商品上架頁
+    - 檔案拖拉即可放置上傳區
 
+## 會員 Member 和顧客 Customer 資料庫表單整合，並且在會員創建『註冊欄位 registered 』
+
+## 訂單明細 Orders Detail 頁面區塊化，UI 調整
+
+## 側邊功能欄位，使用 Fontawesome 調整 icon
+
+## 優化登入頁面功能 Sign In
+    - 增加記住我 Remember Me 功能
+    - 增加密碼提示功能
+
+## 總覽頁面，做商品銷量分析圖、客層分析圖... 等報告數據，和管理者資料設定...
 
 問題集
 ---
