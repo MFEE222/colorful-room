@@ -110,7 +110,7 @@ if (!post('keyword') && !post('filter_time') && !post('filter_status')) {
 //                           orders_status.description AS status_desc
 //                         FROM orders
 //                         JOIN member ON orders.member_id = member.id
-//                         JOIN orders_status ON orders.status_id = orders_status.id";
+//                         JOIN orders_status ON orders.status = orders_status.id";
 
 $sql['prepare'] = "SELECT orders.*,
                           member.name AS member_name,
@@ -132,7 +132,7 @@ if ($sql['is_keyword']) {
 if ($sql['is_filter_time']) {
 }
 if ($sql['is_filter_status']) {
-    where($sql['prepare'], "orders.status_id = :orders_status_id");
+    where($sql['prepare'], "orders.status = :orders_status_id");
     $sql['execute'] += [
         ':orders_status_id' => $sql['filter_status']
     ];

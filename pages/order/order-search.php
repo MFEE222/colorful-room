@@ -128,6 +128,7 @@ function status_desc($sts_id)
                             <div class="form-check form-check-inline m-0 ps-3">
                                 <label for="ft_none" class="form-check-label text-dark ms-0">
                                     <?php if (get('filter_time') === '0') : ?>
+
                                         <input type="radio" class=" form-check-input" id="ft_none" name="filter_time" value="0" checked>
                                     <?php else : ?>
                                         <input type="radio" class=" form-check-input" id="ft_none" name="filter_time" value="0">
@@ -328,11 +329,11 @@ function status_desc($sts_id)
                             -->
                             <?php foreach ($orders_body as $order) : ?>
                             <tr>
-                                <td class="p-0 text-center text-dark"><?= $order['id'] ?></td>
+                                <td class="p-0 text-center text-dark"><?= $order['oid'] ?></td>
                                 <td class="p-0 text-center text-dark"><?= $order['member_name'] ?></td>
                                 <td class="p-0 text-center text-dark"><?= $order['member_phone'] ?></td>
                                 <td class="p-0 text-center text-dark"><?= $order['created_at'] ?></td>
-                                <td class="p-0 text-center text-dark"><?= status_desc($order['status_id']) ?></td>
+                                <td class="p-0 text-center text-dark"><?= status_desc($order['status']) ?></td>
                                 <td class="p-0 text-center text-dark">
                                     <div class="mt-3">
                                         <form action="<?= $url_page_member . '?id=' . $order['member_id'] ?>"
