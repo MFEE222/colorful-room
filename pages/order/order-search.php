@@ -345,7 +345,7 @@ function status_desc($sts_id)
                                                 Member
                                             </button>
                                         </form>
-                                        <a href="<?= $url_page_order_detail . '?id=' . $order['id'] ?>" rel="tooltip"
+                                        <a href="<?= $url_page_order_detail . '?id=' . $order['oid'] ?>" rel="tooltip"
                                             class="btn btn-round btn-danger px-3">
                                             <i class="material-icons">receipt</i>
                                             Detail

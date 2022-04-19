@@ -119,7 +119,7 @@ $sql['prepare'] = "SELECT orders.*,
                         JOIN member ON orders.member_id = member.id";
 
 if ($sql['is_keyword']) {
-    where($sql['prepare'], "orders.id = :orders_id OR member.name LIKE :member_name OR member.phone LIKE :member_phone");
+    where($sql['prepare'], "orders.oid = :orders_id OR member.name LIKE :member_name OR member.phone LIKE :member_phone");
     $sql['execute'] += [
         // ':orders_id' => $sql['keyword'],
         ':orders_id' => post('keyword'),
